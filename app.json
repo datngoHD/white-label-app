@@ -1,0 +1,29 @@
+{
+  "expo": {
+    "name": "White Label App",
+    "slug": "rn-whitelabel-app",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/brands/default/icon.png",
+    "userInterfaceStyle": "automatic",
+    "splash": {
+      "image": "./assets/brands/default/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.example.whitelabelapp"
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/brands/default/adaptive-icon.png",
+        "backgroundColor": "#ffffff"
+      },
+      "package": "com.example.whitelabelapp"
+    },
+    "web": {
+      "favicon": "./assets/brands/default/favicon.png"
+    }
+  }
+}

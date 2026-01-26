@@ -1,0 +1,21 @@
+{
+  "id": "brand-a",
+  "appName": "Brand A App",
+  "slug": "brand-a-app",
+  "ios": {
+    "bundleId": "com.example.brandaapp",
+    "teamId": "TEAM123456"
+  },
+  "android": {
+    "packageName": "com.example.brandaapp"
+  },
+  "defaultTenantId": "tenant-brand-a",
+  "assetsPath": "assets/brands/brand-a",
+  "theme": {
+    "colors": {
+      "primary": "#E91E63",
+      "secondary": "#9C27B0",
+      "accent": "#00BCD4"
+    }
+  }
+}

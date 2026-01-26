@@ -1,0 +1,148 @@
+# Customise this file, documentation can be found here:
+# https://docs.fastlane.tools/actions
+# All available actions: https://docs.fastlane.tools/actions
+
+default_platform(:ios)
+
+# Brand configuration
+BRANDS = {
+  'default' => {
+    ios_bundle_id: 'com.whitelabel.app',
+    android_package: 'com.whitelabel.app',
+    app_name: 'WhiteLabel App'
+  },
+  'brand-a' => {
+    ios_bundle_id: 'com.branda.app',
+    android_package: 'com.branda.app',
+    app_name: 'Brand A'
+  }
+}
+
+def get_brand_config(brand)
+  BRANDS[brand] || BRANDS['default']
+end
+
+platform :ios do
+  desc "Setup certificates using match"
+  lane :setup_certs do
+    match(type: "development", readonly: true)
+    match(type: "appstore", readonly: true)
+  end
+
+  desc "Build iOS app"
+  lane :build do |options|
+    brand = options[:brand] || 'default'
+    environment = options[:environment] || 'staging'
+    config = get_brand_config(brand)
+
+    # Prebuild with brand
+    sh("cd .. && BRAND=#{brand} APP_ENV=#{environment} npx expo prebuild --clean")
+
+    # Build the app
+    gym(
+      workspace: "../ios/#{config[:app_name].gsub(' ', '')}.xcworkspace",
+      scheme: config[:app_name].gsub(' ', ''),
+      export_method: environment == 'production' ? 'app-store' : 'development',
+      output_directory: "./build",
+      output_name: "#{brand}-#{environment}.ipa",
+      clean: true
+    )
+  end
+
+  desc "Deploy to TestFlight"
+  lane :beta do |options|
+    brand = options[:brand] || 'default'
+    config = get_brand_config(brand)
+
+    build(brand: brand, environment: 'staging')
+
+    pilot(
+      app_identifier: config[:ios_bundle_id],
+      skip_waiting_for_build_processing: true,
+      distribute_external: false
+    )
+  end
+
+  desc "Deploy to App Store"
+  lane :release do |options|
+    brand = options[:brand] || 'default'
+    config = get_brand_config(brand)
+
+    build(brand: brand, environment: 'production')
+
+    deliver(
+      app_identifier: config[:ios_bundle_id],
+      submit_for_review: false,
+      automatic_release: false,
+      force: true,
+      skip_screenshots: true,
+      skip_metadata: true
+    )
+  end
+end
+
+platform :android do
+  desc "Build Android app"
+  lane :build do |options|
+    brand = options[:brand] || 'default'
+    environment = options[:environment] || 'staging'
+    config = get_brand_config(brand)
+
+    # Prebuild with brand
+    sh("cd .. && BRAND=#{brand} APP_ENV=#{environment} npx expo prebuild --clean")
+
+    # Build the app
+    gradle(
+      project_dir: "../android",
+      task: environment == 'production' ? 'bundleRelease' : 'assembleRelease',
+      properties: {
+        "android.injected.signing.store.file" => ENV["ANDROID_KEYSTORE_PATH"] || "../android/app/release.keystore",
+        "android.injected.signing.store.password" => ENV["ANDROID_KEYSTORE_PASSWORD"],
+        "android.injected.signing.key.alias" => ENV["ANDROID_KEY_ALIAS"],
+        "android.injected.signing.key.password" => ENV["ANDROID_KEY_PASSWORD"]
+      }
+    )
+
+    # Copy output to build directory
+    sh("mkdir -p ./build")
+    if environment == 'production'
+      sh("cp ../android/app/build/outputs/bundle/release/*.aab ./build/#{brand}-#{environment}.aab")
+    else
+      sh("cp ../android/app/build/outputs/apk/release/*.apk ./build/#{brand}-#{environment}.apk")
+    end
+  end
+
+  desc "Deploy to Play Store Internal Testing"
+  lane :beta do |options|
+    brand = options[:brand] || 'default'
+    config = get_brand_config(brand)
+
+    build(brand: brand, environment: 'staging')
+
+    supply(
+      package_name: config[:android_package],
+      track: 'internal',
+      aab: "./build/#{brand}-staging.aab",
+      skip_upload_metadata: true,
+      skip_upload_images: true,
+      skip_upload_screenshots: true
+    )
+  end
+
+  desc "Deploy to Play Store Production"
+  lane :release do |options|
+    brand = options[:brand] || 'default'
+    config = get_brand_config(brand)
+
+    build(brand: brand, environment: 'production')
+
+    supply(
+      package_name: config[:android_package],
+      track: 'production',
+      aab: "./build/#{brand}-production.aab",
+      skip_upload_metadata: true,
+      skip_upload_images: true,
+      skip_upload_screenshots: true
+    )
+  end
+end

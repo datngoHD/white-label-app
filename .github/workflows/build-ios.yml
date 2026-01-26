@@ -1,0 +1,75 @@
+name: Build iOS
+
+on:
+  workflow_dispatch:
+    inputs:
+      brand:
+        description: 'Brand to build'
+        required: true
+        default: 'default'
+        type: choice
+        options:
+          - default
+          - brand-a
+      environment:
+        description: 'Environment'
+        required: true
+        default: 'staging'
+        type: choice
+        options:
+          - development
+          - staging
+          - production
+
+jobs:
+  build-ios:
+    runs-on: macos-latest
+    environment: ${{ github.event.inputs.environment }}
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'yarn'
+
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.2'
+          bundler-cache: true
+
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+
+      - name: Install Fastlane
+        run: |
+          cd fastlane
+          bundle install
+
+      - name: Setup certificates
+        env:
+          MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
+          MATCH_GIT_URL: ${{ secrets.MATCH_GIT_URL }}
+          FASTLANE_USER: ${{ secrets.FASTLANE_USER }}
+          FASTLANE_PASSWORD: ${{ secrets.FASTLANE_PASSWORD }}
+        run: |
+          cd fastlane
+          bundle exec fastlane ios setup_certs
+
+      - name: Build iOS
+        env:
+          BRAND: ${{ github.event.inputs.brand }}
+          APP_ENV: ${{ github.event.inputs.environment }}
+        run: |
+          cd fastlane
+          bundle exec fastlane ios build brand:$BRAND environment:$APP_ENV
+
+      - name: Upload IPA
+        uses: actions/upload-artifact@v4
+        with:
+          name: ios-${{ github.event.inputs.brand }}-${{ github.event.inputs.environment }}
+          path: fastlane/build/*.ipa

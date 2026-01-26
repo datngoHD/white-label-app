@@ -1,0 +1,86 @@
+name: Build Android
+
+on:
+  workflow_dispatch:
+    inputs:
+      brand:
+        description: 'Brand to build'
+        required: true
+        default: 'default'
+        type: choice
+        options:
+          - default
+          - brand-a
+      environment:
+        description: 'Environment'
+        required: true
+        default: 'staging'
+        type: choice
+        options:
+          - development
+          - staging
+          - production
+
+jobs:
+  build-android:
+    runs-on: ubuntu-latest
+    environment: ${{ github.event.inputs.environment }}
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'yarn'
+
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.2'
+          bundler-cache: true
+
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+
+      - name: Install Fastlane
+        run: |
+          cd fastlane
+          bundle install
+
+      - name: Decode Keystore
+        env:
+          ANDROID_KEYSTORE_BASE64: ${{ secrets.ANDROID_KEYSTORE_BASE64 }}
+        run: |
+          echo $ANDROID_KEYSTORE_BASE64 | base64 -d > android/app/release.keystore
+
+      - name: Build Android
+        env:
+          BRAND: ${{ github.event.inputs.brand }}
+          APP_ENV: ${{ github.event.inputs.environment }}
+          ANDROID_KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
+          ANDROID_KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
+          ANDROID_KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
+        run: |
+          cd fastlane
+          bundle exec fastlane android build brand:$BRAND environment:$APP_ENV
+
+      - name: Upload APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: android-${{ github.event.inputs.brand }}-${{ github.event.inputs.environment }}
+          path: fastlane/build/*.apk
+
+      - name: Upload AAB
+        uses: actions/upload-artifact@v4
+        with:
+          name: android-aab-${{ github.event.inputs.brand }}-${{ github.event.inputs.environment }}
+          path: fastlane/build/*.aab

@@ -1,0 +1,14 @@
+# App identifiers - these are set dynamically per brand in Fastfile
+# Default values are used when not overridden
+
+# iOS
+app_identifier(ENV["APP_IDENTIFIER"] || "com.whitelabel.app")
+apple_id(ENV["FASTLANE_USER"])
+itc_team_id(ENV["ITC_TEAM_ID"])
+team_id(ENV["TEAM_ID"])
+
+# Android
+json_key_file(ENV["GOOGLE_PLAY_JSON_KEY_PATH"] || "google-play-key.json")
+
+# For more information about the Appfile, see:
+# https://docs.fastlane.tools/advanced/#appfile

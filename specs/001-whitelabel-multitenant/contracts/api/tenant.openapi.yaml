@@ -1,0 +1,220 @@
+openapi: 3.0.3
+info:
+  title: Tenant Configuration API
+  description: Tenant configuration endpoints for white-label multi-tenant mobile application
+  version: 1.0.0
+
+servers:
+  - url: '{baseUrl}/api/v1'
+    variables:
+      baseUrl:
+        default: https://api.example.com
+        description: Tenant-specific API base URL
+
+paths:
+  /tenant/config:
+    get:
+      summary: Get current tenant configuration
+      description: Returns the configuration for the tenant identified by X-Tenant-ID header
+      operationId: getTenantConfig
+      tags:
+        - Tenant
+      parameters:
+        - name: X-Tenant-ID
+          in: header
+          required: true
+          schema:
+            type: string
+            format: uuid
+          description: Tenant identifier
+      responses:
+        '200':
+          description: Tenant configuration
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TenantConfig'
+        '404':
+          description: Tenant not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /tenant/status:
+    get:
+      summary: Get tenant status
+      description: Returns the current status of the tenant (active, maintenance, suspended)
+      operationId: getTenantStatus
+      tags:
+        - Tenant
+      parameters:
+        - name: X-Tenant-ID
+          in: header
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Tenant status
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TenantStatus'
+        '404':
+          description: Tenant not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+components:
+  schemas:
+    TenantConfig:
+      type: object
+      required:
+        - id
+        - name
+        - status
+        - api
+        - features
+        - updatedAt
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Unique tenant identifier
+        name:
+          type: string
+          description: Human-readable tenant name
+        status:
+          type: string
+          enum: [active, suspended, maintenance]
+        api:
+          type: object
+          required:
+            - baseUrl
+            - version
+          properties:
+            baseUrl:
+              type: string
+              format: uri
+              description: Base URL for API requests
+            version:
+              type: string
+              description: API version
+        features:
+          $ref: '#/components/schemas/FeatureFlags'
+        theme:
+          $ref: '#/components/schemas/ThemeOverrides'
+        metadata:
+          type: object
+          properties:
+            supportEmail:
+              type: string
+              format: email
+            termsUrl:
+              type: string
+              format: uri
+            privacyUrl:
+              type: string
+              format: uri
+        updatedAt:
+          type: string
+          format: date-time
+
+    FeatureFlags:
+      type: object
+      properties:
+        socialLogin:
+          type: boolean
+          default: false
+        pushNotifications:
+          type: boolean
+          default: true
+        biometricAuth:
+          type: boolean
+          default: true
+        offlineMode:
+          type: boolean
+          default: true
+        analytics:
+          type: boolean
+          default: true
+      additionalProperties:
+        type: boolean
+
+    ThemeOverrides:
+      type: object
+      properties:
+        colors:
+          type: object
+          properties:
+            primary:
+              type: string
+              pattern: '^#[0-9A-Fa-f]{6}$'
+            secondary:
+              type: string
+              pattern: '^#[0-9A-Fa-f]{6}$'
+            accent:
+              type: string
+              pattern: '^#[0-9A-Fa-f]{6}$'
+            background:
+              type: string
+              pattern: '^#[0-9A-Fa-f]{6}$'
+            surface:
+              type: string
+              pattern: '^#[0-9A-Fa-f]{6}$'
+            error:
+              type: string
+              pattern: '^#[0-9A-Fa-f]{6}$'
+            success:
+              type: string
+              pattern: '^#[0-9A-Fa-f]{6}$'
+            warning:
+              type: string
+              pattern: '^#[0-9A-Fa-f]{6}$'
+        typography:
+          type: object
+          properties:
+            fontFamily:
+              type: object
+              properties:
+                regular:
+                  type: string
+                medium:
+                  type: string
+                bold:
+                  type: string
+
+    TenantStatus:
+      type: object
+      required:
+        - status
+        - message
+      properties:
+        status:
+          type: string
+          enum: [active, suspended, maintenance]
+        message:
+          type: string
+          description: Status message to display to users
+        estimatedResolution:
+          type: string
+          format: date-time
+          description: Estimated time when maintenance will complete
+
+    ErrorResponse:
+      type: object
+      required:
+        - code
+        - message
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+        details:
+          type: object
+          additionalProperties: true

@@ -1,0 +1,21 @@
+{
+  "id": "default",
+  "appName": "White Label App",
+  "slug": "whitelabel-app",
+  "ios": {
+    "bundleId": "com.example.whitelabelapp",
+    "teamId": "TEAM123456"
+  },
+  "android": {
+    "packageName": "com.example.whitelabelapp"
+  },
+  "defaultTenantId": "tenant-default",
+  "assetsPath": "assets/brands/default",
+  "theme": {
+    "colors": {
+      "primary": "#007AFF",
+      "secondary": "#5856D6",
+      "accent": "#FF9500"
+    }
+  }
+}

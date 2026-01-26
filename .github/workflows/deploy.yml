@@ -1,0 +1,118 @@
+name: Deploy
+
+on:
+  workflow_dispatch:
+    inputs:
+      brand:
+        description: 'Brand to deploy'
+        required: true
+        default: 'default'
+        type: choice
+        options:
+          - default
+          - brand-a
+      platform:
+        description: 'Platform'
+        required: true
+        default: 'both'
+        type: choice
+        options:
+          - ios
+          - android
+          - both
+      environment:
+        description: 'Environment'
+        required: true
+        default: 'staging'
+        type: choice
+        options:
+          - staging
+          - production
+
+jobs:
+  deploy-ios:
+    if: ${{ github.event.inputs.platform == 'ios' || github.event.inputs.platform == 'both' }}
+    runs-on: macos-latest
+    environment: ${{ github.event.inputs.environment }}
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'yarn'
+
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.2'
+          bundler-cache: true
+
+      - name: Install dependencies
+        run: |
+          yarn install --frozen-lockfile
+          cd fastlane && bundle install
+
+      - name: Deploy to TestFlight/App Store
+        env:
+          BRAND: ${{ github.event.inputs.brand }}
+          APP_ENV: ${{ github.event.inputs.environment }}
+          FASTLANE_USER: ${{ secrets.FASTLANE_USER }}
+          FASTLANE_PASSWORD: ${{ secrets.FASTLANE_PASSWORD }}
+          FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD: ${{ secrets.FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD }}
+        run: |
+          cd fastlane
+          if [ "$APP_ENV" = "production" ]; then
+            bundle exec fastlane ios release brand:$BRAND
+          else
+            bundle exec fastlane ios beta brand:$BRAND
+          fi
+
+  deploy-android:
+    if: ${{ github.event.inputs.platform == 'android' || github.event.inputs.platform == 'both' }}
+    runs-on: ubuntu-latest
+    environment: ${{ github.event.inputs.environment }}
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'yarn'
+
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.2'
+          bundler-cache: true
+
+      - name: Install dependencies
+        run: |
+          yarn install --frozen-lockfile
+          cd fastlane && bundle install
+
+      - name: Deploy to Play Store
+        env:
+          BRAND: ${{ github.event.inputs.brand }}
+          APP_ENV: ${{ github.event.inputs.environment }}
+          GOOGLE_PLAY_JSON_KEY: ${{ secrets.GOOGLE_PLAY_JSON_KEY }}
+        run: |
+          echo "$GOOGLE_PLAY_JSON_KEY" > google-play-key.json
+          cd fastlane
+          if [ "$APP_ENV" = "production" ]; then
+            bundle exec fastlane android release brand:$BRAND
+          else
+            bundle exec fastlane android beta brand:$BRAND
+          fi
