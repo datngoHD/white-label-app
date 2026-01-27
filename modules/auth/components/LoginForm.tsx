@@ -1,8 +1,8 @@
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
-import { Input } from '../../../shared/components';
-import { Text } from '../../../shared/components/Text/Text';
-import { useTheme } from '../../../core/theme';
+import { Input } from '@shared/components';
+import { Text } from '@shared/components/Text/Text';
+import { useTheme } from '@core/theme';
 
 interface LoginFormProps {
   email: string;

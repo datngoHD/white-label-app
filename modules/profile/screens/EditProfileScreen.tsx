@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { View, StyleSheet, KeyboardAvoidingView, Platform, ScrollView } from 'react-native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { useTheme } from '../../../core/theme';
-import { Button, Input, Loading } from '../../../shared/components';
-import { Text } from '../../../shared/components/Text/Text';
-import { Header } from '../../../shared/components/Header/Header';
-import { ProfileStackParamList } from '../../../core/navigation/types';
+import { useTheme } from '@core/theme';
+import { Button, Input, Loading } from '@shared/components';
+import { Text } from '@shared/components/Text/Text';
+import { Header } from '@shared/components/Header/Header';
+import { ProfileStackParamList } from '@core/navigation/types';
 import { useProfile } from '../hooks/useProfile';
 
 type Props = NativeStackScreenProps<ProfileStackParamList, 'EditProfile'>;

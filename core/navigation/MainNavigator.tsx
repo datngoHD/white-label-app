@@ -10,28 +10,28 @@ import {
 } from './types';
 import { useTheme } from '../theme';
 import { useIsAdmin } from '../hooks/useUserRole';
-import { Text } from '../../shared/components/Text/Text';
+import { Text } from '@shared/components/Text/Text';
 
 // Profile screens
 import {
   ProfileScreen,
   EditProfileScreen,
   ChangePasswordScreen,
-} from '../../modules/profile/screens';
+} from '@modules/profile/screens';
 
 // Settings screens
 import {
   SettingsScreen,
   PreferencesScreen,
   BrandPreviewScreen,
-} from '../../modules/settings/screens';
+} from '@modules/settings/screens';
 
 // Admin screens
 import {
   UserListScreen,
   InviteUserScreen,
   UserDetailScreen,
-} from '../../modules/admin/screens';
+} from '@modules/admin/screens';
 
 // Home placeholder
 const HomeScreen = () => {

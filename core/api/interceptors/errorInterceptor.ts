@@ -1,6 +1,6 @@
 import { AxiosError, AxiosResponse } from 'axios';
-import { ApiError } from '../../types';
-import { logger } from '../../logging/logger';
+import { ApiError } from '@core/types';
+import { logger } from '@core/logging/logger';
 
 export interface ApiErrorResponse {
   code: string;

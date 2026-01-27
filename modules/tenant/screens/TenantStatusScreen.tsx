@@ -1,10 +1,10 @@
 import React from 'react';
 import { View, StyleSheet, Image } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { useTheme } from '../../../core/theme';
-import { TenantStatus } from '../../../core/config/tenant.types';
-import { Button } from '../../../shared/components';
-import { Text } from '../../../shared/components/Text/Text';
+import { useTheme } from '@core/theme';
+import { TenantStatus } from '@core/config/tenant.types';
+import { Button } from '@shared/components';
+import { Text } from '@shared/components/Text/Text';
 
 interface TenantStatusScreenProps {
   status: TenantStatus;

@@ -1,6 +1,6 @@
-import { api } from '../../../core/api';
-import { Tenant, TenantStatus } from '../../../core/config/tenant.types';
-import { logger } from '../../../core/logging/logger';
+import { api } from '@core/api';
+import { Tenant, TenantStatus } from '@core/config/tenant.types';
+import { logger } from '@core/logging/logger';
 
 interface TenantStatusResponse {
   status: TenantStatus;

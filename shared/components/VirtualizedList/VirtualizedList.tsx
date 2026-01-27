@@ -6,7 +6,7 @@ import {
   View,
   ViewStyle,
 } from 'react-native';
-import { useTheme } from '../../../core/theme';
+import { useTheme } from '@core/theme';
 import { Loading } from '../Loading/Loading';
 import { Text } from '../Text/Text';
 

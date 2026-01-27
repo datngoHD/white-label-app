@@ -1,5 +1,5 @@
-import { tokenStorage } from '../../../core/storage/tokenStorage';
-import { logger } from '../../../core/logging/logger';
+import { tokenStorage } from '@core/storage/tokenStorage';
+import { logger } from '@core/logging/logger';
 import { AuthTokens } from '../types';
 
 export const authPersistence = {

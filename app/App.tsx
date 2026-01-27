@@ -3,8 +3,8 @@ import { View, Text, StyleSheet } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import { AppProviders } from './providers/AppProviders';
 import { bootstrap, markBootstrapped } from './bootstrap';
-import { Loading } from '../shared/components';
-import { RootNavigator } from '../core/navigation';
+import { Loading } from '@shared/components';
+import { RootNavigator } from '@core/navigation';
 
 const App: React.FC = () => {
   const [isReady, setIsReady] = useState(false);

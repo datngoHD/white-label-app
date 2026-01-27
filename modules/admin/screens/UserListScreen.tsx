@@ -7,11 +7,11 @@ import {
   RefreshControl,
 } from 'react-native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { useTheme } from '../../../core/theme';
-import { Button, Card, Loading, Input } from '../../../shared/components';
-import { Text } from '../../../shared/components/Text/Text';
-import { Header } from '../../../shared/components/Header/Header';
-import { AdminStackParamList } from '../../../core/navigation/types';
+import { useTheme } from '@core/theme';
+import { Button, Card, Loading, Input } from '@shared/components';
+import { Text } from '@shared/components/Text/Text';
+import { Header } from '@shared/components/Header/Header';
+import { AdminStackParamList } from '@core/navigation/types';
 import { adminUserService } from '../services/adminUserService';
 import { TenantUser } from '../types';
 
