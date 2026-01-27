@@ -7,6 +7,7 @@
 ## Overview
 
 This document defines the data models for the white-label multi-tenant mobile application. Models are divided into:
+
 - **Build-time Configuration** - Baked into app at build time
 - **Runtime Configuration** - Fetched/stored at runtime
 - **Domain Entities** - Core business objects
@@ -53,6 +54,7 @@ interface Brand {
 ```
 
 **Validation Rules**:
+
 - `id`: Required, alphanumeric with hyphens, unique across brands
 - `appName`: Required, 2-30 characters
 - `slug`: Required, lowercase alphanumeric with hyphens
@@ -60,6 +62,7 @@ interface Brand {
 - `android.packageName`: Required, valid Java package format
 
 **Example**:
+
 ```json
 {
   "id": "brand-alpha",
@@ -103,6 +106,7 @@ interface BrandAssets {
 ```
 
 **File Requirements**:
+
 - `icon`: PNG, 1024x1024px minimum, no transparency
 - `splash`: PNG, 1284x2778px recommended (largest iPhone size)
 - `logo`: PNG or SVG, transparent background preferred
@@ -158,6 +162,7 @@ type TenantStatus = 'active' | 'suspended' | 'maintenance';
 ```
 
 **Validation Rules**:
+
 - `id`: Required, UUID format
 - `status`: Required, must be valid TenantStatus
 - `api.baseUrl`: Required, valid HTTPS URL
@@ -191,6 +196,7 @@ interface FeatureFlags {
 ```
 
 **Default Values**:
+
 ```typescript
 const defaultFeatureFlags: FeatureFlags = {
   socialLogin: false,
@@ -302,12 +308,14 @@ type UserStatus = 'active' | 'inactive' | 'pending';
 ```
 
 **Validation Rules**:
+
 - `email`: Required, valid email format, globally unique across all tenants
 - `displayName`: Required, 1-100 characters
 - `tenantId`: Required, must reference valid tenant
 - `role`: Required, must be valid UserRole
 
 **State Transitions**:
+
 ```
 pending → active (email verified)
 active → inactive (admin deactivation)
@@ -344,6 +352,7 @@ interface UserPreferences {
 ```
 
 **Default Values**:
+
 ```typescript
 const defaultPreferences: UserPreferences = {
   locale: 'en',
@@ -464,6 +473,7 @@ interface EnvironmentConfig {
 ```
 
 **Relationships**:
+
 - Brand → Tenant: 1:1 (each brand maps to exactly one tenant)
 - Tenant → User: 1:N (a tenant has many users)
 - User → UserPreferences: 1:1 (each user has one preferences object)
@@ -507,9 +517,9 @@ const SECURE_KEYS = {
 
 ## Validation Summary
 
-| Entity | Required Fields | Unique Constraints |
-|--------|-----------------|-------------------|
-| Brand | id, appName, slug, ios.bundleId, android.packageName | id, ios.bundleId, android.packageName |
-| Tenant | id, name, status, api.baseUrl | id |
-| User | id, tenantId, email, displayName, role, status | email (global) |
-| AuthTokens | accessToken, refreshToken, expiresAt | - |
+| Entity     | Required Fields                                      | Unique Constraints                    |
+| ---------- | ---------------------------------------------------- | ------------------------------------- |
+| Brand      | id, appName, slug, ios.bundleId, android.packageName | id, ios.bundleId, android.packageName |
+| Tenant     | id, name, status, api.baseUrl                        | id                                    |
+| User       | id, tenantId, email, displayName, role, status       | email (global)                        |
+| AuthTokens | accessToken, refreshToken, expiresAt                 | -                                     |

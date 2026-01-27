@@ -1,13 +1,16 @@
 import React, { useState } from 'react';
-import { View, StyleSheet, KeyboardAvoidingView, Platform, ScrollView } from 'react-native';
+import { KeyboardAvoidingView, Platform, ScrollView, StyleSheet, View } from 'react-native';
+
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
+
+import { AuthStackParamList } from '@core/navigation/types';
 import { useTheme } from '@core/theme';
 import { Button, Input, Loading } from '@shared/components';
-import { Text } from '@shared/components/Text/Text';
 import { Header } from '@shared/components/Header/Header';
-import { AuthStackParamList } from '@core/navigation/types';
-import { useAuth } from '../hooks/useAuth';
+import { Text } from '@shared/components/Text/Text';
+
 import { LoginForm } from '../components/LoginForm';
+import { useAuth } from '../hooks/useAuth';
 
 type Props = NativeStackScreenProps<AuthStackParamList, 'Login'>;
 
@@ -42,10 +45,7 @@ export function LoginScreen({ navigation }: Props) {
       style={[styles.container, { backgroundColor: theme.colors.background }]}
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
     >
-      <ScrollView
-        contentContainerStyle={styles.scrollContent}
-        keyboardShouldPersistTaps="handled"
-      >
+      <ScrollView contentContainerStyle={styles.scrollContent} keyboardShouldPersistTaps="handled">
         <Header title="Welcome Back" showLogo />
 
         <View style={styles.formContainer}>

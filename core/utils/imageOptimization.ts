@@ -1,4 +1,4 @@
-import { Image, PixelRatio, Dimensions } from 'react-native';
+import { Dimensions, Image, PixelRatio } from 'react-native';
 
 const { width: SCREEN_WIDTH } = Dimensions.get('window');
 const PIXEL_RATIO = PixelRatio.get();

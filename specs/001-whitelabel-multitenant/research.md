@@ -17,12 +17,14 @@ This document consolidates research findings for implementing a white-label mult
 **Rationale**: Mobile app stores require certain assets (icon, splash, app name, bundle ID) to be baked into the build. Visual theming (colors, fonts) can be applied at runtime for flexibility.
 
 **Build-time Configuration** (per brand):
+
 - App name
 - Bundle ID / App ID
 - App icon
 - Splash screen
 
 **Runtime Configuration** (per brand, changeable without rebuild):
+
 - Color palette (primary, secondary, accent)
 - Typography scale
 - Logo displayed within app UI
@@ -41,23 +43,23 @@ export default ({ config }) => {
     slug: brandConfig.slug,
     ios: {
       bundleIdentifier: brandConfig.ios.bundleId,
-      ...config.ios
+      ...config.ios,
     },
     android: {
       package: brandConfig.android.packageName,
-      ...config.android
-    }
+      ...config.android,
+    },
   };
 };
 ```
 
 ### Alternatives Considered
 
-| Alternative | Rejected Because |
-|-------------|------------------|
-| Single app with runtime-only branding | App store requirements mandate build-time bundle ID and app name |
-| Separate codebases per brand | Violates maintainability requirement; impossible to scale to 10+ brands |
-| Native flavors only (no Expo) | Loses Expo ecosystem benefits; increases native complexity |
+| Alternative                           | Rejected Because                                                        |
+| ------------------------------------- | ----------------------------------------------------------------------- |
+| Single app with runtime-only branding | App store requirements mandate build-time bundle ID and app name        |
+| Separate codebases per brand          | Violates maintainability requirement; impossible to scale to 10+ brands |
+| Native flavors only (no Expo)         | Loses Expo ecosystem benefits; increases native complexity              |
 
 ---
 
@@ -79,6 +81,7 @@ apiClient.interceptors.request.use((config) => {
 ```
 
 ### Key Principles
+
 - Tenant ID is determined at app startup (from brand config) or login (multi-tenant selection)
 - All API requests include tenant context
 - Mobile app never stores data from multiple tenants locally
@@ -86,11 +89,11 @@ apiClient.interceptors.request.use((config) => {
 
 ### Alternatives Considered
 
-| Alternative | Rejected Because |
-|-------------|------------------|
-| Client-side tenant filtering | Insecure; data leakage risk if client logic fails |
-| Separate backend per tenant | Operational complexity; doesn't scale to 10+ brands |
-| Tenant ID in URL path | Coupling; harder to change; potential routing issues |
+| Alternative                  | Rejected Because                                     |
+| ---------------------------- | ---------------------------------------------------- |
+| Client-side tenant filtering | Insecure; data leakage risk if client logic fails    |
+| Separate backend per tenant  | Operational complexity; doesn't scale to 10+ brands  |
+| Tenant ID in URL path        | Coupling; harder to change; potential routing issues |
 
 ---
 
@@ -172,6 +175,7 @@ const RootNavigator = () => {
 ```
 
 ### Navigation Structure
+
 - `RootNavigator` - Authentication state switching
 - `AuthNavigator` - Login, Register, Forgot Password
 - `MainNavigator` - Tab navigation for main app
@@ -193,8 +197,12 @@ const RootNavigator = () => {
 const authSlice = createSlice({
   name: 'auth',
   initialState,
-  reducers: { /* ... */ },
-  extraReducers: { /* async thunks */ }
+  reducers: {
+    /* ... */
+  },
+  extraReducers: {
+    /* async thunks */
+  },
 });
 
 // Root reducer combines all slices
@@ -207,6 +215,7 @@ export const rootReducer = combineReducers({
 ```
 
 ### State Structure
+
 - `auth` - Authentication state (user, tokens, status)
 - `tenant` - Current tenant configuration
 - `theme` - Active theme (if runtime changes needed)
@@ -238,6 +247,7 @@ jobs:
 ```
 
 ### Fastlane Lanes
+
 - `ios build` - Build iOS app for specified brand
 - `ios beta` - Deploy to TestFlight
 - `ios release` - Deploy to App Store
@@ -246,6 +256,7 @@ jobs:
 - `android release` - Deploy to Play Store production
 
 ### Build Artifacts
+
 - Each brand produces separate iOS and Android builds
 - Artifacts named with brand and environment: `brand-a-staging.ipa`, `brand-a-production.aab`
 
@@ -261,6 +272,7 @@ jobs:
 
 ```typescript
 // Token storage
+
 import * as SecureStore from 'expo-secure-store';
 
 const storeTokens = async (tokens: AuthTokens) => {
@@ -270,8 +282,8 @@ const storeTokens = async (tokens: AuthTokens) => {
 
 // Axios interceptor for token refresh
 apiClient.interceptors.response.use(
-  response => response,
-  async error => {
+  (response) => response,
+  async (error) => {
     if (error.response?.status === 401) {
       const newTokens = await refreshTokens();
       // Retry original request
@@ -340,6 +352,7 @@ const useFeatureFlag = (flag: string): boolean => {
 ```
 
 ### Future Enhancement
+
 - Consider dedicated feature flag service (LaunchDarkly, Firebase Remote Config) if complexity increases
 
 ---
@@ -370,6 +383,7 @@ const fetchWithCache = async (url: string) => {
 ```
 
 ### Offline Capabilities
+
 - View cached profile data
 - View cached settings
 - Queue write operations for later (stretch goal)
@@ -380,14 +394,14 @@ const fetchWithCache = async (url: string) => {
 
 All technical context items from the plan have been resolved:
 
-| Item | Resolution |
-|------|------------|
-| Language/Version | TypeScript (strict mode) - per constitution |
-| Framework | Expo SDK (latest) with prebuild - per constitution |
-| State Management | Redux Toolkit (RTK) - per constitution |
-| Navigation | React Navigation - per constitution |
-| HTTP Client | Axios with interceptors - per constitution |
-| CI/CD | GitHub Actions + Fastlane - per constitution |
+| Item             | Resolution                                         |
+| ---------------- | -------------------------------------------------- |
+| Language/Version | TypeScript (strict mode) - per constitution        |
+| Framework        | Expo SDK (latest) with prebuild - per constitution |
+| State Management | Redux Toolkit (RTK) - per constitution             |
+| Navigation       | React Navigation - per constitution                |
+| HTTP Client      | Axios with interceptors - per constitution         |
+| CI/CD            | GitHub Actions + Fastlane - per constitution       |
 
 ---
 

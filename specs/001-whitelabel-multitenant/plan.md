@@ -13,6 +13,7 @@ Build a production-grade React Native mobile application using Expo that support
 **Framework**: Expo SDK (latest) with prebuild workflow
 **Package Manager**: Yarn
 **Primary Dependencies**:
+
 - React Navigation (navigation architecture)
 - Redux Toolkit (RTK) with React-Redux hooks (state management)
 - Axios (HTTP client with interceptors and token handling)
@@ -20,6 +21,7 @@ Build a production-grade React Native mobile application using Expo that support
 - Sentry (error tracking, ready integration)
 
 **Storage**:
+
 - Remote: Backend API (tenant-isolated data storage)
 - Local: AsyncStorage for preferences, SecureStore for tokens
 
@@ -30,36 +32,40 @@ Build a production-grade React Native mobile application using Expo that support
 **Project Type**: Mobile application with backend API dependency
 
 **Performance Goals**:
+
 - Sub-3-second screen load times for 95% of interactions
 - Smooth 60fps UI animations
 - App startup to interactive < 3 seconds
 
 **Constraints**:
+
 - Single codebase serving 10+ brands
 - Complete tenant data isolation
 - Build pipeline generating all brand variants within 1 hour
 - Offline capability for basic operations
 
 **Scale/Scope**:
+
 - 10 concurrent brands (initial target)
 - Hundreds of users per tenant
 - Feature-based modular architecture
 
 ## Constitution Check
 
-*GATE: Must pass before Phase 0 research. Re-check after Phase 1 design.*
+_GATE: Must pass before Phase 0 research. Re-check after Phase 1 design._
 
-| Principle | Status | Notes |
-|-----------|--------|-------|
-| I. Clean Architecture / Modular Architecture | ✅ PASS | Feature-based modules with presentation/domain/data layers |
-| II. Clear Folder Structure | ✅ PASS | Following required: app/, modules/, shared/, core/, assets/ |
-| III. Separation of Concerns | ✅ PASS | UI components presentational; business logic in services/hooks |
-| IV. Strong TypeScript Typing | ✅ PASS | All contracts and configs typed; no `any` |
-| V. Externalized Configuration | ✅ PASS | Environment variables, app.config.js, runtime tenant config |
-| VI. White-label & Multi-tenant Design | ✅ PASS | Brand config (build-time) + Tenant config (runtime) |
-| VII. Expo Prebuild Workflow | ✅ PASS | expo prebuild with native customization support |
+| Principle                                    | Status  | Notes                                                          |
+| -------------------------------------------- | ------- | -------------------------------------------------------------- |
+| I. Clean Architecture / Modular Architecture | ✅ PASS | Feature-based modules with presentation/domain/data layers     |
+| II. Clear Folder Structure                   | ✅ PASS | Following required: app/, modules/, shared/, core/, assets/    |
+| III. Separation of Concerns                  | ✅ PASS | UI components presentational; business logic in services/hooks |
+| IV. Strong TypeScript Typing                 | ✅ PASS | All contracts and configs typed; no `any`                      |
+| V. Externalized Configuration                | ✅ PASS | Environment variables, app.config.js, runtime tenant config    |
+| VI. White-label & Multi-tenant Design        | ✅ PASS | Brand config (build-time) + Tenant config (runtime)            |
+| VII. Expo Prebuild Workflow                  | ✅ PASS | expo prebuild with native customization support                |
 
 **Required Configurations (per Constitution):**
+
 - `brand.config.ts` - White-label brand definition (build-time)
 - `tenant.config.ts` - Runtime tenant definition
 - Centralized theme system (brand-aware, tenant-aware)
@@ -71,6 +77,7 @@ Build a production-grade React Native mobile application using Expo that support
 - Feature flags / Remote configuration system
 
 **CI/CD Requirements:**
+
 - GitHub Actions workflows for brand builds
 - Fastlane lanes for iOS/Android builds
 - Matrix builds for multiple brands and environments
@@ -217,5 +224,5 @@ fastlane/
 > No constitution violations requiring justification.
 
 | Violation | Why Needed | Simpler Alternative Rejected Because |
-|-----------|------------|-------------------------------------|
-| N/A | N/A | N/A |
+| --------- | ---------- | ------------------------------------ |
+| N/A       | N/A        | N/A                                  |

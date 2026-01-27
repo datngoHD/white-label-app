@@ -1,5 +1,5 @@
-import { ApiError } from '../types';
 import { logger } from '../logging/logger';
+import { ApiError } from '../types';
 
 export interface ErrorContext {
   source?: string;
@@ -38,12 +38,7 @@ export const handleError = (error: unknown, context?: ErrorContext): ApiError =>
 };
 
 export const isApiError = (error: unknown): error is ApiError => {
-  return (
-    typeof error === 'object' &&
-    error !== null &&
-    'code' in error &&
-    'message' in error
-  );
+  return typeof error === 'object' && error !== null && 'code' in error && 'message' in error;
 };
 
 const logError = (error: ApiError, context?: ErrorContext): void => {

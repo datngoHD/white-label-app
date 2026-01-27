@@ -1,5 +1,6 @@
-import { tokenStorage } from '@core/storage/tokenStorage';
 import { logger } from '@core/logging/logger';
+import { tokenStorage } from '@core/storage/tokenStorage';
+
 import { AuthTokens } from '../types';
 
 export const authPersistence = {
@@ -58,7 +59,7 @@ export const authPersistence = {
   async hasValidTokens(): Promise<boolean> {
     try {
       const tokens = await this.getTokens();
-      return tokens !== null && !await tokenStorage.isTokenExpired();
+      return tokens !== null && !(await tokenStorage.isTokenExpired());
     } catch {
       return false;
     }

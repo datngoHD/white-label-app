@@ -5,6 +5,7 @@ This directory contains Fastlane configurations for building and deploying the w
 ## Setup
 
 1. Install Ruby dependencies:
+
    ```bash
    bundle install
    ```
@@ -15,25 +16,25 @@ This directory contains Fastlane configurations for building and deploying the w
 
 ### iOS
 
-| Variable | Description |
-|----------|-------------|
-| `FASTLANE_USER` | Apple ID email |
-| `FASTLANE_PASSWORD` | Apple ID password |
-| `FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD` | App-specific password for 2FA |
-| `MATCH_GIT_URL` | Git URL for Match certificates repository |
-| `MATCH_PASSWORD` | Password for Match encryption |
-| `TEAM_ID` | Apple Developer Team ID |
-| `ITC_TEAM_ID` | App Store Connect Team ID |
+| Variable                                       | Description                               |
+| ---------------------------------------------- | ----------------------------------------- |
+| `FASTLANE_USER`                                | Apple ID email                            |
+| `FASTLANE_PASSWORD`                            | Apple ID password                         |
+| `FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD` | App-specific password for 2FA             |
+| `MATCH_GIT_URL`                                | Git URL for Match certificates repository |
+| `MATCH_PASSWORD`                               | Password for Match encryption             |
+| `TEAM_ID`                                      | Apple Developer Team ID                   |
+| `ITC_TEAM_ID`                                  | App Store Connect Team ID                 |
 
 ### Android
 
-| Variable | Description |
-|----------|-------------|
+| Variable                    | Description                              |
+| --------------------------- | ---------------------------------------- |
 | `GOOGLE_PLAY_JSON_KEY_PATH` | Path to Google Play service account JSON |
-| `ANDROID_KEYSTORE_PATH` | Path to release keystore |
-| `ANDROID_KEYSTORE_PASSWORD` | Keystore password |
-| `ANDROID_KEY_ALIAS` | Key alias |
-| `ANDROID_KEY_PASSWORD` | Key password |
+| `ANDROID_KEYSTORE_PATH`     | Path to release keystore                 |
+| `ANDROID_KEYSTORE_PASSWORD` | Keystore password                        |
+| `ANDROID_KEY_ALIAS`         | Key alias                                |
+| `ANDROID_KEY_PASSWORD`      | Key password                             |
 
 ## Available Lanes
 
@@ -71,6 +72,7 @@ bundle exec fastlane android release brand:default
 ## Brand Configuration
 
 Brands are configured in the `Fastfile`. Each brand specifies:
+
 - `ios_bundle_id`: iOS bundle identifier
 - `android_package`: Android package name
 - `app_name`: Display name of the app

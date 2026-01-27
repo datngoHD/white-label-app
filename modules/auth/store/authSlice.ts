@@ -1,13 +1,8 @@
-import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
-import { authService } from '../services/authService';
+import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
+
 import { authPersistence } from '../services/authPersistence';
-import {
-  AuthState,
-  LoginCredentials,
-  RegisterData,
-  User,
-  AuthTokens,
-} from '../types';
+import { authService } from '../services/authService';
+import { AuthState, AuthTokens, LoginCredentials, RegisterData, User } from '../types';
 
 const initialState: AuthState = {
   user: null,
@@ -64,19 +59,16 @@ export const register = createAsyncThunk(
   }
 );
 
-export const logout = createAsyncThunk(
-  'auth/logout',
-  async (_, { rejectWithValue }) => {
-    try {
-      await authService.logout();
-      await authPersistence.clearTokens();
-    } catch (error: unknown) {
-      await authPersistence.clearTokens();
-      const message = error instanceof Error ? error.message : 'Logout failed';
-      return rejectWithValue(message);
-    }
+export const logout = createAsyncThunk('auth/logout', async (_, { rejectWithValue }) => {
+  try {
+    await authService.logout();
+    await authPersistence.clearTokens();
+  } catch (error: unknown) {
+    await authPersistence.clearTokens();
+    const message = error instanceof Error ? error.message : 'Logout failed';
+    return rejectWithValue(message);
   }
-);
+});
 
 export const refreshAuth = createAsyncThunk(
   'auth/refresh',

@@ -1,13 +1,16 @@
 import React from 'react';
+
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { RootStackParamList } from './types';
+
+import { TenantStatusScreen } from '@modules/tenant/screens/TenantStatusScreen';
+import { Loading } from '@shared/components';
+
+import { useTenant } from '../hooks/useTenant';
+import { useTheme } from '../theme';
 import { AuthNavigator } from './AuthNavigator';
 import { MainNavigator } from './MainNavigator';
-import { TenantStatusScreen } from '@modules/tenant/screens/TenantStatusScreen';
-import { useTheme } from '../theme';
-import { useTenant } from '../hooks/useTenant';
-import { Loading } from '@shared/components';
+import { RootStackParamList } from './types';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -92,13 +95,8 @@ export const RootNavigator: React.FC = () => {
 };
 
 // Wrapper to handle route params
-const TenantStatusScreenWrapper: React.FC<{ route: { params: { status: 'suspended' | 'maintenance'; message?: string } } }> = ({
-  route,
-}) => {
-  return (
-    <TenantStatusScreen
-      status={route.params.status}
-      message={route.params.message}
-    />
-  );
+const TenantStatusScreenWrapper: React.FC<{
+  route: { params: { status: 'suspended' | 'maintenance'; message?: string } };
+}> = ({ route }) => {
+  return <TenantStatusScreen status={route.params.status} message={route.params.message} />;
 };

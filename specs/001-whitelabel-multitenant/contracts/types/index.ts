@@ -251,12 +251,7 @@ export interface AuthState {
   isRestored: boolean;
 }
 
-export type AuthStateStatus =
-  | 'idle'
-  | 'loading'
-  | 'authenticated'
-  | 'unauthenticated'
-  | 'error';
+export type AuthStateStatus = 'idle' | 'loading' | 'authenticated' | 'unauthenticated' | 'error';
 
 export interface TenantState {
   config: Tenant | null;

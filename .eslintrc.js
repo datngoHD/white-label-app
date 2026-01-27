@@ -15,12 +15,7 @@ module.exports = {
     ecmaVersion: 'latest',
     sourceType: 'module',
   },
-  plugins: [
-    '@typescript-eslint',
-    'react',
-    'react-hooks',
-    'react-native',
-  ],
+  plugins: ['@typescript-eslint', 'react', 'react-hooks', 'react-native'],
   settings: {
     react: {
       version: 'detect',

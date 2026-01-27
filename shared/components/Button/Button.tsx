@@ -1,11 +1,11 @@
 import React from 'react';
 import {
-  TouchableOpacity,
-  Text,
-  StyleSheet,
   ActivityIndicator,
-  ViewStyle,
+  StyleSheet,
+  Text,
   TextStyle,
+  TouchableOpacity,
+  ViewStyle,
 } from 'react-native';
 
 export type ButtonVariant = 'primary' | 'secondary' | 'outline' | 'ghost' | 'text';
@@ -54,10 +54,7 @@ export const Button: React.FC<ButtonProps> = ({
       testID={testID}
     >
       {loading ? (
-        <ActivityIndicator
-          size="small"
-          color={variant === 'primary' ? '#ffffff' : '#007AFF'}
-        />
+        <ActivityIndicator size="small" color={variant === 'primary' ? '#ffffff' : '#007AFF'} />
       ) : (
         <Text
           style={[

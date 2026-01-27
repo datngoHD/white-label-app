@@ -1,7 +1,9 @@
-import { InternalAxiosRequestConfig, AxiosError } from 'axios';
 import * as SecureStore from 'expo-secure-store';
-import { SECURE_KEYS } from '@core/storage/keys';
+
+import { AxiosError, InternalAxiosRequestConfig } from 'axios';
+
 import { logger } from '@core/logging/logger';
+import { SECURE_KEYS } from '@core/storage/keys';
 
 let isRefreshing = false;
 let failedQueue: Array<{

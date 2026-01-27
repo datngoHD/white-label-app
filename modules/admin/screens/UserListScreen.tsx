@@ -1,17 +1,14 @@
-import React, { useEffect, useState, useCallback } from 'react';
-import {
-  View,
-  StyleSheet,
-  FlatList,
-  TouchableOpacity,
-  RefreshControl,
-} from 'react-native';
+import React, { useCallback, useEffect, useState } from 'react';
+import { FlatList, RefreshControl, StyleSheet, TouchableOpacity, View } from 'react-native';
+
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { useTheme } from '@core/theme';
-import { Button, Card, Loading, Input } from '@shared/components';
-import { Text } from '@shared/components/Text/Text';
-import { Header } from '@shared/components/Header/Header';
+
 import { AdminStackParamList } from '@core/navigation/types';
+import { useTheme } from '@core/theme';
+import { Button, Card, Input, Loading } from '@shared/components';
+import { Header } from '@shared/components/Header/Header';
+import { Text } from '@shared/components/Text/Text';
+
 import { adminUserService } from '../services/adminUserService';
 import { TenantUser } from '../types';
 
@@ -31,34 +28,37 @@ export function UserListScreen({ navigation }: Props) {
     hasMore: false,
   });
 
-  const fetchUsers = useCallback(async (page = 1, refresh = false) => {
-    try {
-      if (refresh) {
-        setIsRefreshing(true);
-      } else if (page === 1) {
-        setIsLoading(true);
-      }
-      setError(null);
+  const fetchUsers = useCallback(
+    async (page = 1, refresh = false) => {
+      try {
+        if (refresh) {
+          setIsRefreshing(true);
+        } else if (page === 1) {
+          setIsLoading(true);
+        }
+        setError(null);
 
-      const response = await adminUserService.getUsers({
-        page,
-        limit: 20,
-        search: search || undefined,
-      });
+        const response = await adminUserService.getUsers({
+          page,
+          limit: 20,
+          search: search || undefined,
+        });
 
-      if (page === 1) {
-        setUsers(response.data);
-      } else {
-        setUsers((prev) => [...prev, ...response.data]);
+        if (page === 1) {
+          setUsers(response.data);
+        } else {
+          setUsers((prev) => [...prev, ...response.data]);
+        }
+        setPagination(response.pagination);
+      } catch (err) {
+        setError(err instanceof Error ? err.message : 'Failed to load users');
+      } finally {
+        setIsLoading(false);
+        setIsRefreshing(false);
       }
-      setPagination(response.pagination);
-    } catch (err) {
-      setError(err instanceof Error ? err.message : 'Failed to load users');
-    } finally {
-      setIsLoading(false);
-      setIsRefreshing(false);
-    }
-  }, [search]);
+    },
+    [search]
+  );
 
   useEffect(() => {
     fetchUsers(1);
@@ -89,11 +89,14 @@ export function UserListScreen({ navigation }: Props) {
           <View
             style={[
               styles.avatar,
-              { backgroundColor: item.isActive ? theme.colors.primary : theme.colors.text.secondary },
+              {
+                backgroundColor: item.isActive ? theme.colors.primary : theme.colors.text.secondary,
+              },
             ]}
           >
             <Text style={styles.avatarText}>
-              {item.firstName[0]}{item.lastName[0]}
+              {item.firstName[0]}
+              {item.lastName[0]}
             </Text>
           </View>
           <View style={styles.userInfo}>
@@ -104,15 +107,8 @@ export function UserListScreen({ navigation }: Props) {
               {item.email}
             </Text>
             <View style={styles.badges}>
-              <View
-                style={[
-                  styles.badge,
-                  { backgroundColor: theme.colors.primary + '20' },
-                ]}
-              >
-                <Text style={[styles.badgeText, { color: theme.colors.primary }]}>
-                  {item.role}
-                </Text>
+              <View style={[styles.badge, { backgroundColor: theme.colors.primary + '20' }]}>
+                <Text style={[styles.badgeText, { color: theme.colors.primary }]}>{item.role}</Text>
               </View>
               <View
                 style={[
@@ -162,9 +158,7 @@ export function UserListScreen({ navigation }: Props) {
 
       {error && (
         <View style={[styles.errorContainer, { backgroundColor: theme.colors.error + '10' }]}>
-          <Text style={[styles.errorText, { color: theme.colors.error }]}>
-            {error}
-          </Text>
+          <Text style={[styles.errorText, { color: theme.colors.error }]}>{error}</Text>
           <Button title="Retry" onPress={() => fetchUsers(1)} variant="text" />
         </View>
       )}
@@ -174,9 +168,7 @@ export function UserListScreen({ navigation }: Props) {
         renderItem={renderUser}
         keyExtractor={(item) => item.id}
         contentContainerStyle={styles.listContent}
-        refreshControl={
-          <RefreshControl refreshing={isRefreshing} onRefresh={handleRefresh} />
-        }
+        refreshControl={<RefreshControl refreshing={isRefreshing} onRefresh={handleRefresh} />}
         onEndReached={handleLoadMore}
         onEndReachedThreshold={0.5}
         ListEmptyComponent={

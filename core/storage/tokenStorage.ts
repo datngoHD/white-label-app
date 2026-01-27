@@ -1,6 +1,7 @@
 import * as SecureStore from 'expo-secure-store';
-import { STORAGE_KEYS } from './keys';
+
 import { logger } from '../logging/logger';
+import { STORAGE_KEYS } from './keys';
 
 export interface StoredTokens {
   accessToken: string;
@@ -50,10 +51,7 @@ export const tokenStorage = {
       await Promise.all([
         SecureStore.setItemAsync(STORAGE_KEYS.AUTH_TOKEN, tokens.accessToken),
         SecureStore.setItemAsync(STORAGE_KEYS.REFRESH_TOKEN, tokens.refreshToken),
-        SecureStore.setItemAsync(
-          STORAGE_KEYS.TOKEN_EXPIRY,
-          tokens.expiresAt.toString()
-        ),
+        SecureStore.setItemAsync(STORAGE_KEYS.TOKEN_EXPIRY, tokens.expiresAt.toString()),
       ]);
     } catch (error) {
       logger.error('Failed to save tokens', { error });

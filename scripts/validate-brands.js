@@ -15,7 +15,7 @@ const REQUIRED_FIELDS = [
   'ios',
   'android',
   'defaultTenantId',
-  'assetsPath'
+  'assetsPath',
 ];
 
 const REQUIRED_IOS_FIELDS = ['bundleId'];
@@ -73,13 +73,12 @@ function validateBrand(brandFile) {
 
     if (errors.length > 0) {
       console.log(`  ❌ Validation failed:`);
-      errors.forEach(err => console.log(`     - ${err}`));
+      errors.forEach((err) => console.log(`     - ${err}`));
       return false;
     }
 
     console.log(`  ✓ Brand config valid`);
     return true;
-
   } catch (error) {
     console.log(`  ❌ Error reading brand config: ${error.message}`);
     return false;
@@ -94,7 +93,7 @@ function main() {
     process.exit(1);
   }
 
-  const brandFiles = fs.readdirSync(BRANDS_DIR).filter(f => f.endsWith('.json'));
+  const brandFiles = fs.readdirSync(BRANDS_DIR).filter((f) => f.endsWith('.json'));
 
   if (brandFiles.length === 0) {
     console.error('No brand configuration files found');

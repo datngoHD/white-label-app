@@ -84,9 +84,7 @@ export const formatValidationErrors = (result: ValidationResult): string => {
     return 'Brand configuration is valid';
   }
 
-  return result.errors
-    .map((e) => `  - ${e.field}: ${e.message}`)
-    .join('\n');
+  return result.errors.map((e) => `  - ${e.field}: ${e.message}`).join('\n');
 };
 
 /**
@@ -95,8 +93,6 @@ export const formatValidationErrors = (result: ValidationResult): string => {
 export const assertValidBrandConfig = (brand: BrandConfig): void => {
   const result = validateBrandConfig(brand);
   if (!result.valid) {
-    throw new Error(
-      `Invalid brand configuration:\n${formatValidationErrors(result)}`
-    );
+    throw new Error(`Invalid brand configuration:\n${formatValidationErrors(result)}`);
   }
 };

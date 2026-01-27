@@ -1,6 +1,6 @@
-import { BrandConfig } from './types';
-import defaultBrand from './brands/default.json';
 import brandA from './brands/brand-a.json';
+import defaultBrand from './brands/default.json';
+import { BrandConfig } from './types';
 
 const BRAND_ID = process.env.BRAND || 'default';
 

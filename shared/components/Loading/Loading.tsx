@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, ActivityIndicator, Text, StyleSheet, ViewStyle } from 'react-native';
+import { ActivityIndicator, StyleSheet, Text, View, ViewStyle } from 'react-native';
 
 interface LoadingProps {
   message?: string;

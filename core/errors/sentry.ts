@@ -1,6 +1,7 @@
 import * as Sentry from '@sentry/react-native';
-import { environment, isProd, isStaging } from '../config/environment.config';
+
 import { getCurrentBrandId } from '../config/brand.config';
+import { environment, isProd, isStaging } from '../config/environment.config';
 import { logger } from '../logging/logger';
 
 interface SentryConfig {
@@ -48,9 +49,7 @@ export const initializeSentry = (): void => {
       },
 
       // Integrations
-      integrations: [
-        Sentry.reactNativeTracingIntegration(),
-      ],
+      integrations: [Sentry.reactNativeTracingIntegration()],
     });
 
     // Set initial context
@@ -62,11 +61,7 @@ export const initializeSentry = (): void => {
   }
 };
 
-export const setUserContext = (user: {
-  id: string;
-  email?: string;
-  tenantId?: string;
-}): void => {
+export const setUserContext = (user: { id: string; email?: string; tenantId?: string }): void => {
   Sentry.setUser({
     id: user.id,
     email: user.email,
@@ -81,10 +76,7 @@ export const clearUserContext = (): void => {
   Sentry.setUser(null);
 };
 
-export const captureException = (
-  error: Error,
-  context?: Record<string, unknown>
-): void => {
+export const captureException = (error: Error, context?: Record<string, unknown>): void => {
   Sentry.captureException(error, {
     extra: context,
   });
@@ -114,10 +106,7 @@ export const addBreadcrumb = (
   });
 };
 
-export const startTransaction = (
-  name: string,
-  op: string
-): Sentry.Span | undefined => {
+export const startTransaction = (name: string, op: string): Sentry.Span | undefined => {
   return Sentry.startInactiveSpan({ name, op });
 };
 

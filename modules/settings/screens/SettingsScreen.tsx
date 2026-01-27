@@ -1,14 +1,16 @@
 import React from 'react';
-import { View, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
+import { ScrollView, StyleSheet, TouchableOpacity, View } from 'react-native';
+
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { useTheme } from '@core/theme';
-import { Card } from '@shared/components';
-import { Text } from '@shared/components/Text/Text';
-import { Header } from '@shared/components/Header/Header';
-import { SettingsStackParamList } from '@core/navigation/types';
-import { useAuth } from '@modules/auth/hooks/useAuth';
+
 import { useHasPermission } from '@core/hooks/useHasPermission';
+import { SettingsStackParamList } from '@core/navigation/types';
 import { PERMISSIONS } from '@core/permissions/permissions';
+import { useTheme } from '@core/theme';
+import { useAuth } from '@modules/auth/hooks/useAuth';
+import { Card } from '@shared/components';
+import { Header } from '@shared/components/Header/Header';
+import { Text } from '@shared/components/Text/Text';
 
 type Props = NativeStackScreenProps<SettingsStackParamList, 'Settings'>;
 
@@ -56,7 +58,8 @@ export function SettingsScreen({ navigation }: Props) {
           <View style={styles.userInfo}>
             <View style={[styles.avatar, { backgroundColor: theme.colors.primary }]}>
               <Text style={styles.avatarText}>
-                {user?.firstName?.[0]}{user?.lastName?.[0]}
+                {user?.firstName?.[0]}
+                {user?.lastName?.[0]}
               </Text>
             </View>
             <View style={styles.userDetails}>
@@ -71,9 +74,7 @@ export function SettingsScreen({ navigation }: Props) {
         </Card>
 
         <View style={styles.section}>
-          <Text style={[styles.sectionTitle, { color: theme.colors.text.secondary }]}>
-            GENERAL
-          </Text>
+          <Text style={[styles.sectionTitle, { color: theme.colors.text.secondary }]}>GENERAL</Text>
           {settingsItems.map((item, index) => (
             <TouchableOpacity
               key={index}
@@ -92,32 +93,20 @@ export function SettingsScreen({ navigation }: Props) {
                   {item.subtitle}
                 </Text>
               </View>
-              <Text style={[styles.chevron, { color: theme.colors.text.secondary }]}>
-                {'>'}
-              </Text>
+              <Text style={[styles.chevron, { color: theme.colors.text.secondary }]}>{'>'}</Text>
             </TouchableOpacity>
           ))}
         </View>
 
         <View style={styles.section}>
-          <Text style={[styles.sectionTitle, { color: theme.colors.text.secondary }]}>
-            ABOUT
-          </Text>
+          <Text style={[styles.sectionTitle, { color: theme.colors.text.secondary }]}>ABOUT</Text>
           <View style={[styles.aboutItem, { borderBottomColor: theme.colors.surface }]}>
-            <Text style={[styles.aboutLabel, { color: theme.colors.text.secondary }]}>
-              Version
-            </Text>
-            <Text style={[styles.aboutValue, { color: theme.colors.text.primary }]}>
-              1.0.0
-            </Text>
+            <Text style={[styles.aboutLabel, { color: theme.colors.text.secondary }]}>Version</Text>
+            <Text style={[styles.aboutValue, { color: theme.colors.text.primary }]}>1.0.0</Text>
           </View>
           <View style={styles.aboutItem}>
-            <Text style={[styles.aboutLabel, { color: theme.colors.text.secondary }]}>
-              Build
-            </Text>
-            <Text style={[styles.aboutValue, { color: theme.colors.text.primary }]}>
-              1
-            </Text>
+            <Text style={[styles.aboutLabel, { color: theme.colors.text.secondary }]}>Build</Text>
+            <Text style={[styles.aboutValue, { color: theme.colors.text.primary }]}>1</Text>
           </View>
         </View>
       </ScrollView>

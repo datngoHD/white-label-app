@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
-import { View, StyleSheet, ScrollView, Switch } from 'react-native';
+import { ScrollView, StyleSheet, Switch, View } from 'react-native';
+
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { useTheme } from '@core/theme';
-import { Card } from '@shared/components';
-import { Text } from '@shared/components/Text/Text';
-import { Header } from '@shared/components/Header/Header';
+
 import { SettingsStackParamList } from '@core/navigation/types';
+import { useTheme } from '@core/theme';
 import { useProfile } from '@modules/profile/hooks/useProfile';
+import { Card } from '@shared/components';
+import { Header } from '@shared/components/Header/Header';
+import { Text } from '@shared/components/Text/Text';
 
 type Props = NativeStackScreenProps<SettingsStackParamList, 'Preferences'>;
 
@@ -17,20 +19,13 @@ export function PreferencesScreen({ navigation }: Props) {
   const [emailNotifications, setEmailNotifications] = useState(
     profile?.notifications?.email ?? true
   );
-  const [pushNotifications, setPushNotifications] = useState(
-    profile?.notifications?.push ?? true
-  );
-  const [smsNotifications, setSmsNotifications] = useState(
-    profile?.notifications?.sms ?? false
-  );
+  const [pushNotifications, setPushNotifications] = useState(profile?.notifications?.push ?? true);
+  const [smsNotifications, setSmsNotifications] = useState(profile?.notifications?.sms ?? false);
   const [marketingEmails, setMarketingEmails] = useState(
     profile?.notifications?.marketing ?? false
   );
 
-  const handleToggle = async (
-    key: 'email' | 'push' | 'sms' | 'marketing',
-    value: boolean
-  ) => {
+  const handleToggle = async (key: 'email' | 'push' | 'sms' | 'marketing', value: boolean) => {
     const setters: Record<string, (v: boolean) => void> = {
       email: setEmailNotifications,
       push: setPushNotifications,
@@ -103,9 +98,7 @@ export function PreferencesScreen({ navigation }: Props) {
         </View>
 
         <View style={styles.section}>
-          <Text style={[styles.sectionTitle, { color: theme.colors.text.secondary }]}>
-            DISPLAY
-          </Text>
+          <Text style={[styles.sectionTitle, { color: theme.colors.text.secondary }]}>DISPLAY</Text>
           <Card style={styles.card}>
             <View style={styles.infoRow}>
               <Text style={[styles.infoLabel, { color: theme.colors.text.secondary }]}>
@@ -151,9 +144,7 @@ function PreferenceRow({
   return (
     <View style={styles.preferenceRow}>
       <View style={styles.preferenceContent}>
-        <Text style={[styles.preferenceTitle, { color: theme.colors.text.primary }]}>
-          {title}
-        </Text>
+        <Text style={[styles.preferenceTitle, { color: theme.colors.text.primary }]}>{title}</Text>
         <Text style={[styles.preferenceSubtitle, { color: theme.colors.text.secondary }]}>
           {subtitle}
         </Text>

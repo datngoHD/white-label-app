@@ -1,7 +1,8 @@
-import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
+
 import { Tenant, TenantStatus } from '@core/config/tenant.types';
-import { TenantState } from '@core/types';
 import { logger } from '@core/logging/logger';
+import { TenantState } from '@core/types';
 
 const initialState: TenantState = {
   config: null,

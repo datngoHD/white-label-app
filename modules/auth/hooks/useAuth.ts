@@ -1,11 +1,13 @@
 import { useCallback } from 'react';
+
 import { useAppDispatch, useAppSelector } from '@core/store';
+
 import {
-  login as loginAction,
-  register as registerAction,
-  logout as logoutAction,
-  initializeAuth,
   clearError,
+  initializeAuth,
+  login as loginAction,
+  logout as logoutAction,
+  register as registerAction,
 } from '../store/authSlice';
 import { LoginCredentials, RegisterData } from '../types';
 

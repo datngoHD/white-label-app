@@ -1,6 +1,6 @@
+import { BottomTabScreenProps } from '@react-navigation/bottom-tabs';
 import { NavigatorScreenParams } from '@react-navigation/native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { BottomTabScreenProps } from '@react-navigation/bottom-tabs';
 
 /**
  * Root stack navigator params
@@ -68,23 +68,33 @@ export type AdminStackParamList = {
 /**
  * Screen props types
  */
-export type RootStackScreenProps<T extends keyof RootStackParamList> =
-  NativeStackScreenProps<RootStackParamList, T>;
+export type RootStackScreenProps<T extends keyof RootStackParamList> = NativeStackScreenProps<
+  RootStackParamList,
+  T
+>;
 
-export type AuthStackScreenProps<T extends keyof AuthStackParamList> =
-  NativeStackScreenProps<AuthStackParamList, T>;
+export type AuthStackScreenProps<T extends keyof AuthStackParamList> = NativeStackScreenProps<
+  AuthStackParamList,
+  T
+>;
 
-export type MainTabScreenProps<T extends keyof MainTabParamList> =
-  BottomTabScreenProps<MainTabParamList, T>;
+export type MainTabScreenProps<T extends keyof MainTabParamList> = BottomTabScreenProps<
+  MainTabParamList,
+  T
+>;
 
-export type ProfileStackScreenProps<T extends keyof ProfileStackParamList> =
-  NativeStackScreenProps<ProfileStackParamList, T>;
+export type ProfileStackScreenProps<T extends keyof ProfileStackParamList> = NativeStackScreenProps<
+  ProfileStackParamList,
+  T
+>;
 
 export type SettingsStackScreenProps<T extends keyof SettingsStackParamList> =
   NativeStackScreenProps<SettingsStackParamList, T>;
 
-export type AdminStackScreenProps<T extends keyof AdminStackParamList> =
-  NativeStackScreenProps<AdminStackParamList, T>;
+export type AdminStackScreenProps<T extends keyof AdminStackParamList> = NativeStackScreenProps<
+  AdminStackParamList,
+  T
+>;
 
 /**
  * Declare global navigation types

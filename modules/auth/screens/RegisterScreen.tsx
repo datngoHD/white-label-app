@@ -1,14 +1,17 @@
 import React, { useState } from 'react';
-import { View, StyleSheet, KeyboardAvoidingView, Platform, ScrollView } from 'react-native';
+import { KeyboardAvoidingView, Platform, ScrollView, StyleSheet, View } from 'react-native';
+
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
+
+import { useTenant } from '@core/hooks/useTenant';
+import { AuthStackParamList } from '@core/navigation/types';
 import { useTheme } from '@core/theme';
 import { Button, Input, Loading } from '@shared/components';
-import { Text } from '@shared/components/Text/Text';
 import { Header } from '@shared/components/Header/Header';
-import { AuthStackParamList } from '@core/navigation/types';
-import { useAuth } from '../hooks/useAuth';
-import { useTenant } from '@core/hooks/useTenant';
+import { Text } from '@shared/components/Text/Text';
+
 import { RegisterForm } from '../components/RegisterForm';
+import { useAuth } from '../hooks/useAuth';
 
 type Props = NativeStackScreenProps<AuthStackParamList, 'Register'>;
 
@@ -70,10 +73,7 @@ export function RegisterScreen({ navigation }: Props) {
       style={[styles.container, { backgroundColor: theme.colors.background }]}
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
     >
-      <ScrollView
-        contentContainerStyle={styles.scrollContent}
-        keyboardShouldPersistTaps="handled"
-      >
+      <ScrollView contentContainerStyle={styles.scrollContent} keyboardShouldPersistTaps="handled">
         <Header title="Create Account" showLogo />
 
         <View style={styles.formContainer}>

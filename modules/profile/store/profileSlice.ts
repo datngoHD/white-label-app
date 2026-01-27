@@ -1,6 +1,7 @@
-import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
+
 import { profileService } from '../services/profileService';
-import { Profile, ProfileState, UpdateProfileData, UpdateNotificationPreferences } from '../types';
+import { Profile, ProfileState, UpdateNotificationPreferences, UpdateProfileData } from '../types';
 
 const initialState: ProfileState = {
   profile: null,
@@ -9,17 +10,14 @@ const initialState: ProfileState = {
   isUpdating: false,
 };
 
-export const fetchProfile = createAsyncThunk(
-  'profile/fetch',
-  async (_, { rejectWithValue }) => {
-    try {
-      return await profileService.getProfile();
-    } catch (error: unknown) {
-      const message = error instanceof Error ? error.message : 'Failed to fetch profile';
-      return rejectWithValue(message);
-    }
+export const fetchProfile = createAsyncThunk('profile/fetch', async (_, { rejectWithValue }) => {
+  try {
+    return await profileService.getProfile();
+  } catch (error: unknown) {
+    const message = error instanceof Error ? error.message : 'Failed to fetch profile';
+    return rejectWithValue(message);
   }
-);
+});
 
 export const updateProfile = createAsyncThunk(
   'profile/update',

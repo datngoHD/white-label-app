@@ -170,7 +170,7 @@ export default ({ config }) => ({
 Create `core/config/environment.config.ts`:
 
 ```typescript
-import { EnvironmentConfig, Environment } from '../../contracts/types';
+import { Environment, EnvironmentConfig } from '../../contracts/types';
 
 const ENV = (process.env.APP_ENV as Environment) || 'development';
 
@@ -297,6 +297,7 @@ Create `core/store/store.ts`:
 
 ```typescript
 import { configureStore } from '@reduxjs/toolkit';
+
 import { rootReducer } from './rootReducer';
 
 export const store = configureStore({
@@ -318,6 +319,7 @@ Create `core/store/rootReducer.ts`:
 
 ```typescript
 import { combineReducers } from '@reduxjs/toolkit';
+
 // Import feature slices as they are created
 // import authReducer from '../../modules/auth/store/authSlice';
 
@@ -334,8 +336,9 @@ Create `core/api/client.ts`:
 
 ```typescript
 import axios, { AxiosInstance, AxiosRequestConfig } from 'axios';
-import { environment } from '../config/environment.config';
+
 import { getBrand } from '../config/brand.config';
+import { environment } from '../config/environment.config';
 
 const createApiClient = (): AxiosInstance => {
   const client = axios.create({
@@ -447,6 +450,7 @@ npx expo prebuild --clean
 ## Troubleshooting
 
 ### Metro bundler issues
+
 ```bash
 # Clear Metro cache
 yarn start --reset-cache
@@ -456,12 +460,14 @@ watchman watch-del-all
 ```
 
 ### iOS build issues
+
 ```bash
 # Clean iOS build
 cd ios && rm -rf build && pod install && cd ..
 ```
 
 ### Android build issues
+
 ```bash
 # Clean Android build
 cd android && ./gradlew clean && cd ..

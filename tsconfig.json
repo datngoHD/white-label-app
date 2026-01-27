@@ -17,14 +17,6 @@
       "@assets/*": ["assets/*"]
     }
   },
-  "include": [
-    "**/*.ts",
-    "**/*.tsx",
-    "app.config.js"
-  ],
-  "exclude": [
-    "node_modules",
-    "ios",
-    "android"
-  ]
+  "include": ["**/*.ts", "**/*.tsx", "app.config.js"],
+  "exclude": ["node_modules", "ios", "android"]
 }

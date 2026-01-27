@@ -1,11 +1,12 @@
 import React from 'react';
-import { View, ScrollView, StyleSheet } from 'react-native';
+import { ScrollView, StyleSheet, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { useTheme } from '@core/theme';
+
 import { currentBrand } from '@core/config/brand.config';
+import { useTheme } from '@core/theme';
 import { Button, Card, Input } from '@shared/components';
-import { Text } from '@shared/components/Text/Text';
 import { Header } from '@shared/components/Header/Header';
+import { Text } from '@shared/components/Text/Text';
 
 export const BrandPreviewScreen: React.FC = () => {
   const theme = useTheme();
@@ -98,11 +99,7 @@ export const BrandPreviewScreen: React.FC = () => {
             fullWidth
             style={styles.button}
           />
-          <Input
-            label="Sample Input"
-            placeholder="Enter text..."
-            containerStyle={styles.input}
-          />
+          <Input label="Sample Input" placeholder="Enter text..." containerStyle={styles.input} />
           <Input
             label="Input with Error"
             placeholder="Enter text..."

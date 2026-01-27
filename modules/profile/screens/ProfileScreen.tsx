@@ -1,13 +1,16 @@
 import React, { useEffect } from 'react';
-import { View, StyleSheet, ScrollView, Image, TouchableOpacity } from 'react-native';
+import { Image, ScrollView, StyleSheet, TouchableOpacity, View } from 'react-native';
+
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { useTheme } from '@core/theme';
-import { Button, Card, Loading } from '@shared/components';
-import { Text } from '@shared/components/Text/Text';
-import { Header } from '@shared/components/Header/Header';
+
 import { MainTabParamList } from '@core/navigation/types';
-import { useProfile } from '../hooks/useProfile';
+import { useTheme } from '@core/theme';
 import { useAuth } from '@modules/auth/hooks/useAuth';
+import { Button, Card, Loading } from '@shared/components';
+import { Header } from '@shared/components/Header/Header';
+import { Text } from '@shared/components/Text/Text';
+
+import { useProfile } from '../hooks/useProfile';
 
 type Props = NativeStackScreenProps<MainTabParamList, 'Profile'>;
 
@@ -46,9 +49,7 @@ export function ProfileScreen({ navigation }: Props) {
     return (
       <View style={[styles.container, { backgroundColor: theme.colors.background }]}>
         <View style={styles.errorContainer}>
-          <Text style={[styles.errorText, { color: theme.colors.error }]}>
-            {error}
-          </Text>
+          <Text style={[styles.errorText, { color: theme.colors.error }]}>{error}</Text>
           <Button title="Retry" onPress={fetchProfile} style={styles.retryButton} />
         </View>
       </View>
@@ -81,18 +82,14 @@ export function ProfileScreen({ navigation }: Props) {
 
         <Card style={styles.infoCard}>
           <View style={styles.infoRow}>
-            <Text style={[styles.infoLabel, { color: theme.colors.text.secondary }]}>
-              Role
-            </Text>
+            <Text style={[styles.infoLabel, { color: theme.colors.text.secondary }]}>Role</Text>
             <Text style={[styles.infoValue, { color: theme.colors.text.primary }]}>
               {profile?.role || 'User'}
             </Text>
           </View>
           <View style={[styles.divider, { backgroundColor: theme.colors.surface }]} />
           <View style={styles.infoRow}>
-            <Text style={[styles.infoLabel, { color: theme.colors.text.secondary }]}>
-              Phone
-            </Text>
+            <Text style={[styles.infoLabel, { color: theme.colors.text.secondary }]}>Phone</Text>
             <Text style={[styles.infoValue, { color: theme.colors.text.primary }]}>
               {profile?.phone || 'Not set'}
             </Text>
@@ -103,19 +100,13 @@ export function ProfileScreen({ navigation }: Props) {
               Member since
             </Text>
             <Text style={[styles.infoValue, { color: theme.colors.text.primary }]}>
-              {profile?.createdAt
-                ? new Date(profile.createdAt).toLocaleDateString()
-                : 'Unknown'}
+              {profile?.createdAt ? new Date(profile.createdAt).toLocaleDateString() : 'Unknown'}
             </Text>
           </View>
         </Card>
 
         <View style={styles.actions}>
-          <Button
-            title="Edit Profile"
-            onPress={handleEditProfile}
-            style={styles.actionButton}
-          />
+          <Button title="Edit Profile" onPress={handleEditProfile} style={styles.actionButton} />
           <Button
             title="Change Password"
             onPress={handleChangePassword}

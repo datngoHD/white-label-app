@@ -1,11 +1,12 @@
 import { apiClient } from '@core/api';
-import {
-  Profile,
-  UpdateProfileData,
-  UpdateNotificationPreferences,
-  ChangeAvatarResponse,
-} from '../types';
 import { ChangePasswordData } from '@modules/auth/types';
+
+import {
+  ChangeAvatarResponse,
+  Profile,
+  UpdateNotificationPreferences,
+  UpdateProfileData,
+} from '../types';
 
 const PROFILE_ENDPOINTS = {
   PROFILE: '/profile',
@@ -22,10 +23,7 @@ export const profileService = {
   },
 
   async updateProfile(data: UpdateProfileData): Promise<Profile> {
-    const response = await apiClient.patch<Profile>(
-      PROFILE_ENDPOINTS.PROFILE,
-      data
-    );
+    const response = await apiClient.patch<Profile>(PROFILE_ENDPOINTS.PROFILE, data);
     return response.data;
   },
 
@@ -60,10 +58,7 @@ export const profileService = {
   async updateNotificationPreferences(
     preferences: UpdateNotificationPreferences
   ): Promise<Profile> {
-    const response = await apiClient.patch<Profile>(
-      PROFILE_ENDPOINTS.NOTIFICATIONS,
-      preferences
-    );
+    const response = await apiClient.patch<Profile>(PROFILE_ENDPOINTS.NOTIFICATIONS, preferences);
     return response.data;
   },
 

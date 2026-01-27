@@ -1,8 +1,9 @@
-import React, { createContext, useContext, useMemo, ReactNode } from 'react';
+import React, { createContext, ReactNode, useContext, useMemo } from 'react';
 import { useColorScheme } from 'react-native';
-import { Theme, ThemeMode, ThemeOverrides } from '../types';
-import { lightTheme, darkTheme, createTheme, mergeBrandTheme } from './theme';
+
 import { currentBrand } from '../config/brand.config';
+import { Theme, ThemeMode, ThemeOverrides } from '../types';
+import { createTheme, darkTheme, lightTheme, mergeBrandTheme } from './theme';
 
 interface ThemeContextValue {
   theme: Theme;
@@ -31,8 +32,7 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({
 
   const value = useMemo(() => {
     // Determine if dark mode
-    const isDark =
-      mode === 'dark' || (mode === 'system' && systemColorScheme === 'dark');
+    const isDark = mode === 'dark' || (mode === 'system' && systemColorScheme === 'dark');
 
     // Start with light or dark base theme
     let baseTheme = isDark ? darkTheme : lightTheme;
@@ -52,9 +52,7 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({
     };
   }, [mode, systemColorScheme, overrides]);
 
-  return (
-    <ThemeContext.Provider value={value}>{children}</ThemeContext.Provider>
-  );
+  return <ThemeContext.Provider value={value}>{children}</ThemeContext.Provider>;
 };
 
 export const useThemeContext = (): ThemeContextValue => {

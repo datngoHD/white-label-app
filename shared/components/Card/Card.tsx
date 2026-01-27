@@ -1,5 +1,5 @@
 import React, { ReactNode } from 'react';
-import { View, StyleSheet, ViewStyle, TouchableOpacity } from 'react-native';
+import { StyleSheet, TouchableOpacity, View, ViewStyle } from 'react-native';
 
 interface CardProps {
   children: ReactNode;
@@ -18,21 +18,11 @@ export const Card: React.FC<CardProps> = ({
   padded = true,
   testID,
 }) => {
-  const cardStyle = [
-    styles.card,
-    elevated && styles.elevated,
-    padded && styles.padded,
-    style,
-  ];
+  const cardStyle = [styles.card, elevated && styles.elevated, padded && styles.padded, style];
 
   if (onPress) {
     return (
-      <TouchableOpacity
-        style={cardStyle}
-        onPress={onPress}
-        activeOpacity={0.8}
-        testID={testID}
-      >
+      <TouchableOpacity style={cardStyle} onPress={onPress} activeOpacity={0.8} testID={testID}>
         {children}
       </TouchableOpacity>
     );

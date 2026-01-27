@@ -25,16 +25,19 @@ A React Native mobile application built with Expo that supports white-labeling (
 ## Quick Start
 
 1. **Install dependencies**
+
    ```bash
    yarn install
    ```
 
 2. **Start the development server**
+
    ```bash
    yarn start
    ```
 
 3. **Run on a device/simulator**
+
    ```bash
    # iOS
    yarn ios
@@ -82,6 +85,7 @@ A React Native mobile application built with Expo that supports white-labeling (
 ### Adding a New Brand
 
 1. Create a brand configuration file in `core/config/brands/`:
+
    ```json
    {
      "id": "my-brand",
@@ -130,17 +134,17 @@ SENTRY_DSN=                 # Optional: Sentry DSN for error tracking
 
 ## Scripts
 
-| Script | Description |
-|--------|-------------|
-| `yarn start` | Start Expo development server |
-| `yarn ios` | Run on iOS simulator |
-| `yarn android` | Run on Android emulator |
-| `yarn test` | Run tests |
-| `yarn typecheck` | TypeScript type checking |
-| `yarn lint` | Run ESLint |
-| `yarn format` | Format code with Prettier |
-| `yarn build:default` | Prebuild for default brand |
-| `yarn build:brand-a` | Prebuild for Brand A |
+| Script                 | Description                       |
+| ---------------------- | --------------------------------- |
+| `yarn start`           | Start Expo development server     |
+| `yarn ios`             | Run on iOS simulator              |
+| `yarn android`         | Run on Android emulator           |
+| `yarn test`            | Run tests                         |
+| `yarn typecheck`       | TypeScript type checking          |
+| `yarn lint`            | Run ESLint                        |
+| `yarn format`          | Format code with Prettier         |
+| `yarn build:default`   | Prebuild for default brand        |
+| `yarn build:brand-a`   | Prebuild for Brand A              |
 | `yarn validate:brands` | Validate all brand configurations |
 
 ## CI/CD

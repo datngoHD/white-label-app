@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
-import { View, StyleSheet, KeyboardAvoidingView, Platform, ScrollView } from 'react-native';
+import { KeyboardAvoidingView, Platform, ScrollView, StyleSheet, View } from 'react-native';
+
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
+
+import { AuthStackParamList } from '@core/navigation/types';
 import { useTheme } from '@core/theme';
 import { Button, Input, Loading } from '@shared/components';
-import { Text } from '@shared/components/Text/Text';
 import { Header } from '@shared/components/Header/Header';
-import { AuthStackParamList } from '@core/navigation/types';
+import { Text } from '@shared/components/Text/Text';
+
 import { authService } from '../services/authService';
 
 type Props = NativeStackScreenProps<AuthStackParamList, 'ResetPassword'>;
@@ -66,11 +69,7 @@ export function ResetPasswordScreen({ route, navigation }: Props) {
           <Text style={[styles.successMessage, { color: theme.colors.text.secondary }]}>
             Your password has been successfully reset. You can now sign in with your new password.
           </Text>
-          <Button
-            title="Sign In"
-            onPress={handleBackToLogin}
-            style={styles.signInButton}
-          />
+          <Button title="Sign In" onPress={handleBackToLogin} style={styles.signInButton} />
         </View>
       </View>
     );
@@ -81,10 +80,7 @@ export function ResetPasswordScreen({ route, navigation }: Props) {
       style={[styles.container, { backgroundColor: theme.colors.background }]}
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
     >
-      <ScrollView
-        contentContainerStyle={styles.scrollContent}
-        keyboardShouldPersistTaps="handled"
-      >
+      <ScrollView contentContainerStyle={styles.scrollContent} keyboardShouldPersistTaps="handled">
         <Header title="Create New Password" />
 
         <View style={styles.content}>
@@ -92,11 +88,7 @@ export function ResetPasswordScreen({ route, navigation }: Props) {
             Enter your new password below.
           </Text>
 
-          {error && (
-            <Text style={[styles.error, { color: theme.colors.error }]}>
-              {error}
-            </Text>
-          )}
+          {error && <Text style={[styles.error, { color: theme.colors.error }]}>{error}</Text>}
 
           <Input
             label="New Password"

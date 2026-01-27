@@ -6,5 +6,20 @@
   "printWidth": 100,
   "bracketSpacing": true,
   "arrowParens": "always",
-  "endOfLine": "lf"
+  "endOfLine": "lf",
+  "plugins": ["@ianvs/prettier-plugin-sort-imports"],
+  "importOrder": [
+    "",
+    "^react(-native)?$",
+    "^react-native-.*$",
+    "^expo.*$",
+    "",
+    "<THIRD_PARTY_MODULES>",
+    "",
+    "^@(app|modules|shared|core|assets)/(.*)$",
+    "",
+    "^[./]"
+  ],
+  "importOrderParserPlugins": ["typescript", "jsx"],
+  "importOrderTypeScriptVersion": "5.3.3"
 }

@@ -1,11 +1,14 @@
-import React, { useState, useEffect } from 'react';
-import { View, StyleSheet, KeyboardAvoidingView, Platform, ScrollView } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { KeyboardAvoidingView, Platform, ScrollView, StyleSheet, View } from 'react-native';
+
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
+
+import { ProfileStackParamList } from '@core/navigation/types';
 import { useTheme } from '@core/theme';
 import { Button, Input, Loading } from '@shared/components';
-import { Text } from '@shared/components/Text/Text';
 import { Header } from '@shared/components/Header/Header';
-import { ProfileStackParamList } from '@core/navigation/types';
+import { Text } from '@shared/components/Text/Text';
+
 import { useProfile } from '../hooks/useProfile';
 
 type Props = NativeStackScreenProps<ProfileStackParamList, 'EditProfile'>;
@@ -57,15 +60,10 @@ export function EditProfileScreen({ navigation }: Props) {
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
     >
       <Header title="Edit Profile" showBack onBack={() => navigation.goBack()} />
-      <ScrollView
-        contentContainerStyle={styles.scrollContent}
-        keyboardShouldPersistTaps="handled"
-      >
+      <ScrollView contentContainerStyle={styles.scrollContent} keyboardShouldPersistTaps="handled">
         {error && (
           <View style={[styles.errorContainer, { backgroundColor: theme.colors.error + '10' }]}>
-            <Text style={[styles.errorText, { color: theme.colors.error }]}>
-              {error}
-            </Text>
+            <Text style={[styles.errorText, { color: theme.colors.error }]}>{error}</Text>
           </View>
         )}
 

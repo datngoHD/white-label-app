@@ -16,6 +16,7 @@
 ## Path Conventions
 
 Based on plan.md, this is a React Native mobile application:
+
 - `app/` - Application entry point, bootstrap, providers
 - `modules/` - Feature-based modules
 - `shared/` - Reusable components, hooks, utilities
@@ -376,7 +377,7 @@ Based on plan.md, this is a React Native mobile application:
 
 **Purpose**: Final improvements that affect multiple user stories
 
-- [x] T145 Add comprehensive JSDoc comments to all core modules in core/**/*.ts
+- [x] T145 Add comprehensive JSDoc comments to all core modules in core/\*_/_.ts
 - [x] T146 [P] Create app README with setup instructions in README.md
 - [x] T147 [P] Verify all barrel exports are complete and correct across core/, shared/, modules/
 - [x] T148 Run TypeScript compilation check and fix any type errors
@@ -422,18 +423,21 @@ Based on plan.md, this is a React Native mobile application:
 ### Parallel Opportunities
 
 **Setup Phase (T001-T010)**:
+
 ```bash
 # After T002, these can run in parallel:
 T003, T004, T005, T007, T008
 ```
 
 **Foundational Phase (T011-T033)**:
+
 ```bash
 # These can run in parallel after T011:
 T012, T013, T016, T017, T020, T021, T024, T027, T030, T031, T032
 ```
 
 **User Story 1 (T034-T058)**:
+
 ```bash
 # Brand assets can be created in parallel:
 T046, T047, T048, T049, T050, T051
@@ -443,6 +447,7 @@ T039, T040, T041
 ```
 
 **User Story 5 (T104-T132)**:
+
 ```bash
 # Auth screens can be parallel after T107:
 T109, T110, T111
