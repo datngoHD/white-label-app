@@ -1,5 +1,5 @@
 import { InternalAxiosRequestConfig } from 'axios';
-import { logger } from '../../logging/logger';
+import { logger } from '@core/logging/logger';
 
 let currentTenantId: string | null = null;
 

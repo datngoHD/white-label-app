@@ -4,10 +4,10 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { RootStackParamList } from './types';
 import { AuthNavigator } from './AuthNavigator';
 import { MainNavigator } from './MainNavigator';
-import { TenantStatusScreen } from '../../modules/tenant/screens/TenantStatusScreen';
+import { TenantStatusScreen } from '@modules/tenant/screens/TenantStatusScreen';
 import { useTheme } from '../theme';
 import { useTenant } from '../hooks/useTenant';
-import { Loading } from '../../shared/components';
+import { Loading } from '@shared/components';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 

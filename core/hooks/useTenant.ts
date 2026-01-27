@@ -1,4 +1,4 @@
-import { useTenantContext } from '../../app/providers/TenantProvider';
+import { useTenantContext } from '@app/providers/TenantProvider';
 import { Tenant } from '../config/tenant.types';
 import { isTenantAvailable, getTenantStatusMessage } from '../config/tenant.config';
 

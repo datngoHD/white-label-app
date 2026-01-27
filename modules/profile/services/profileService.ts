@@ -1,11 +1,11 @@
-import { apiClient } from '../../../core/api';
+import { apiClient } from '@core/api';
 import {
   Profile,
   UpdateProfileData,
   UpdateNotificationPreferences,
   ChangeAvatarResponse,
 } from '../types';
-import { ChangePasswordData } from '../../auth/types';
+import { ChangePasswordData } from '@modules/auth/types';
 
 const PROFILE_ENDPOINTS = {
   PROFILE: '/profile',

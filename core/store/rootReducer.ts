@@ -1,7 +1,7 @@
 import { combineReducers } from '@reduxjs/toolkit';
 import tenantReducer from './slices/tenantSlice';
-import authReducer from '../../modules/auth/store/authSlice';
-import profileReducer from '../../modules/profile/store/profileSlice';
+import authReducer from '@modules/auth/store/authSlice';
+import profileReducer from '@modules/profile/store/profileSlice';
 
 export const rootReducer = combineReducers({
   tenant: tenantReducer,

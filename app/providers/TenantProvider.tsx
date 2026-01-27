@@ -1,9 +1,9 @@
 import React, { createContext, useContext, useEffect, ReactNode } from 'react';
-import { useAppDispatch, useAppSelector } from '../../core/store';
-import { Tenant } from '../../core/config/tenant.types';
-import { getDefaultTenantConfig } from '../../core/config/tenant.config';
-import { setTenantId } from '../../core/api';
-import { logger } from '../../core/logging/logger';
+import { useAppDispatch, useAppSelector } from '@core/store';
+import { Tenant } from '@core/config/tenant.types';
+import { getDefaultTenantConfig } from '@core/config/tenant.config';
+import { setTenantId } from '@core/api';
+import { logger } from '@core/logging/logger';
 
 interface TenantContextValue {
   tenant: Tenant | null;

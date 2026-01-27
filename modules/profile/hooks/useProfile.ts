@@ -1,5 +1,5 @@
 import { useCallback } from 'react';
-import { useAppDispatch, useAppSelector } from '../../../core/store';
+import { useAppDispatch, useAppSelector } from '@core/store';
 import {
   fetchProfile as fetchProfileAction,
   updateProfile as updateProfileAction,

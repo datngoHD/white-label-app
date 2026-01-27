@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import { View, StyleSheet, Animated } from 'react-native';
-import { useTheme } from '../../../core/theme';
-import { useIsOffline } from '../../../core/hooks/useNetworkStatus';
+import { useTheme } from '@core/theme';
+import { useIsOffline } from '@core/hooks/useNetworkStatus';
 import { Text } from '../Text/Text';
 
 interface OfflineBannerProps {

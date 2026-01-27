@@ -1,13 +1,13 @@
 import React, { useEffect } from 'react';
 import { View, StyleSheet, ScrollView, Image, TouchableOpacity } from 'react-native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { useTheme } from '../../../core/theme';
-import { Button, Card, Loading } from '../../../shared/components';
-import { Text } from '../../../shared/components/Text/Text';
-import { Header } from '../../../shared/components/Header/Header';
-import { MainTabParamList } from '../../../core/navigation/types';
+import { useTheme } from '@core/theme';
+import { Button, Card, Loading } from '@shared/components';
+import { Text } from '@shared/components/Text/Text';
+import { Header } from '@shared/components/Header/Header';
+import { MainTabParamList } from '@core/navigation/types';
 import { useProfile } from '../hooks/useProfile';
-import { useAuth } from '../../auth/hooks/useAuth';
+import { useAuth } from '@modules/auth/hooks/useAuth';
 
 type Props = NativeStackScreenProps<MainTabParamList, 'Profile'>;
 

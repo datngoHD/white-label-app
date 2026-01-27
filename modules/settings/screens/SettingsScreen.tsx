@@ -1,14 +1,14 @@
 import React from 'react';
 import { View, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { useTheme } from '../../../core/theme';
-import { Card } from '../../../shared/components';
-import { Text } from '../../../shared/components/Text/Text';
-import { Header } from '../../../shared/components/Header/Header';
-import { SettingsStackParamList } from '../../../core/navigation/types';
-import { useAuth } from '../../auth/hooks/useAuth';
-import { useHasPermission } from '../../../core/hooks/useHasPermission';
-import { PERMISSIONS } from '../../../core/permissions/permissions';
+import { useTheme } from '@core/theme';
+import { Card } from '@shared/components';
+import { Text } from '@shared/components/Text/Text';
+import { Header } from '@shared/components/Header/Header';
+import { SettingsStackParamList } from '@core/navigation/types';
+import { useAuth } from '@modules/auth/hooks/useAuth';
+import { useHasPermission } from '@core/hooks/useHasPermission';
+import { PERMISSIONS } from '@core/permissions/permissions';
 
 type Props = NativeStackScreenProps<SettingsStackParamList, 'Settings'>;
 

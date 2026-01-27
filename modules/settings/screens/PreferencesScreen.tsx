@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { View, StyleSheet, ScrollView, Switch } from 'react-native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { useTheme } from '../../../core/theme';
-import { Card } from '../../../shared/components';
-import { Text } from '../../../shared/components/Text/Text';
-import { Header } from '../../../shared/components/Header/Header';
-import { SettingsStackParamList } from '../../../core/navigation/types';
-import { useProfile } from '../../profile/hooks/useProfile';
+import { useTheme } from '@core/theme';
+import { Card } from '@shared/components';
+import { Text } from '@shared/components/Text/Text';
+import { Header } from '@shared/components/Header/Header';
+import { SettingsStackParamList } from '@core/navigation/types';
+import { useProfile } from '@modules/profile/hooks/useProfile';
 
 type Props = NativeStackScreenProps<SettingsStackParamList, 'Preferences'>;
 

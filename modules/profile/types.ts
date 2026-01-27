@@ -1,4 +1,4 @@
-import { User } from '../auth/types';
+import { User } from '@modules/auth/types';
 
 export interface Profile extends User {
   phone?: string;

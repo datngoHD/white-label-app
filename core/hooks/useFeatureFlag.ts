@@ -1,4 +1,4 @@
-import { useTenantContext } from '../../app/providers/TenantProvider';
+import { useTenantContext } from '@app/providers/TenantProvider';
 import { DEFAULT_FLAGS, FeatureFlagKey } from '../config/featureFlags.types';
 
 /**

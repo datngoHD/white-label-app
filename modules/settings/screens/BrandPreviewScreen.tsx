@@ -1,11 +1,11 @@
 import React from 'react';
 import { View, ScrollView, StyleSheet } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { useTheme } from '../../../core/theme';
-import { currentBrand } from '../../../core/config/brand.config';
-import { Button, Card, Input } from '../../../shared/components';
-import { Text } from '../../../shared/components/Text/Text';
-import { Header } from '../../../shared/components/Header/Header';
+import { useTheme } from '@core/theme';
+import { currentBrand } from '@core/config/brand.config';
+import { Button, Card, Input } from '@shared/components';
+import { Text } from '@shared/components/Text/Text';
+import { Header } from '@shared/components/Header/Header';
 
 export const BrandPreviewScreen: React.FC = () => {
   const theme = useTheme();
