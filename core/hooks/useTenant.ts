@@ -1,7 +1,6 @@
 import { useTenantContext } from '@app/providers/TenantProvider';
 
 import { getTenantStatusMessage, isTenantAvailable } from '../config/tenant.config';
-import { Tenant } from '../config/tenant.types';
 
 /**
  * Hook to access tenant information

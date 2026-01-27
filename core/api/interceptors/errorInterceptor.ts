@@ -1,4 +1,4 @@
-import { AxiosError, AxiosResponse } from 'axios';
+import { AxiosError } from 'axios';
 
 import { logger } from '@core/logging/logger';
 import { ApiError } from '@core/types';

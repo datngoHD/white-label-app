@@ -107,18 +107,18 @@
 
 ### Codebase Migration (FR-010)
 
-- [ ] T030 Run `yarn format` to reformat all existing source files with sorted imports
-- [ ] T031 Review git diff to verify import changes look correct across the codebase
-- [ ] T032 Stage all reformatted files via `git add -A`
+- [x] T030 Run `yarn format` to reformat all existing source files with sorted imports
+- [x] T031 Review git diff to verify import changes look correct across the codebase
+- [x] T032 Stage all reformatted files via `git add -A`
 
 ### Documentation
 
-- [ ] T033 [P] Verify quickstart.md matches final configuration in specs/003-prettier-import-sort/quickstart.md
-- [ ] T034 [P] Add ESLint alignment note to project documentation if eslint-plugin-import is added later
+- [x] T033 [P] Verify quickstart.md matches final configuration in specs/003-prettier-import-sort/quickstart.md
+- [x] T034 [P] Add ESLint alignment note to project documentation if eslint-plugin-import is added later
 
 ### Final Commit
 
-- [ ] T035 Create commit with message "feat(tooling): Add Prettier import sorting plugin with codebase migration"
+- [x] T035 Create commit with message "feat(tooling): Add Prettier import sorting plugin with codebase migration"
 
 ---
 

@@ -103,6 +103,7 @@ const styles = StyleSheet.create({
   text: {
     backgroundColor: 'transparent',
     paddingHorizontal: 0,
+    fontWeight: '600',
   },
 
   // Sizes
@@ -123,9 +124,6 @@ const styles = StyleSheet.create({
   },
 
   // Text
-  text: {
-    fontWeight: '600',
-  },
   primaryText: {
     color: '#ffffff',
   },

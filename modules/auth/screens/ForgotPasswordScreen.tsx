@@ -50,7 +50,7 @@ export function ForgotPasswordScreen({ navigation }: Props) {
             Check Your Email
           </Text>
           <Text style={[styles.successMessage, { color: theme.colors.text.secondary }]}>
-            We've sent password reset instructions to {email}
+            We&apos;ve sent password reset instructions to {email}
           </Text>
           <Button title="Back to Sign In" onPress={handleBackToLogin} style={styles.backButton} />
         </View>
@@ -68,7 +68,7 @@ export function ForgotPasswordScreen({ navigation }: Props) {
 
         <View style={styles.content}>
           <Text style={[styles.description, { color: theme.colors.text.secondary }]}>
-            Enter your email address and we'll send you instructions to reset your password.
+            Enter your email address and we&apos;ll send you instructions to reset your password.
           </Text>
 
           {error && <Text style={[styles.error, { color: theme.colors.error }]}>{error}</Text>}

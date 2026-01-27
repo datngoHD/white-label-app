@@ -173,7 +173,7 @@ interface RoleOptionProps {
   theme: ReturnType<typeof useTheme>;
 }
 
-function RoleOption({ label, selected, onPress, theme }: RoleOptionProps) {
+function RoleOption({ label, selected, onPress, theme: _theme }: RoleOptionProps) {
   return (
     <Button
       title={label}

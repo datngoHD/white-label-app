@@ -5,7 +5,7 @@ import { NativeStackScreenProps } from '@react-navigation/native-stack';
 
 import { AuthStackParamList } from '@core/navigation/types';
 import { useTheme } from '@core/theme';
-import { Button, Input, Loading } from '@shared/components';
+import { Button, Loading } from '@shared/components';
 import { Header } from '@shared/components/Header/Header';
 import { Text } from '@shared/components/Text/Text';
 
@@ -81,7 +81,7 @@ export function LoginScreen({ navigation }: Props) {
 
         <View style={styles.footer}>
           <Text style={[styles.footerText, { color: theme.colors.text.secondary }]}>
-            Don't have an account?
+            Don&apos;t have an account?
           </Text>
           <Button
             title="Sign Up"

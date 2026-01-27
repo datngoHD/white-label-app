@@ -6,7 +6,7 @@ import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { useTenant } from '@core/hooks/useTenant';
 import { AuthStackParamList } from '@core/navigation/types';
 import { useTheme } from '@core/theme';
-import { Button, Input, Loading } from '@shared/components';
+import { Button, Loading } from '@shared/components';
 import { Header } from '@shared/components/Header/Header';
 import { Text } from '@shared/components/Text/Text';
 
