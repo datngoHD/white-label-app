@@ -1,37 +1,25 @@
 import React from 'react';
+import { StyleSheet, View } from 'react-native';
+
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { View, StyleSheet } from 'react-native';
+
+// Admin screens
+import { InviteUserScreen, UserDetailScreen, UserListScreen } from '@modules/admin/screens';
+// Profile screens
+import { ChangePasswordScreen, EditProfileScreen, ProfileScreen } from '@modules/profile/screens';
+// Settings screens
+import { BrandPreviewScreen, PreferencesScreen, SettingsScreen } from '@modules/settings/screens';
+import { Text } from '@shared/components/Text/Text';
+
+import { useIsAdmin } from '../hooks/useUserRole';
+import { useTheme } from '../theme';
 import {
+  AdminStackParamList,
   MainTabParamList,
   ProfileStackParamList,
   SettingsStackParamList,
-  AdminStackParamList,
 } from './types';
-import { useTheme } from '../theme';
-import { useIsAdmin } from '../hooks/useUserRole';
-import { Text } from '@shared/components/Text/Text';
-
-// Profile screens
-import {
-  ProfileScreen,
-  EditProfileScreen,
-  ChangePasswordScreen,
-} from '@modules/profile/screens';
-
-// Settings screens
-import {
-  SettingsScreen,
-  PreferencesScreen,
-  BrandPreviewScreen,
-} from '@modules/settings/screens';
-
-// Admin screens
-import {
-  UserListScreen,
-  InviteUserScreen,
-  UserDetailScreen,
-} from '@modules/admin/screens';
 
 // Home placeholder
 const HomeScreen = () => {

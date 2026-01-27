@@ -36,9 +36,7 @@ export const validateTenantResource = (
 /**
  * Validate that tenant is in active status
  */
-export const validateTenantStatus = (
-  tenant: Tenant
-): TenantValidationResult => {
+export const validateTenantStatus = (tenant: Tenant): TenantValidationResult => {
   if (tenant.status !== 'active') {
     return {
       valid: false,

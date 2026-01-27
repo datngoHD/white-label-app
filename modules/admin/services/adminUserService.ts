@@ -1,10 +1,6 @@
 import { apiClient } from '@core/api';
-import {
-  TenantUser,
-  InviteUserData,
-  UpdateUserData,
-  UserListParams,
-} from '../types';
+
+import { InviteUserData, TenantUser, UpdateUserData, UserListParams } from '../types';
 
 interface PaginatedResponse<T> {
   data: T[];
@@ -27,10 +23,9 @@ const ADMIN_ENDPOINTS = {
 
 export const adminUserService = {
   async getUsers(params?: UserListParams): Promise<PaginatedResponse<TenantUser>> {
-    const response = await apiClient.get<PaginatedResponse<TenantUser>>(
-      ADMIN_ENDPOINTS.USERS,
-      { params }
-    );
+    const response = await apiClient.get<PaginatedResponse<TenantUser>>(ADMIN_ENDPOINTS.USERS, {
+      params,
+    });
     return response.data;
   },
 
@@ -40,39 +35,27 @@ export const adminUserService = {
   },
 
   async inviteUser(data: InviteUserData): Promise<TenantUser> {
-    const response = await apiClient.post<TenantUser>(
-      ADMIN_ENDPOINTS.INVITE,
-      data
-    );
+    const response = await apiClient.post<TenantUser>(ADMIN_ENDPOINTS.INVITE, data);
     return response.data;
   },
 
   async updateUser(id: string, data: UpdateUserData): Promise<TenantUser> {
-    const response = await apiClient.patch<TenantUser>(
-      ADMIN_ENDPOINTS.USER(id),
-      data
-    );
+    const response = await apiClient.patch<TenantUser>(ADMIN_ENDPOINTS.USER(id), data);
     return response.data;
   },
 
   async activateUser(id: string): Promise<TenantUser> {
-    const response = await apiClient.post<TenantUser>(
-      ADMIN_ENDPOINTS.ACTIVATE(id)
-    );
+    const response = await apiClient.post<TenantUser>(ADMIN_ENDPOINTS.ACTIVATE(id));
     return response.data;
   },
 
   async deactivateUser(id: string): Promise<TenantUser> {
-    const response = await apiClient.post<TenantUser>(
-      ADMIN_ENDPOINTS.DEACTIVATE(id)
-    );
+    const response = await apiClient.post<TenantUser>(ADMIN_ENDPOINTS.DEACTIVATE(id));
     return response.data;
   },
 
   async resendInvite(id: string): Promise<{ message: string }> {
-    const response = await apiClient.post<{ message: string }>(
-      ADMIN_ENDPOINTS.RESEND_INVITE(id)
-    );
+    const response = await apiClient.post<{ message: string }>(ADMIN_ENDPOINTS.RESEND_INVITE(id));
     return response.data;
   },
 

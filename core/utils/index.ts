@@ -7,12 +7,7 @@ export {
   sanitizeTenantId,
 } from './tenantValidation';
 
-export {
-  performanceMonitor,
-  measureAsync,
-  measureSync,
-  trackRenderTime,
-} from './performance';
+export { performanceMonitor, measureAsync, measureSync, trackRenderTime } from './performance';
 
 export {
   getOptimalImageSize,

@@ -1,15 +1,17 @@
 import { useCallback } from 'react';
+
 import { useAppDispatch, useAppSelector } from '@core/store';
+
 import {
-  fetchProfile as fetchProfileAction,
-  updateProfile as updateProfileAction,
-  updateAvatar as updateAvatarAction,
-  deleteAvatar as deleteAvatarAction,
-  updateNotifications as updateNotificationsAction,
   clearError,
   clearProfile,
+  deleteAvatar as deleteAvatarAction,
+  fetchProfile as fetchProfileAction,
+  updateAvatar as updateAvatarAction,
+  updateNotifications as updateNotificationsAction,
+  updateProfile as updateProfileAction,
 } from '../store/profileSlice';
-import { UpdateProfileData, UpdateNotificationPreferences } from '../types';
+import { UpdateNotificationPreferences, UpdateProfileData } from '../types';
 
 export function useProfile() {
   const dispatch = useAppDispatch();

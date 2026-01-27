@@ -5,7 +5,7 @@
 **Status**: Draft
 **Input**: User description: "Build a production-grade React Native application using Expo (latest) that fully supports White-label (multi-brand) and Multi-tenant use cases. The system must be scalable, maintainable for 5+ years, and suitable for multi-developer teams and CI/CD pipelines."
 
-## User Scenarios & Testing *(mandatory)*
+## User Scenarios & Testing _(mandatory)_
 
 ### User Story 1 - Brand Owner Configures App Identity (Priority: P1)
 
@@ -116,7 +116,7 @@ As the platform adds more brands and each brand gains more users, the system mai
 - What happens if a tenant exceeds their allocated resources or user limits?
   - Administrators receive warnings; new registrations may be paused until resolved
 
-## Requirements *(mandatory)*
+## Requirements _(mandatory)_
 
 ### Functional Requirements
 
@@ -170,7 +170,7 @@ As the platform adds more brands and each brand gains more users, the system mai
 
 - **Build Artifact**: A deployable app package generated for a specific brand, containing that brand's configuration and assets baked in.
 
-## Success Criteria *(mandatory)*
+## Success Criteria _(mandatory)_
 
 ### Measurable Outcomes
 

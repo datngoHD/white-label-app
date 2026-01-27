@@ -22,15 +22,16 @@ const getAvailableBrands = () => {
   if (!fs.existsSync(brandsDir)) {
     return ['default'];
   }
-  return fs.readdirSync(brandsDir)
-    .filter(f => f.endsWith('.json'))
-    .map(f => f.replace('.json', ''));
+  return fs
+    .readdirSync(brandsDir)
+    .filter((f) => f.endsWith('.json'))
+    .map((f) => f.replace('.json', ''));
 };
 
 // Validate brand configuration
 const validateBrand = (brand) => {
   const required = ['id', 'appName', 'slug', 'ios', 'android', 'defaultTenantId', 'assetsPath'];
-  const missing = required.filter(field => !brand[field]);
+  const missing = required.filter((field) => !brand[field]);
 
   if (missing.length > 0) {
     console.error(`Brand configuration missing required fields: ${missing.join(', ')}`);
@@ -87,8 +88,6 @@ module.exports = ({ config }) => {
       brandId: brand.id,
       tenantId: brand.defaultTenantId,
     },
-    plugins: [
-      'expo-secure-store',
-    ],
+    plugins: ['expo-secure-store'],
   };
 };

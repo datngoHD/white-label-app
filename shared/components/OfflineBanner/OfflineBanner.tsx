@@ -1,16 +1,16 @@
 import React, { useEffect, useRef } from 'react';
-import { View, StyleSheet, Animated } from 'react-native';
-import { useTheme } from '@core/theme';
+import { Animated, StyleSheet, View } from 'react-native';
+
 import { useIsOffline } from '@core/hooks/useNetworkStatus';
+import { useTheme } from '@core/theme';
+
 import { Text } from '../Text/Text';
 
 interface OfflineBannerProps {
   message?: string;
 }
 
-export function OfflineBanner({
-  message = 'No internet connection',
-}: OfflineBannerProps) {
+export function OfflineBanner({ message = 'No internet connection' }: OfflineBannerProps) {
   const theme = useTheme();
   const isOffline = useIsOffline();
   const slideAnim = useRef(new Animated.Value(-50)).current;
@@ -41,9 +41,7 @@ export function OfflineBanner({
         <View style={styles.icon}>
           <Text style={styles.iconText}>!</Text>
         </View>
-        <Text style={[styles.message, { color: theme.colors.text.primary }]}>
-          {message}
-        </Text>
+        <Text style={[styles.message, { color: theme.colors.text.primary }]}>{message}</Text>
       </View>
     </Animated.View>
   );

@@ -58,10 +58,12 @@ Create or modify a file to use an alias:
 
 ```typescript
 // Before (relative path)
-import { SomeComponent } from '../../shared/components/SomeComponent';
 
 // After (alias)
+
 import { SomeComponent } from '@shared/components/SomeComponent';
+
+import { SomeComponent } from '../../shared/components/SomeComponent';
 ```
 
 ### Verify IDE Support
@@ -86,13 +88,13 @@ npx expo run:android
 
 ## Available Aliases
 
-| Alias | Target Directory | Use For |
-|-------|-----------------|---------|
-| `@app` | `./app` | Application entry, providers |
-| `@modules` | `./modules` | Feature modules |
-| `@shared` | `./shared` | Reusable components, hooks |
-| `@core` | `./core` | Infrastructure (API, store, theme) |
-| `@assets` | `./assets` | Images, fonts, brand assets |
+| Alias      | Target Directory | Use For                            |
+| ---------- | ---------------- | ---------------------------------- |
+| `@app`     | `./app`          | Application entry, providers       |
+| `@modules` | `./modules`      | Feature modules                    |
+| `@shared`  | `./shared`       | Reusable components, hooks         |
+| `@core`    | `./core`         | Infrastructure (API, store, theme) |
+| `@assets`  | `./assets`       | Images, fonts, brand assets        |
 
 ## Troubleshooting
 
@@ -121,23 +123,28 @@ The codebase currently uses relative imports that need to be migrated to aliases
 ### What to Refactor
 
 **Cross-directory imports** (MUST use aliases):
+
 ```typescript
 // Before
+
+// After
+
+import { useTheme } from '@core/theme';
+import { useAuth } from '@modules/auth/hooks/useAuth';
+import { Button } from '@shared/components';
+
 import { useTheme } from '../../../core/theme';
 import { Button } from '../../../shared/components';
 import { useAuth } from '../../auth/hooks/useAuth';
-
-// After
-import { useTheme } from '@core/theme';
-import { Button } from '@shared/components';
-import { useAuth } from '@modules/auth/hooks/useAuth';
 ```
 
 ### What to Keep Relative
 
 **Intra-module imports** (keep relative for encapsulation):
+
 ```typescript
 // These stay relative (within same module)
+
 import { authService } from '../services/authService';
 import { LoginCredentials } from '../types';
 import { useProfile } from './useProfile';
@@ -146,25 +153,28 @@ import { useProfile } from './useProfile';
 ### Migration Commands
 
 Run TypeScript check after refactoring:
+
 ```bash
 npm run typecheck
 ```
 
 Run ESLint:
+
 ```bash
 npm run lint
 ```
 
 Run tests:
+
 ```bash
 npm test
 ```
 
 ### Files to Refactor (by directory)
 
-| Directory | Approx Files | Main Patterns |
-|-----------|--------------|---------------|
-| `app/` | 4 | `../core/*`, `../shared/*` |
-| `modules/` | ~30 | `../../../core/*`, `../../../shared/*` |
-| `shared/` | ~8 | `../../../core/*` |
-| `core/` | ~20 | `../../modules/*`, `../../shared/*`, `../../app/*` |
+| Directory  | Approx Files | Main Patterns                                      |
+| ---------- | ------------ | -------------------------------------------------- |
+| `app/`     | 4            | `../core/*`, `../shared/*`                         |
+| `modules/` | ~30          | `../../../core/*`, `../../../shared/*`             |
+| `shared/`  | ~8           | `../../../core/*`                                  |
+| `core/`    | ~20          | `../../modules/*`, `../../shared/*`, `../../app/*` |

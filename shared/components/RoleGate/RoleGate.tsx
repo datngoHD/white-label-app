@@ -1,5 +1,10 @@
 import React, { ReactNode } from 'react';
-import { useHasPermission, useHasAnyPermission, useHasAllPermissions } from '@core/hooks/useHasPermission';
+
+import {
+  useHasAllPermissions,
+  useHasAnyPermission,
+  useHasPermission,
+} from '@core/hooks/useHasPermission';
 import { useHasRole } from '@core/hooks/useUserRole';
 import { Permission } from '@core/permissions/permissions';
 import { UserRole } from '@core/types';

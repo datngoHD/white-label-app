@@ -1,10 +1,11 @@
 import axios, { AxiosInstance, AxiosRequestConfig, InternalAxiosRequestConfig } from 'axios';
+
 import { environment } from '../config/environment.config';
-import { tenantRequestInterceptor } from './interceptors/tenantInterceptor';
-import { errorResponseInterceptor } from './interceptors/errorInterceptor';
-import { authRequestInterceptor } from './interceptors/authInterceptor';
-import { logger } from '../logging/logger';
 import { addBreadcrumb } from '../errors/sentry';
+import { logger } from '../logging/logger';
+import { authRequestInterceptor } from './interceptors/authInterceptor';
+import { errorResponseInterceptor } from './interceptors/errorInterceptor';
+import { tenantRequestInterceptor } from './interceptors/tenantInterceptor';
 
 const DEFAULT_TIMEOUT = 30000;
 
@@ -25,13 +26,9 @@ const createApiClient = (): AxiosInstance => {
   });
 
   // Request interceptors (order matters - last added runs first)
-  client.interceptors.request.use(tenantRequestInterceptor, (error) =>
-    Promise.reject(error)
-  );
+  client.interceptors.request.use(tenantRequestInterceptor, (error) => Promise.reject(error));
 
-  client.interceptors.request.use(authRequestInterceptor, (error) =>
-    Promise.reject(error)
-  );
+  client.interceptors.request.use(authRequestInterceptor, (error) => Promise.reject(error));
 
   // Performance timing interceptor
   client.interceptors.request.use(
@@ -43,36 +40,33 @@ const createApiClient = (): AxiosInstance => {
   );
 
   // Response interceptors
-  client.interceptors.response.use(
-    (response) => {
-      const timing = requestTimings.get(response.config);
-      const duration = timing ? Date.now() - timing.startTime : 0;
+  client.interceptors.response.use((response) => {
+    const timing = requestTimings.get(response.config);
+    const duration = timing ? Date.now() - timing.startTime : 0;
 
-      logger.debug('API Response', {
+    logger.debug('API Response', {
+      url: response.config.url,
+      method: response.config.method?.toUpperCase(),
+      status: response.status,
+      duration: `${duration}ms`,
+    });
+
+    // Add breadcrumb for Sentry
+    addBreadcrumb('api', `${response.config.method?.toUpperCase()} ${response.config.url}`, {
+      status: response.status,
+      duration,
+    });
+
+    // Warn on slow requests
+    if (duration > 3000) {
+      logger.warn('Slow API request detected', {
         url: response.config.url,
-        method: response.config.method?.toUpperCase(),
-        status: response.status,
         duration: `${duration}ms`,
       });
+    }
 
-      // Add breadcrumb for Sentry
-      addBreadcrumb('api', `${response.config.method?.toUpperCase()} ${response.config.url}`, {
-        status: response.status,
-        duration,
-      });
-
-      // Warn on slow requests
-      if (duration > 3000) {
-        logger.warn('Slow API request detected', {
-          url: response.config.url,
-          duration: `${duration}ms`,
-        });
-      }
-
-      return response;
-    },
-    errorResponseInterceptor
-  );
+    return response;
+  }, errorResponseInterceptor);
 
   return client;
 };

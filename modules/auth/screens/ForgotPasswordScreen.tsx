@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
-import { View, StyleSheet, KeyboardAvoidingView, Platform, ScrollView } from 'react-native';
+import { KeyboardAvoidingView, Platform, ScrollView, StyleSheet, View } from 'react-native';
+
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
+
+import { AuthStackParamList } from '@core/navigation/types';
 import { useTheme } from '@core/theme';
 import { Button, Input, Loading } from '@shared/components';
-import { Text } from '@shared/components/Text/Text';
 import { Header } from '@shared/components/Header/Header';
-import { AuthStackParamList } from '@core/navigation/types';
+import { Text } from '@shared/components/Text/Text';
+
 import { authService } from '../services/authService';
 
 type Props = NativeStackScreenProps<AuthStackParamList, 'ForgotPassword'>;
@@ -49,11 +52,7 @@ export function ForgotPasswordScreen({ navigation }: Props) {
           <Text style={[styles.successMessage, { color: theme.colors.text.secondary }]}>
             We've sent password reset instructions to {email}
           </Text>
-          <Button
-            title="Back to Sign In"
-            onPress={handleBackToLogin}
-            style={styles.backButton}
-          />
+          <Button title="Back to Sign In" onPress={handleBackToLogin} style={styles.backButton} />
         </View>
       </View>
     );
@@ -64,10 +63,7 @@ export function ForgotPasswordScreen({ navigation }: Props) {
       style={[styles.container, { backgroundColor: theme.colors.background }]}
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
     >
-      <ScrollView
-        contentContainerStyle={styles.scrollContent}
-        keyboardShouldPersistTaps="handled"
-      >
+      <ScrollView contentContainerStyle={styles.scrollContent} keyboardShouldPersistTaps="handled">
         <Header title="Reset Password" />
 
         <View style={styles.content}>
@@ -75,11 +71,7 @@ export function ForgotPasswordScreen({ navigation }: Props) {
             Enter your email address and we'll send you instructions to reset your password.
           </Text>
 
-          {error && (
-            <Text style={[styles.error, { color: theme.colors.error }]}>
-              {error}
-            </Text>
-          )}
+          {error && <Text style={[styles.error, { color: theme.colors.error }]}>{error}</Text>}
 
           <Input
             label="Email"

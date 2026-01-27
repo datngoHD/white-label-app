@@ -1,8 +1,9 @@
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
+import { StyleSheet, View } from 'react-native';
+
+import { useTheme } from '@core/theme';
 import { Input } from '@shared/components';
 import { Text } from '@shared/components/Text/Text';
-import { useTheme } from '@core/theme';
 
 interface RegisterFormProps {
   email: string;
@@ -37,9 +38,7 @@ export function RegisterForm({
     <View style={styles.container}>
       {error && (
         <View style={[styles.errorContainer, { backgroundColor: theme.colors.error + '10' }]}>
-          <Text style={[styles.errorText, { color: theme.colors.error }]}>
-            {error}
-          </Text>
+          <Text style={[styles.errorText, { color: theme.colors.error }]}>{error}</Text>
         </View>
       )}
 

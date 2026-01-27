@@ -76,10 +76,7 @@ class PerformanceMonitor {
 
 export const performanceMonitor = new PerformanceMonitor();
 
-export const measureAsync = async <T>(
-  name: string,
-  fn: () => Promise<T>
-): Promise<T> => {
+export const measureAsync = async <T>(name: string, fn: () => Promise<T>): Promise<T> => {
   const startMark = `${name}_start`;
   const endMark = `${name}_end`;
 
@@ -113,7 +110,9 @@ export const measureSync = <T>(name: string, fn: () => T): T => {
   }
 };
 
-export const trackRenderTime = (componentName: string): {
+export const trackRenderTime = (
+  componentName: string
+): {
   start: () => void;
   end: () => void;
 } => {

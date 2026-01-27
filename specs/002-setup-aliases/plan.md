@@ -21,17 +21,17 @@ Configure path aliases (`@app/*`, `@modules/*`, `@shared/*`, `@core/*`, `@assets
 
 ## Constitution Check
 
-*GATE: Must pass before Phase 0 research. Re-check after Phase 1 design.*
+_GATE: Must pass before Phase 0 research. Re-check after Phase 1 design._
 
-| Principle | Status | Notes |
-|-----------|--------|-------|
-| I. Clean Architecture | ✅ PASS | Aliases support modular architecture by making cross-module imports cleaner |
-| II. Clear Folder Structure | ✅ PASS | Aliases map to documented folders: `app/`, `modules/`, `shared/`, `core/`, `assets/` |
-| III. Separation of Concerns | ✅ PASS | No impact on architecture, only import syntax |
-| IV. Strong TypeScript Typing | ✅ PASS | TypeScript paths configured in tsconfig.json |
-| V. Externalized Configuration | ✅ PASS | Aliases defined in config files (tsconfig.json, babel.config.js) |
-| VI. White-label & Multi-tenant | ✅ PASS | Aliases are brand/tenant agnostic |
-| VII. Expo Prebuild Workflow | ✅ PASS | Uses babel-plugin-module-resolver compatible with Expo |
+| Principle                      | Status  | Notes                                                                                |
+| ------------------------------ | ------- | ------------------------------------------------------------------------------------ |
+| I. Clean Architecture          | ✅ PASS | Aliases support modular architecture by making cross-module imports cleaner          |
+| II. Clear Folder Structure     | ✅ PASS | Aliases map to documented folders: `app/`, `modules/`, `shared/`, `core/`, `assets/` |
+| III. Separation of Concerns    | ✅ PASS | No impact on architecture, only import syntax                                        |
+| IV. Strong TypeScript Typing   | ✅ PASS | TypeScript paths configured in tsconfig.json                                         |
+| V. Externalized Configuration  | ✅ PASS | Aliases defined in config files (tsconfig.json, babel.config.js)                     |
+| VI. White-label & Multi-tenant | ✅ PASS | Aliases are brand/tenant agnostic                                                    |
+| VII. Expo Prebuild Workflow    | ✅ PASS | Uses babel-plugin-module-resolver compatible with Expo                               |
 
 **Gate Result**: ✅ PASSED - No violations
 
@@ -100,27 +100,27 @@ babel.config.js          # Runtime resolution (already configured)
 > No violations to justify - feature aligns with all constitution principles.
 
 | Violation | Why Needed | Simpler Alternative Rejected Because |
-|-----------|------------|-------------------------------------|
-| N/A | N/A | N/A |
+| --------- | ---------- | ------------------------------------ |
+| N/A       | N/A        | N/A                                  |
 
 ## Current State Analysis
 
 ### Configuration Status
 
-| File | Status | Notes |
-|------|--------|-------|
-| tsconfig.json | ✅ Complete | Paths configured for all 5 aliases |
+| File            | Status      | Notes                                   |
+| --------------- | ----------- | --------------------------------------- |
+| tsconfig.json   | ✅ Complete | Paths configured for all 5 aliases      |
 | babel.config.js | ✅ Complete | module-resolver configured with aliases |
-| package.json | ✅ Complete | babel-plugin-module-resolver installed |
+| package.json    | ✅ Complete | babel-plugin-module-resolver installed  |
 
 ### Import Migration Status
 
-| Directory | Files to Refactor | Import Pattern |
-|-----------|-------------------|----------------|
-| app/ | 4 files | `../core/*`, `../shared/*` → `@core/*`, `@shared/*` |
-| modules/ | ~30 files | `../../../core/*`, `../../../shared/*`, `../../{module}/*` |
-| shared/ | ~8 files | `../../../core/*`, `../Loading/*`, etc. |
-| core/ | ~20 files | `../types`, `../../modules/*`, `../../shared/*`, `../../app/*` |
+| Directory | Files to Refactor | Import Pattern                                                 |
+| --------- | ----------------- | -------------------------------------------------------------- |
+| app/      | 4 files           | `../core/*`, `../shared/*` → `@core/*`, `@shared/*`            |
+| modules/  | ~30 files         | `../../../core/*`, `../../../shared/*`, `../../{module}/*`     |
+| shared/   | ~8 files          | `../../../core/*`, `../Loading/*`, etc.                        |
+| core/     | ~20 files         | `../types`, `../../modules/*`, `../../shared/*`, `../../app/*` |
 
 ### Import Categories to Refactor
 
@@ -141,17 +141,20 @@ babel.config.js          # Runtime resolution (already configured)
 ## Implementation Approach
 
 ### Phase 1: Verify Configuration
+
 1. Verify tsconfig.json paths are correct
 2. Verify babel.config.js module-resolver is correct
 3. Test alias resolution works (create test import)
 
 ### Phase 2: Refactor Imports by Directory
+
 1. Refactor `app/` directory imports
 2. Refactor `modules/` directory imports (by module)
 3. Refactor `shared/` directory imports
 4. Refactor `core/` directory imports
 
 ### Phase 3: Validation
+
 1. Run TypeScript compilation (`npm run typecheck`)
 2. Run ESLint (`npm run lint`)
 3. Run tests (`npm test`)
@@ -160,9 +163,9 @@ babel.config.js          # Runtime resolution (already configured)
 
 ## Risk Mitigation
 
-| Risk | Mitigation |
-|------|------------|
-| Broken imports | TypeScript compiler will catch unresolved modules |
-| Metro cache issues | Clear cache with `npx expo start --clear` |
-| IDE not recognizing aliases | Restart TypeScript server in VSCode |
-| Hot reload issues | Test with `--clear` flag first |
+| Risk                        | Mitigation                                        |
+| --------------------------- | ------------------------------------------------- |
+| Broken imports              | TypeScript compiler will catch unresolved modules |
+| Metro cache issues          | Clear cache with `npx expo start --clear`         |
+| IDE not recognizing aliases | Restart TypeScript server in VSCode               |
+| Hot reload issues           | Test with `--clear` flag first                    |

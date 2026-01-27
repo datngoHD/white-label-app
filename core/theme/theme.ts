@@ -1,7 +1,7 @@
-import { Theme, ColorPalette, Typography, Spacing, ThemeOverrides } from '../types';
-import { defaultColors, darkColors, createColorPalette } from './colors';
-import { defaultTypography, createTypography } from './typography';
-import { defaultSpacing, createSpacing } from './spacing';
+import { ColorPalette, Spacing, Theme, ThemeOverrides, Typography } from '../types';
+import { createColorPalette, darkColors, defaultColors } from './colors';
+import { createSpacing, defaultSpacing } from './spacing';
+import { createTypography, defaultTypography } from './typography';
 
 /**
  * Default light theme
@@ -24,10 +24,7 @@ export const darkTheme: Theme = {
 /**
  * Create a theme from overrides
  */
-export const createTheme = (
-  overrides?: ThemeOverrides,
-  base: Theme = lightTheme
-): Theme => {
+export const createTheme = (overrides?: ThemeOverrides, base: Theme = lightTheme): Theme => {
   if (!overrides) return base;
 
   return {

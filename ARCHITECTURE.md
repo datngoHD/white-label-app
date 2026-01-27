@@ -58,11 +58,13 @@ This is a white-label, multi-tenant React Native application built with Expo. Th
 ### White-label (Brand) System
 
 Brands are configured at **build time**. Each brand has:
+
 - Unique bundle ID (iOS) / package name (Android)
 - Custom app icon, splash screen, and logo
 - Theme colors defined in `core/config/brands/{brand-id}.json`
 
 To build for a specific brand:
+
 ```bash
 BRAND=brand-a yarn ios
 ```
@@ -70,6 +72,7 @@ BRAND=brand-a yarn ios
 ### Multi-tenant (Tenant) System
 
 Tenants are configured at **runtime**. Each tenant has:
+
 - API base URL and version
 - Feature flags
 - Theme overrides (optional)
@@ -116,6 +119,7 @@ Tenant configuration is fetched from the backend and stored in Redux.
 ### Feature Flags
 
 Feature flags control functionality per tenant:
+
 ```typescript
 const isEnabled = useFeatureFlag('socialLogin');
 ```
@@ -123,6 +127,7 @@ const isEnabled = useFeatureFlag('socialLogin');
 ### Role-Based Access Control
 
 Permissions are checked via hooks:
+
 ```typescript
 const canManageUsers = useHasPermission(PERMISSIONS.MANAGE_USERS);
 ```
@@ -162,6 +167,7 @@ yarn test
 ## Environment Variables
 
 Required environment variables:
+
 - `BRAND` - Brand ID (build-time)
 - `APP_ENV` - Environment (development/staging/production)
 - `SENTRY_DSN` - Sentry error tracking DSN (optional)

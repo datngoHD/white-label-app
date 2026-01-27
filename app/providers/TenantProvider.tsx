@@ -1,9 +1,10 @@
-import React, { createContext, useContext, useEffect, ReactNode } from 'react';
-import { useAppDispatch, useAppSelector } from '@core/store';
-import { Tenant } from '@core/config/tenant.types';
-import { getDefaultTenantConfig } from '@core/config/tenant.config';
+import React, { createContext, ReactNode, useContext, useEffect } from 'react';
+
 import { setTenantId } from '@core/api';
+import { getDefaultTenantConfig } from '@core/config/tenant.config';
+import { Tenant } from '@core/config/tenant.types';
 import { logger } from '@core/logging/logger';
+import { useAppDispatch, useAppSelector } from '@core/store';
 
 interface TenantContextValue {
   tenant: Tenant | null;
@@ -59,9 +60,7 @@ export const TenantProvider: React.FC<TenantProviderProps> = ({ children }) => {
     refreshTenant,
   };
 
-  return (
-    <TenantContext.Provider value={value}>{children}</TenantContext.Provider>
-  );
+  return <TenantContext.Provider value={value}>{children}</TenantContext.Provider>;
 };
 
 export const useTenantContext = (): TenantContextValue => {

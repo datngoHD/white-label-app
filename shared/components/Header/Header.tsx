@@ -1,6 +1,7 @@
 import React, { ReactNode } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, ViewStyle } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View, ViewStyle } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+
 import { useTheme } from '@core/theme';
 
 export interface HeaderProps {
@@ -45,24 +46,15 @@ export const Header: React.FC<HeaderProps> = ({
         <View style={styles.left}>
           {showBack && handleBack && (
             <TouchableOpacity onPress={handleBack} style={styles.backButton}>
-              <Text style={[styles.backText, { color: theme.colors.primary }]}>
-                Back
-              </Text>
+              <Text style={[styles.backText, { color: theme.colors.primary }]}>Back</Text>
             </TouchableOpacity>
           )}
-          {showLogo && (
-            <Text style={[styles.logoText, { color: theme.colors.primary }]}>
-              Logo
-            </Text>
-          )}
+          {showLogo && <Text style={[styles.logoText, { color: theme.colors.primary }]}>Logo</Text>}
           {leftAction}
         </View>
 
         <View style={styles.center}>
-          <Text
-            style={[styles.title, { color: theme.colors.text.primary }]}
-            numberOfLines={1}
-          >
+          <Text style={[styles.title, { color: theme.colors.text.primary }]} numberOfLines={1}>
             {title}
           </Text>
           {subtitle && (

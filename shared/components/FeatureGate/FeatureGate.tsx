@@ -1,6 +1,7 @@
 import React, { ReactNode } from 'react';
-import { useFeatureFlag } from '@core/hooks/useFeatureFlag';
+
 import { FeatureFlagKey } from '@core/config/featureFlags.types';
+import { useFeatureFlag } from '@core/hooks/useFeatureFlag';
 
 interface FeatureGateProps {
   /** Feature flag key to check */

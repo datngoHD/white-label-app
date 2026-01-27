@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import { View, StyleSheet, ScrollView, Alert } from 'react-native';
+import { Alert, ScrollView, StyleSheet, View } from 'react-native';
+
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
+
+import { AdminStackParamList } from '@core/navigation/types';
 import { useTheme } from '@core/theme';
 import { Button, Card, Loading } from '@shared/components';
-import { Text } from '@shared/components/Text/Text';
 import { Header } from '@shared/components/Header/Header';
-import { AdminStackParamList } from '@core/navigation/types';
+import { Text } from '@shared/components/Text/Text';
+
 import { adminUserService } from '../services/adminUserService';
 import { TenantUser } from '../types';
 
@@ -56,10 +59,7 @@ export function UserDetailScreen({ route, navigation }: Props) {
                 : await adminUserService.activateUser(userId);
               setUser(updatedUser);
             } catch (err) {
-              Alert.alert(
-                'Error',
-                err instanceof Error ? err.message : `Failed to ${action} user`
-              );
+              Alert.alert('Error', err instanceof Error ? err.message : `Failed to ${action} user`);
             } finally {
               setIsUpdating(false);
             }
@@ -75,10 +75,7 @@ export function UserDetailScreen({ route, navigation }: Props) {
       await adminUserService.resendInvite(userId);
       Alert.alert('Success', 'Invitation email has been resent');
     } catch (err) {
-      Alert.alert(
-        'Error',
-        err instanceof Error ? err.message : 'Failed to resend invitation'
-      );
+      Alert.alert('Error', err instanceof Error ? err.message : 'Failed to resend invitation');
     } finally {
       setIsUpdating(false);
     }
@@ -101,10 +98,7 @@ export function UserDetailScreen({ route, navigation }: Props) {
               await adminUserService.deleteUser(userId);
               navigation.goBack();
             } catch (err) {
-              Alert.alert(
-                'Error',
-                err instanceof Error ? err.message : 'Failed to delete user'
-              );
+              Alert.alert('Error', err instanceof Error ? err.message : 'Failed to delete user');
               setIsUpdating(false);
             }
           },
@@ -139,24 +133,23 @@ export function UserDetailScreen({ route, navigation }: Props) {
           <View
             style={[
               styles.avatar,
-              { backgroundColor: user.isActive ? theme.colors.primary : theme.colors.text.secondary },
+              {
+                backgroundColor: user.isActive ? theme.colors.primary : theme.colors.text.secondary,
+              },
             ]}
           >
             <Text style={styles.avatarText}>
-              {user.firstName[0]}{user.lastName[0]}
+              {user.firstName[0]}
+              {user.lastName[0]}
             </Text>
           </View>
           <Text style={[styles.name, { color: theme.colors.text.primary }]}>
             {user.firstName} {user.lastName}
           </Text>
-          <Text style={[styles.email, { color: theme.colors.text.secondary }]}>
-            {user.email}
-          </Text>
+          <Text style={[styles.email, { color: theme.colors.text.secondary }]}>{user.email}</Text>
           <View style={styles.badges}>
             <View style={[styles.badge, { backgroundColor: theme.colors.primary + '20' }]}>
-              <Text style={[styles.badgeText, { color: theme.colors.primary }]}>
-                {user.role}
-              </Text>
+              <Text style={[styles.badgeText, { color: theme.colors.primary }]}>{user.role}</Text>
             </View>
             <View
               style={[
@@ -182,9 +175,7 @@ export function UserDetailScreen({ route, navigation }: Props) {
 
         <Card style={styles.infoCard}>
           <View style={styles.infoRow}>
-            <Text style={[styles.infoLabel, { color: theme.colors.text.secondary }]}>
-              Created
-            </Text>
+            <Text style={[styles.infoLabel, { color: theme.colors.text.secondary }]}>Created</Text>
             <Text style={[styles.infoValue, { color: theme.colors.text.primary }]}>
               {new Date(user.createdAt).toLocaleDateString()}
             </Text>
@@ -195,9 +186,7 @@ export function UserDetailScreen({ route, navigation }: Props) {
               Last Login
             </Text>
             <Text style={[styles.infoValue, { color: theme.colors.text.primary }]}>
-              {user.lastLoginAt
-                ? new Date(user.lastLoginAt).toLocaleDateString()
-                : 'Never'}
+              {user.lastLoginAt ? new Date(user.lastLoginAt).toLocaleDateString() : 'Never'}
             </Text>
           </View>
           {user.invitedBy && (

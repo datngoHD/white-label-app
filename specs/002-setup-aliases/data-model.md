@@ -13,12 +13,13 @@ This feature is **configuration-only** and does not introduce new data entities.
 
 Represents a single path alias configuration.
 
-| Field | Type | Description |
-|-------|------|-------------|
-| prefix | string | The alias prefix (e.g., `@app`) |
+| Field  | Type   | Description                               |
+| ------ | ------ | ----------------------------------------- |
+| prefix | string | The alias prefix (e.g., `@app`)           |
 | target | string | The target directory path (e.g., `./app`) |
 
 **Validation Rules**:
+
 - Prefix MUST start with `@`
 - Target MUST be a valid relative path from project root
 - Target directory MUST exist
@@ -27,12 +28,13 @@ Represents a single path alias configuration.
 
 TypeScript paths configuration in tsconfig.json.
 
-| Field | Type | Description |
-|-------|------|-------------|
-| baseUrl | string | Base URL for path resolution (`.`) |
-| paths | Record<string, string[]> | Mapping of alias patterns to paths |
+| Field   | Type                     | Description                        |
+| ------- | ------------------------ | ---------------------------------- |
+| baseUrl | string                   | Base URL for path resolution (`.`) |
+| paths   | Record<string, string[]> | Mapping of alias patterns to paths |
 
 **Example**:
+
 ```json
 {
   "baseUrl": ".",
@@ -47,12 +49,13 @@ TypeScript paths configuration in tsconfig.json.
 
 Babel module-resolver plugin configuration.
 
-| Field | Type | Description |
-|-------|------|-------------|
-| root | string[] | Root directories for resolution |
-| alias | Record<string, string> | Mapping of alias to path |
+| Field | Type                   | Description                     |
+| ----- | ---------------------- | ------------------------------- |
+| root  | string[]               | Root directories for resolution |
+| alias | Record<string, string> | Mapping of alias to path        |
 
 **Example**:
+
 ```javascript
 {
   root: ['.'],

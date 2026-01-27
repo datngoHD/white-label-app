@@ -1,8 +1,9 @@
-import { logger } from '@core/logging/logger';
 import { currentBrand } from '@core/config/brand.config';
 import { environment, isDev } from '@core/config/environment.config';
 import { initializeSentry } from '@core/errors/sentry';
+import { logger } from '@core/logging/logger';
 import { performanceMonitor } from '@core/utils/performance';
+
 import '@core/i18n/i18n';
 
 /**

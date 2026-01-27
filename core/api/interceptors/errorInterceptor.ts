@@ -1,6 +1,7 @@
 import { AxiosError, AxiosResponse } from 'axios';
-import { ApiError } from '@core/types';
+
 import { logger } from '@core/logging/logger';
+import { ApiError } from '@core/types';
 
 export interface ApiErrorResponse {
   code: string;
@@ -8,9 +9,7 @@ export interface ApiErrorResponse {
   details?: Record<string, unknown>;
 }
 
-export const errorResponseInterceptor = (
-  error: AxiosError<ApiErrorResponse>
-): Promise<never> => {
+export const errorResponseInterceptor = (error: AxiosError<ApiErrorResponse>): Promise<never> => {
   const { response, request, message } = error;
 
   if (response) {

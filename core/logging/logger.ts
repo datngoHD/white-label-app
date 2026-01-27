@@ -1,5 +1,5 @@
-import { LogLevel } from '../types';
 import { environment } from '../config/environment.config';
+import { LogLevel } from '../types';
 
 type LogMethod = (...args: unknown[]) => void;
 

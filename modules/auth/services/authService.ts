@@ -1,11 +1,12 @@
 import { apiClient } from '@core/api';
+
 import {
   AuthResponse,
+  ChangePasswordData,
+  ForgotPasswordData,
   LoginCredentials,
   RegisterData,
-  ForgotPasswordData,
   ResetPasswordData,
-  ChangePasswordData,
   User,
 } from '../types';
 
@@ -23,18 +24,12 @@ const AUTH_ENDPOINTS = {
 
 export const authService = {
   async login(credentials: LoginCredentials): Promise<AuthResponse> {
-    const response = await apiClient.post<AuthResponse>(
-      AUTH_ENDPOINTS.LOGIN,
-      credentials
-    );
+    const response = await apiClient.post<AuthResponse>(AUTH_ENDPOINTS.LOGIN, credentials);
     return response.data;
   },
 
   async register(data: RegisterData): Promise<AuthResponse> {
-    const response = await apiClient.post<AuthResponse>(
-      AUTH_ENDPOINTS.REGISTER,
-      data
-    );
+    const response = await apiClient.post<AuthResponse>(AUTH_ENDPOINTS.REGISTER, data);
     return response.data;
   },
 
@@ -58,10 +53,7 @@ export const authService = {
   },
 
   async resetPassword(data: ResetPasswordData): Promise<{ message: string }> {
-    const response = await apiClient.post<{ message: string }>(
-      AUTH_ENDPOINTS.RESET_PASSWORD,
-      data
-    );
+    const response = await apiClient.post<{ message: string }>(AUTH_ENDPOINTS.RESET_PASSWORD, data);
     return response.data;
   },
 
@@ -79,10 +71,9 @@ export const authService = {
   },
 
   async verifyEmail(token: string): Promise<{ message: string }> {
-    const response = await apiClient.post<{ message: string }>(
-      AUTH_ENDPOINTS.VERIFY_EMAIL,
-      { token }
-    );
+    const response = await apiClient.post<{ message: string }>(AUTH_ENDPOINTS.VERIFY_EMAIL, {
+      token,
+    });
     return response.data;
   },
 };

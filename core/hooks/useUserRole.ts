@@ -1,5 +1,5 @@
-import { UserRole } from '../types';
 import { useAppSelector } from '../store';
+import { UserRole } from '../types';
 
 /**
  * Hook to get the current user's role

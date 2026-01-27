@@ -1,12 +1,8 @@
 import React, { useCallback, useMemo } from 'react';
-import {
-  FlatList,
-  FlatListProps,
-  StyleSheet,
-  View,
-  ViewStyle,
-} from 'react-native';
+import { FlatList, FlatListProps, StyleSheet, View, ViewStyle } from 'react-native';
+
 import { useTheme } from '@core/theme';
+
 import { Loading } from '../Loading/Loading';
 import { Text } from '../Text/Text';
 
@@ -105,10 +101,7 @@ export function VirtualizedList<T>({
       ListEmptyComponent={ListEmptyComponent}
       onEndReached={handleEndReached}
       onEndReachedThreshold={onEndReachedThreshold}
-      contentContainerStyle={[
-        data.length === 0 && styles.emptyList,
-        contentContainerStyle,
-      ]}
+      contentContainerStyle={[data.length === 0 && styles.emptyList, contentContainerStyle]}
       // Performance optimizations
       removeClippedSubviews
       maxToRenderPerBatch={10}

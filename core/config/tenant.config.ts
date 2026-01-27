@@ -1,6 +1,6 @@
-import { Tenant, DEFAULT_FEATURE_FLAGS } from './tenant.types';
 import { currentBrand } from './brand.config';
 import { environment } from './environment.config';
+import { DEFAULT_FEATURE_FLAGS, Tenant } from './tenant.types';
 
 /**
  * Get the default tenant configuration

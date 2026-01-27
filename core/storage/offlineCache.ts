@@ -1,4 +1,5 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
+
 import { logger } from '../logging/logger';
 
 interface CacheEntry<T> {
@@ -26,10 +27,7 @@ export const offlineCache = {
     };
 
     try {
-      await AsyncStorage.setItem(
-        `${CACHE_PREFIX}${key}`,
-        JSON.stringify(entry)
-      );
+      await AsyncStorage.setItem(`${CACHE_PREFIX}${key}`, JSON.stringify(entry));
       logger.debug(`Cache set: ${key}`);
     } catch (error) {
       logger.error('Failed to set cache', { key, error });

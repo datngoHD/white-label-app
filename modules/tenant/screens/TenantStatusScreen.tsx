@@ -1,8 +1,9 @@
 import React from 'react';
-import { View, StyleSheet, Image } from 'react-native';
+import { Image, StyleSheet, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { useTheme } from '@core/theme';
+
 import { TenantStatus } from '@core/config/tenant.types';
+import { useTheme } from '@core/theme';
 import { Button } from '@shared/components';
 import { Text } from '@shared/components/Text/Text';
 
@@ -29,8 +30,7 @@ export const TenantStatusScreen: React.FC<TenantStatusScreenProps> = ({
       case 'suspended':
         return {
           title: 'Account Suspended',
-          defaultMessage:
-            'Your account has been suspended. Please contact support for assistance.',
+          defaultMessage: 'Your account has been suspended. Please contact support for assistance.',
           icon: 'alert-circle',
           color: theme.colors.error,
         };

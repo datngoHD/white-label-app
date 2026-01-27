@@ -5,7 +5,7 @@
 **Status**: Draft
 **Input**: User description: "Setting up aliases"
 
-## User Scenarios & Testing *(mandatory)*
+## User Scenarios & Testing _(mandatory)_
 
 ### User Story 1 - Import with Aliases (Priority: P1)
 
@@ -81,7 +81,7 @@ As a developer, I want all existing relative imports in the codebase to be updat
 - What happens when a developer uses both relative and aliased imports for the same file?
   - Both should work correctly; the resolved path should be identical.
 
-## Requirements *(mandatory)*
+## Requirements _(mandatory)_
 
 ### Functional Requirements
 
@@ -100,7 +100,7 @@ As a developer, I want all existing relative imports in the codebase to be updat
 - **Alias Mapping**: A definition that maps a prefix (e.g., `@shared/`) to a directory path (e.g., `shared/`).
 - **Import Statement**: A code statement that references a module using either a relative path or an alias.
 
-## Success Criteria *(mandatory)*
+## Success Criteria _(mandatory)_
 
 ### Measurable Outcomes
 

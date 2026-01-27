@@ -45,11 +45,7 @@ export const ROLE_PERMISSIONS: Record<UserRole, Permission[]> = {
     PERMISSIONS.VIEW_PROFILE,
     PERMISSIONS.EDIT_PROFILE,
   ],
-  user: [
-    PERMISSIONS.VIEW_SETTINGS,
-    PERMISSIONS.VIEW_PROFILE,
-    PERMISSIONS.EDIT_PROFILE,
-  ],
+  user: [PERMISSIONS.VIEW_SETTINGS, PERMISSIONS.VIEW_PROFILE, PERMISSIONS.EDIT_PROFILE],
 };
 
 /**
@@ -62,20 +58,14 @@ export const roleHasPermission = (role: UserRole, permission: Permission): boole
 /**
  * Check if a role has all specified permissions
  */
-export const roleHasAllPermissions = (
-  role: UserRole,
-  permissions: Permission[]
-): boolean => {
+export const roleHasAllPermissions = (role: UserRole, permissions: Permission[]): boolean => {
   return permissions.every((permission) => roleHasPermission(role, permission));
 };
 
 /**
  * Check if a role has any of the specified permissions
  */
-export const roleHasAnyPermission = (
-  role: UserRole,
-  permissions: Permission[]
-): boolean => {
+export const roleHasAnyPermission = (role: UserRole, permissions: Permission[]): boolean => {
   return permissions.some((permission) => roleHasPermission(role, permission));
 };
 

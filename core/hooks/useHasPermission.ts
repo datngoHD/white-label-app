@@ -1,11 +1,11 @@
-import { useUserRole } from './useUserRole';
 import {
+  getPermissionsForRole,
   Permission,
-  roleHasPermission,
   roleHasAllPermissions,
   roleHasAnyPermission,
-  getPermissionsForRole,
+  roleHasPermission,
 } from '../permissions/permissions';
+import { useUserRole } from './useUserRole';
 
 /**
  * Hook to check if the current user has a specific permission
