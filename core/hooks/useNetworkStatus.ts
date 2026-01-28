@@ -1,6 +1,6 @@
+import NetInfo, { NetInfoState, NetInfoStateType } from '@react-native-community/netinfo';
 import { useCallback, useEffect, useState } from 'react';
 
-import NetInfo, { NetInfoState, NetInfoStateType } from '@react-native-community/netinfo';
 
 import { logger } from '../logging/logger';
 

@@ -1,10 +1,10 @@
-import { Text } from '../Text/Text';
 import React, { useEffect, useMemo } from 'react';
 import { Animated, StyleSheet, View } from 'react-native';
 
 import { useIsOffline } from '@core/hooks/useNetworkStatus';
 import { useTheme } from '@core/theme';
 
+import { Text } from '../Text/Text';
 
 interface OfflineBannerProps {
   message?: string;

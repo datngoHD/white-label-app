@@ -1,7 +1,7 @@
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import React, { useCallback, useEffect, useState } from 'react';
 import { FlatList, RefreshControl, StyleSheet, TouchableOpacity, View } from 'react-native';
 
-import { NativeStackScreenProps } from '@react-navigation/native-stack';
 
 import { AdminStackParamList } from '@core/navigation/types';
 import { useTheme } from '@core/theme';

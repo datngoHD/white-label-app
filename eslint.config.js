@@ -4,6 +4,7 @@ const tsparser = require('@typescript-eslint/parser');
 const react = require('eslint-plugin-react');
 const reactHooks = require('eslint-plugin-react-hooks');
 const reactNative = require('eslint-plugin-react-native');
+const importPlugin = require('eslint-plugin-import');
 
 module.exports = [
   {
@@ -85,10 +86,17 @@ module.exports = [
       react: react,
       'react-hooks': reactHooks,
       'react-native': reactNative,
+      import: importPlugin,
     },
     settings: {
       react: {
         version: 'detect',
+      },
+      'import/resolver': {
+        typescript: {
+          alwaysTryTypes: true,
+          project: './tsconfig.json',
+        },
       },
     },
     rules: {
@@ -102,6 +110,29 @@ module.exports = [
       '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
       'react-native/no-raw-text': 'off',
       'react-native/no-inline-styles': 'warn',
+      'import/order': [
+        'warn',
+        {
+          groups: ['builtin', 'external', 'internal', ['parent', 'sibling', 'index']],
+          pathGroups: [
+            // React ecosystem - grouped together without position to avoid subgroup newlines
+            { pattern: 'react', group: 'external' },
+            { pattern: 'react-native', group: 'external' },
+            { pattern: 'react-native-*', group: 'external' },
+            { pattern: 'expo', group: 'external' },
+            { pattern: 'expo-*', group: 'external' },
+            // Internal aliases - grouped together
+            { pattern: '@app/**', group: 'internal' },
+            { pattern: '@modules/**', group: 'internal' },
+            { pattern: '@shared/**', group: 'internal' },
+            { pattern: '@core/**', group: 'internal' },
+            { pattern: '@assets/**', group: 'internal' },
+          ],
+          pathGroupsExcludedImportTypes: ['react', 'react-native'],
+          'newlines-between': 'always',
+          alphabetize: { order: 'asc', caseInsensitive: true },
+        },
+      ],
     },
   },
 ];

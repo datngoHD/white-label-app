@@ -1,6 +1,6 @@
+import { StatusBar } from 'expo-status-bar';
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import { StatusBar } from 'expo-status-bar';
 
 import { RootNavigator } from '@core/navigation';
 import { Loading } from '@shared/components';

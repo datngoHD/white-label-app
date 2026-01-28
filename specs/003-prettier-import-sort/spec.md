@@ -75,6 +75,8 @@ As a developer, I want to format imports via command line, so that I can integra
 - **FR-008**: The system MUST support import sorting via both IDE save actions and command line execution.
 - **FR-009**: The configuration MUST be shareable via version control (committed configuration files).
 - **FR-010**: All existing source files MUST be reformatted in a one-time migration commit to establish a consistent baseline.
+- **FR-011**: The system MUST install and configure `eslint-plugin-import` with the `import/order` rule aligned to match the Prettier import sorting configuration.
+- **FR-012**: The ESLint `import/order` rule configuration MUST match the same grouping order defined in this specification to prevent conflicts between ESLint and Prettier.
 
 ### Import Grouping Order
 
@@ -92,6 +94,7 @@ The import groups should follow this order (standard React Native convention):
 - **Import Group**: A logical categorization of imports based on their source (React, external, internal, relative).
 - **Prettier Configuration**: The project's `.prettierrc` or equivalent configuration file that defines formatting rules.
 - **Plugin Configuration**: Settings specific to the import sorting plugin that define grouping and ordering rules.
+- **ESLint Import Plugin**: The `eslint-plugin-import` package with `import/order` rule that provides linting feedback for import ordering.
 
 ## Success Criteria _(mandatory)_
 
@@ -103,18 +106,19 @@ The import groups should follow this order (standard React Native convention):
 - **SC-004**: Zero import-related formatting comments in code reviews after adoption.
 - **SC-005**: New team members can start using the feature immediately after cloning the repository with no additional configuration required.
 - **SC-006**: 100% of existing source files pass the Prettier format check after the migration commit.
+- **SC-007**: ESLint `import/order` rule produces no errors/warnings on files that have been formatted by Prettier (tools are aligned).
 
 ## Clarifications
 
 ### Session 2026-01-27
 
-- Q: How should conflicts with ESLint import ordering rules be handled? → A: Keep both tools; document that they must be manually aligned.
+- Q: How should conflicts with ESLint import ordering rules be handled? → A: Use both tools with aligned configurations: ESLint `import/order` rule for linting warnings/errors, Prettier plugin for auto-fixing. Both must use identical grouping order.
 - Q: Where should TypeScript type-only imports be placed? → A: Type imports stay with their source group (e.g., `import type` from `react` stays in React group).
 - Q: How should existing codebase files be migrated? → A: One-time migration: Run `yarn format` on all files in a single commit.
 
 ## Assumptions
 
-- If the project uses ESLint with import ordering rules (e.g., `eslint-plugin-import`), the configuration documentation must include instructions for aligning ESLint rules with the Prettier plugin settings to prevent conflicts.
+- The project MUST use `eslint-plugin-import` with the `import/order` rule to provide linting-time feedback on import ordering, complementing Prettier's auto-fix capability.
 - Prettier is already installed and configured in the project (or will be as part of setup).
 - Developers use IDEs that support "format on save" functionality with Prettier.
 - The project uses standard ES module import syntax.

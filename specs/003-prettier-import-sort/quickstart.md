@@ -13,7 +13,11 @@
 
 ```bash
 # Using yarn (per project constitution)
+# Prettier plugin (if not already installed)
 yarn add -D @ianvs/prettier-plugin-sort-imports
+
+# ESLint plugin for import ordering (FR-011)
+yarn add -D eslint-plugin-import eslint-import-resolver-typescript
 ```
 
 ## Configuration
@@ -100,14 +104,23 @@ import { Button } from './components/Button';
 Run these commands to verify the setup:
 
 ```bash
-# Check if plugin is recognized
+# Check if Prettier plugin is recognized
 npx prettier --help | grep -i import
 
-# Test on a single file
+# Check if ESLint plugin is installed
+yarn list eslint-plugin-import
+
+# Test Prettier on a single file
 npx prettier --write src/App.tsx
 
+# Test ESLint on a single file
+npx eslint src/App.tsx
+
 # Verify no formatting issues
-yarn format && git diff
+yarn format && yarn lint
+
+# SC-007: Verify tools are aligned (no ESLint errors after Prettier)
+yarn format && yarn lint
 ```
 
 ## Troubleshooting
@@ -118,12 +131,21 @@ yarn format && git diff
 2. Check `.prettierrc` includes the plugin in `plugins` array
 3. Restart your IDE to reload Prettier configuration
 
-### Conflict with ESLint
+### ESLint and Prettier Alignment
 
-If using `eslint-plugin-import` with ordering rules:
+Per FR-011 and FR-012, both tools are configured for import ordering:
 
-1. Disable ESLint's `import/order` rule, OR
-2. Configure ESLint to match Prettier's import order (see research.md for example)
+1. **Prettier** (`@ianvs/prettier-plugin-sort-imports`) - Auto-fixes imports on save using regex patterns
+2. **ESLint** (`import/order`) - Provides linting feedback at `warn` level
+
+**Note**: The two tools have slightly different sorting philosophies:
+
+- Prettier uses regex patterns to prioritize React/RN/Expo first, then third-party, then internal
+- ESLint uses alphabetical sorting within groups
+
+The ESLint rule is set to `warn` (not `error`) to provide helpful feedback without blocking development. Prettier is the source of truth for auto-formatting.
+
+If you see ESLint warnings after Prettier formats, this is expected behavior due to the different sorting approaches.
 
 ### Type imports not grouping correctly
 
