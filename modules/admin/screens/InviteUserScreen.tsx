@@ -1,7 +1,7 @@
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import React, { useState } from 'react';
 import { KeyboardAvoidingView, Platform, ScrollView, StyleSheet, View } from 'react-native';
 
-import { NativeStackScreenProps } from '@react-navigation/native-stack';
 
 import { AdminStackParamList } from '@core/navigation/types';
 import { useTheme } from '@core/theme';
@@ -173,7 +173,7 @@ interface RoleOptionProps {
   theme: ReturnType<typeof useTheme>;
 }
 
-function RoleOption({ label, selected, onPress, theme }: RoleOptionProps) {
+function RoleOption({ label, selected, onPress, theme: _theme }: RoleOptionProps) {
   return (
     <Button
       title={label}

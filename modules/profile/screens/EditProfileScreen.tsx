@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from 'react';
-import { KeyboardAvoidingView, Platform, ScrollView, StyleSheet, View } from 'react-native';
-
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import React, { useState } from 'react';
+import { KeyboardAvoidingView, Platform, ScrollView, StyleSheet, View } from 'react-native';
 
 import { ProfileStackParamList } from '@core/navigation/types';
 import { useTheme } from '@core/theme';
@@ -13,22 +12,35 @@ import { useProfile } from '../hooks/useProfile';
 
 type Props = NativeStackScreenProps<ProfileStackParamList, 'EditProfile'>;
 
+interface FormData {
+  firstName: string;
+  lastName: string;
+  phone: string;
+  bio: string;
+}
+
+function useFormState(
+  profile: { firstName?: string; lastName?: string; phone?: string; bio?: string } | null
+) {
+  const [formData, setFormData] = useState<FormData>(() => ({
+    firstName: profile?.firstName || '',
+    lastName: profile?.lastName || '',
+    phone: profile?.phone || '',
+    bio: profile?.bio || '',
+  }));
+
+  const updateField = <K extends keyof FormData>(field: K, value: FormData[K]) => {
+    setFormData((prev) => ({ ...prev, [field]: value }));
+  };
+
+  return { formData, updateField };
+}
+
 export function EditProfileScreen({ navigation }: Props) {
   const theme = useTheme();
   const { profile, isUpdating, error, updateProfile, resetError } = useProfile();
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
-  const [phone, setPhone] = useState('');
-  const [bio, setBio] = useState('');
-
-  useEffect(() => {
-    if (profile) {
-      setFirstName(profile.firstName || '');
-      setLastName(profile.lastName || '');
-      setPhone(profile.phone || '');
-      setBio(profile.bio || '');
-    }
-  }, [profile]);
+  const { formData, updateField } = useFormState(profile);
+  const { firstName, lastName, phone, bio } = formData;
 
   const handleSave = async () => {
     try {
@@ -72,7 +84,7 @@ export function EditProfileScreen({ navigation }: Props) {
             label="First Name"
             value={firstName}
             onChangeText={(value) => {
-              setFirstName(value);
+              updateField('firstName', value);
               if (error) resetError();
             }}
             placeholder="Enter first name"
@@ -84,7 +96,7 @@ export function EditProfileScreen({ navigation }: Props) {
               label="Last Name"
               value={lastName}
               onChangeText={(value) => {
-                setLastName(value);
+                updateField('lastName', value);
                 if (error) resetError();
               }}
               placeholder="Enter last name"
@@ -96,7 +108,7 @@ export function EditProfileScreen({ navigation }: Props) {
             <Input
               label="Phone"
               value={phone}
-              onChangeText={setPhone}
+              onChangeText={(value) => updateField('phone', value)}
               placeholder="Enter phone number"
               keyboardType="phone-pad"
             />
@@ -106,7 +118,7 @@ export function EditProfileScreen({ navigation }: Props) {
             <Input
               label="Bio"
               value={bio}
-              onChangeText={setBio}
+              onChangeText={(value) => updateField('bio', value)}
               placeholder="Tell us about yourself"
               multiline
               numberOfLines={4}

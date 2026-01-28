@@ -1,7 +1,7 @@
 import * as SecureStore from 'expo-secure-store';
 
-import { logger } from '../logging/logger';
 import { STORAGE_KEYS } from './keys';
+import { logger } from '../logging/logger';
 
 export interface StoredTokens {
   accessToken: string;

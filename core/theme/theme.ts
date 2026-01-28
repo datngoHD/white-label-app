@@ -1,6 +1,6 @@
-import { ColorPalette, Spacing, Theme, ThemeOverrides, Typography } from '../types';
+import { Theme, ThemeOverrides } from '../types';
 import { createColorPalette, darkColors, defaultColors } from './colors';
-import { createSpacing, defaultSpacing } from './spacing';
+import { defaultSpacing } from './spacing';
 import { createTypography, defaultTypography } from './typography';
 
 /**

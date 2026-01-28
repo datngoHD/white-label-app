@@ -118,44 +118,97 @@
 
 ---
 
-## ESLint Alignment (Per Clarification)
+## ESLint Integration (FR-011, FR-012)
 
-Since the spec requires keeping both ESLint and Prettier with documentation for alignment:
+Per spec requirements FR-011 and FR-012, the project MUST install and configure `eslint-plugin-import` with the `import/order` rule aligned to match the Prettier import sorting configuration.
 
-### If ESLint import rules are added later
+### Dependencies to Add
 
-Create `eslint.config.js` with compatible rules:
-
-```javascript
-// Example eslint-plugin-import configuration (if added)
+```json
 {
-  rules: {
-    'import/order': ['error', {
-      groups: [
-        'builtin',
-        'external',
-        'internal',
-        'parent',
-        'sibling',
-        'index'
-      ],
-      pathGroups: [
-        { pattern: 'react', group: 'external', position: 'before' },
-        { pattern: 'react-native', group: 'external', position: 'before' },
-        { pattern: '@app/**', group: 'internal' },
-        { pattern: '@modules/**', group: 'internal' },
-        { pattern: '@shared/**', group: 'internal' },
-        { pattern: '@core/**', group: 'internal' },
-        { pattern: '@assets/**', group: 'internal' }
-      ],
-      'newlines-between': 'always',
-      alphabetize: { order: 'asc', caseInsensitive: true }
-    }]
+  "devDependencies": {
+    "eslint-plugin-import": "^2.31.0",
+    "eslint-import-resolver-typescript": "^3.7.0"
   }
 }
 ```
 
-**Note**: Current project has ESLint 9.x but no import ordering rules configured. Documentation will be provided for future alignment if eslint-plugin-import is added.
+### ESLint Configuration (Flat Config)
+
+The existing `eslint.config.js` needs to be updated with:
+
+```javascript
+const importPlugin = require('eslint-plugin-import');
+
+// Add to plugins section:
+plugins: {
+  'import': importPlugin,
+  // ... existing plugins
+}
+
+// Add settings for TypeScript resolver:
+settings: {
+  'import/resolver': {
+    typescript: {
+      alwaysTryTypes: true,
+      project: './tsconfig.json',
+    },
+  },
+}
+
+// Add import/order rule:
+rules: {
+  'import/order': ['error', {
+    groups: [
+      'builtin',
+      'external',
+      'internal',
+      ['parent', 'sibling', 'index'],
+    ],
+    pathGroups: [
+      { pattern: 'react', group: 'external', position: 'before' },
+      { pattern: 'react-native', group: 'external', position: 'before' },
+      { pattern: 'react-native-*', group: 'external', position: 'before' },
+      { pattern: 'expo', group: 'external', position: 'before' },
+      { pattern: 'expo-*', group: 'external', position: 'before' },
+      { pattern: '@app/**', group: 'internal' },
+      { pattern: '@modules/**', group: 'internal' },
+      { pattern: '@shared/**', group: 'internal' },
+      { pattern: '@core/**', group: 'internal' },
+      { pattern: '@assets/**', group: 'internal' },
+    ],
+    pathGroupsExcludedImportTypes: ['builtin'],
+    'newlines-between': 'always',
+    alphabetize: { order: 'asc', caseInsensitive: true },
+  }],
+  // ... existing rules
+}
+```
+
+### Mapping Prettier to ESLint
+
+| Prettier (`importOrder`)                       | ESLint (`import/order`)                                              |
+| ---------------------------------------------- | -------------------------------------------------------------------- |
+| `""` (blank line)                              | `'newlines-between': 'always'`                                       |
+| `^react(-native)?$`                            | `pathGroups: [{ pattern: 'react', ... }]`                            |
+| `^react-native-.*$`                            | `pathGroups: [{ pattern: 'react-native-*', ... }]`                   |
+| `^expo.*$`                                     | `pathGroups: [{ pattern: 'expo', ... }, { pattern: 'expo-*', ... }]` |
+| `<THIRD_PARTY_MODULES>`                        | `groups: ['external']`                                               |
+| `^@(app\|modules\|shared\|core\|assets)/(.*)$` | `pathGroups` for each alias                                          |
+| `^[./]`                                        | `groups: ['parent', 'sibling', 'index']`                             |
+
+### Why Both Tools?
+
+| Tool         | Purpose                                          |
+| ------------ | ------------------------------------------------ |
+| **Prettier** | Auto-fixes on save, CI formatting check          |
+| **ESLint**   | Immediate linting feedback in IDE, CI lint check |
+
+Having both ensures:
+
+1. Developers see import order issues immediately (ESLint red squiggles)
+2. Auto-fix on save corrects issues automatically (Prettier)
+3. CI catches both linting and formatting issues
 
 ---
 

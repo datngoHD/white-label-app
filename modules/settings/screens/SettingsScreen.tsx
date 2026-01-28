@@ -1,7 +1,7 @@
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import React from 'react';
 import { ScrollView, StyleSheet, TouchableOpacity, View } from 'react-native';
 
-import { NativeStackScreenProps } from '@react-navigation/native-stack';
 
 import { useHasPermission } from '@core/hooks/useHasPermission';
 import { SettingsStackParamList } from '@core/navigation/types';

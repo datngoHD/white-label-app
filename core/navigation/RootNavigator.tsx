@@ -1,7 +1,7 @@
-import React from 'react';
 
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import React from 'react';
 
 import { TenantStatusScreen } from '@modules/tenant/screens/TenantStatusScreen';
 import { Loading } from '@shared/components';

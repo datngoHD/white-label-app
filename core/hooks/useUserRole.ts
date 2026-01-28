@@ -1,4 +1,3 @@
-import { useAppSelector } from '../store';
 import { UserRole } from '../types';
 
 /**

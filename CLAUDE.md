@@ -8,6 +8,8 @@ Auto-generated from all feature plans. Last updated: 2026-01-23
 - JavaScript (Node.js 18+) + Node.js built-in modules (fs, path) + sharp (for image processing) (004-switch-brand)
 - N/A (file-based configuration) (004-switch-brand)
 
+- TypeScript 5.3.3 (strict mode) + Prettier 3.8.1, @ianvs/prettier-plugin-sort-imports 4.7.0 (existing), eslint-plugin-import (to add) (003-prettier-import-sort)
+
 - TypeScript 5.3.3 (strict mode) + Expo SDK 54, React Native 0.81.5, babel-preset-expo, babel-plugin-module-resolver (to add) (002-setup-aliases)
 - TypeScript 5.3.3 (strict mode) + Prettier 3.8.1 (existing), Prettier import sorting plugin (to be added) (003-prettier-import-sort)
 - N/A (configuration files only) (003-prettier-import-sort)
@@ -33,7 +35,10 @@ TypeScript (strict mode): Follow standard conventions
 - 004-switch-brand: Added JavaScript (Node.js 18+) + Node.js built-in modules (fs, path) + sharp (for image processing)
 - 004-switch-brand: Added TypeScript 5.3.3 (strict mode) + Node.js built-in modules only (fs, path)
 
+- 003-prettier-import-sort: Added TypeScript 5.3.3 (strict mode) + Prettier 3.8.1, @ianvs/prettier-plugin-sort-imports 4.7.0 (existing), eslint-plugin-import (to add)
+
 - 003-prettier-import-sort: Added TypeScript 5.3.3 (strict mode) + Prettier 3.8.1 (existing), Prettier import sorting plugin (to be added)
+- 002-setup-aliases: Added TypeScript 5.3.3 (strict mode) + Expo SDK 54, React Native 0.81.5, babel-preset-expo, babel-plugin-module-resolver
 
 <!-- MANUAL ADDITIONS START -->
 <!-- MANUAL ADDITIONS END -->

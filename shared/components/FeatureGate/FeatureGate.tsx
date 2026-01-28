@@ -37,7 +37,7 @@ export const withFeatureGate = <P extends object>(
   feature: FeatureFlagKey | string,
   FallbackComponent?: React.ComponentType<P>
 ): React.FC<P> => {
-  return (props: P) => {
+  const WithFeatureGate = (props: P) => {
     const isEnabled = useFeatureFlag(feature);
 
     if (isEnabled) {
@@ -50,4 +50,6 @@ export const withFeatureGate = <P extends object>(
 
     return null;
   };
+  WithFeatureGate.displayName = `withFeatureGate(${WrappedComponent.displayName || WrappedComponent.name || 'Component'})`;
+  return WithFeatureGate;
 };

@@ -97,10 +97,10 @@ export type AdminStackScreenProps<T extends keyof AdminStackParamList> = NativeS
 >;
 
 /**
- * Declare global navigation types
+ * Declare global navigation types for React Navigation
+ * Using module augmentation pattern
  */
-declare global {
-  namespace ReactNavigation {
-    interface RootParamList extends RootStackParamList {}
-  }
+declare module '@react-navigation/native' {
+  // eslint-disable-next-line @typescript-eslint/no-empty-object-type
+  interface RootParamList extends RootStackParamList {}
 }

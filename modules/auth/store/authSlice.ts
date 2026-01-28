@@ -24,7 +24,7 @@ export const initializeAuth = createAsyncThunk(
 
       const user = await authService.getCurrentUser();
       return { user, tokens };
-    } catch (error) {
+    } catch {
       await authPersistence.clearTokens();
       return rejectWithValue('Session expired');
     }
