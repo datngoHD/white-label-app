@@ -6,9 +6,18 @@ node_modules/
 dist/
 web-build/
 
-# Native build artifacts
-ios/
-android/
+# Native build artifacts (keep ios/ and android/ but ignore build outputs)
+ios/Pods/
+ios/build/
+ios/*.xcworkspace/xcuserdata/
+ios/*.xcodeproj/xcuserdata/
+ios/*.xcodeproj/project.xcworkspace/xcshareddata/
+android/.gradle/
+android/build/
+android/app/build/
+android/app/.cxx/
+android/.idea/
+android/local.properties
 *.jks
 *.p8
 *.p12
@@ -74,3 +83,6 @@ google-play-key.json
 # Secrets
 *.secret
 secrets/
+
+# Brand state (local only)
+.current-brand

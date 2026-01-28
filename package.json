@@ -30,7 +30,8 @@
     "fastlane:android:build": "cd fastlane && bundle exec fastlane android build",
     "fastlane:android:beta": "cd fastlane && bundle exec fastlane android beta",
     "fastlane:android:release": "cd fastlane && bundle exec fastlane android release",
-    "validate:brands": "node scripts/validate-brands.js"
+    "validate:brands": "node scripts/validate-brands.js",
+    "brand": "node scripts/switch-brand.js"
   },
   "dependencies": {
     "@react-native-async-storage/async-storage": "^2.1.2",
@@ -73,6 +74,7 @@
     "patch-package": "^8.0.1",
     "postinstall-postinstall": "^2.1.0",
     "prettier": "^3.8.1",
+    "sharp": "^0.34.5",
     "typescript": "~5.3.3"
   },
   "private": true
