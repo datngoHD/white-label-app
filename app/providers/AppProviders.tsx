@@ -1,6 +1,5 @@
 import React, { ReactNode } from 'react';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
-
 import { Provider as ReduxProvider } from 'react-redux';
 
 import { ErrorBoundary } from '@core/errors';

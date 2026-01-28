@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import { Animated, StyleSheet, View } from 'react-native';
 
 import { useIsOffline } from '@core/hooks/useNetworkStatus';
@@ -13,7 +13,7 @@ interface OfflineBannerProps {
 export function OfflineBanner({ message = 'No internet connection' }: OfflineBannerProps) {
   const theme = useTheme();
   const isOffline = useIsOffline();
-  const slideAnim = useRef(new Animated.Value(-50)).current;
+  const slideAnim = useMemo(() => new Animated.Value(-50), []);
 
   useEffect(() => {
     Animated.timing(slideAnim, {

@@ -4,7 +4,6 @@ import { setTenantId } from '@core/api';
 import { getDefaultTenantConfig } from '@core/config/tenant.config';
 import { Tenant } from '@core/config/tenant.types';
 import { logger } from '@core/logging/logger';
-import { useAppDispatch, useAppSelector } from '@core/store';
 
 interface TenantContextValue {
   tenant: Tenant | null;

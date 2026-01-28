@@ -1,7 +1,6 @@
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import React, { useState } from 'react';
 import { ScrollView, StyleSheet, Switch, View } from 'react-native';
-
-import { NativeStackScreenProps } from '@react-navigation/native-stack';
 
 import { SettingsStackParamList } from '@core/navigation/types';
 import { useTheme } from '@core/theme';
@@ -9,6 +8,7 @@ import { useProfile } from '@modules/profile/hooks/useProfile';
 import { Card } from '@shared/components';
 import { Header } from '@shared/components/Header/Header';
 import { Text } from '@shared/components/Text/Text';
+
 
 type Props = NativeStackScreenProps<SettingsStackParamList, 'Preferences'>;
 

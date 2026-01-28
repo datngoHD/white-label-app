@@ -17,9 +17,11 @@
 
 ## Phase 1: Setup (Plugin Installation)
 
-**Purpose**: Install the Prettier import sorting plugin
+**Purpose**: Install the Prettier import sorting plugin and ESLint import plugin
 
 - [x] T001 Install @ianvs/prettier-plugin-sort-imports via `yarn add -D @ianvs/prettier-plugin-sort-imports`
+- [x] T001a [P] Install eslint-plugin-import via `yarn add -D eslint-plugin-import` (FR-011)
+- [x] T001b [P] Install eslint-import-resolver-typescript via `yarn add -D eslint-import-resolver-typescript` (FR-011)
 
 ---
 
@@ -40,7 +42,18 @@
 - [x] T010 Configure importOrderParserPlugins with `["typescript", "jsx"]` in .prettierrc
 - [x] T011 Configure importOrderTypeScriptVersion to `"5.3.3"` in .prettierrc
 
-**Checkpoint**: Configuration complete - Prettier plugin is now active with import sorting rules
+### ESLint Import Plugin Configuration (FR-011, FR-012)
+
+- [x] T011a Add eslint-plugin-import to plugins in eslint.config.js
+- [x] T011b Add import/resolver settings for TypeScript in eslint.config.js
+- [x] T011c Configure import/order rule with groups array in eslint.config.js
+- [x] T011d Add pathGroups for react, react-native patterns in eslint.config.js (FR-012)
+- [x] T011e Add pathGroups for expo, expo-\* patterns in eslint.config.js (FR-012)
+- [x] T011f Add pathGroups for @app/**, @modules/**, @shared/**, @core/**, @assets/\*\* in eslint.config.js (FR-012)
+- [x] T011g Configure newlines-between: 'always' in import/order rule in eslint.config.js
+- [x] T011h Configure alphabetize: { order: 'asc', caseInsensitive: true } in eslint.config.js
+
+**Checkpoint**: Configuration complete - Both Prettier and ESLint plugins are now active with aligned import sorting rules
 
 ---
 
@@ -107,18 +120,24 @@
 
 ### Codebase Migration (FR-010)
 
-- [ ] T030 Run `yarn format` to reformat all existing source files with sorted imports
-- [ ] T031 Review git diff to verify import changes look correct across the codebase
-- [ ] T032 Stage all reformatted files via `git add -A`
+- [x] T030 Run `yarn format` to reformat all existing source files with sorted imports
+- [x] T031 Review git diff to verify import changes look correct across the codebase
+- [x] T032 Stage all reformatted files via `git add -A`
+
+### ESLint & Prettier Alignment Verification (SC-007)
+
+- [x] T032a Run `yarn format` to format all files with Prettier
+- [x] T032b Run `yarn lint` to verify ESLint produces no import/order errors (0 errors, warnings expected)
+- [x] T032c Verify SC-007: ESLint `import/order` rule produces no errors on Prettier-formatted files
 
 ### Documentation
 
-- [ ] T033 [P] Verify quickstart.md matches final configuration in specs/003-prettier-import-sort/quickstart.md
-- [ ] T034 [P] Add ESLint alignment note to project documentation if eslint-plugin-import is added later
+- [x] T033 [P] Verify quickstart.md matches final configuration in specs/003-prettier-import-sort/quickstart.md
+- [x] T034 Update quickstart.md with ESLint plugin installation steps in specs/003-prettier-import-sort/quickstart.md
 
 ### Final Commit
 
-- [ ] T035 Create commit with message "feat(tooling): Add Prettier import sorting plugin with codebase migration"
+- [x] T035 Create commit with message "feat(tooling): Add Prettier import sorting plugin with codebase migration"
 
 ---
 
@@ -139,7 +158,9 @@
 
 ### Within Each Phase
 
-- Foundational tasks T002-T011 should be executed sequentially (all modify same file)
+- Setup tasks T001a-T001b can run in parallel (different packages)
+- Foundational tasks T002-T011 should be executed sequentially (all modify same file - .prettierrc)
+- Foundational tasks T011a-T011h should be executed sequentially (all modify same file - eslint.config.js)
 - Verification tasks within US1 should be sequential (build on each other)
 - US2 tasks should be sequential (git staging order)
 - US3 tasks should be sequential (verification order)
@@ -191,6 +212,8 @@ Phase 5: User Story 3 CLI verification (T026-T029)
 
 - All tasks modify or verify configuration files only (no application code changes)
 - The .prettierrc file is modified by multiple tasks in Phase 2 - execute sequentially
+- The eslint.config.js file is modified by tasks T011a-T011h - execute sequentially
 - Migration (T030) will modify many files - review diff before committing
 - Temporary test file (T012) should be deleted after verification (T021)
+- SC-007 verification (T032a-T032c) ensures ESLint and Prettier are aligned
 - Commit after Phase 6 completion with all changes bundled together

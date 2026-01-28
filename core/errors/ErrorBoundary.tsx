@@ -1,8 +1,8 @@
 import React, { Component, ErrorInfo, ReactNode } from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
-import { logger } from '../logging/logger';
 import { addBreadcrumb, captureException } from './sentry';
+import { logger } from '../logging/logger';
 
 interface Props {
   children: ReactNode;

@@ -75,7 +75,7 @@ export const withRoleGate = <P extends object>(
   },
   FallbackComponent?: React.ComponentType<P>
 ): React.FC<P> => {
-  return (props: P) => (
+  const WithRoleGate = (props: P) => (
     <RoleGate
       role={options.role}
       permission={options.permission}
@@ -86,4 +86,6 @@ export const withRoleGate = <P extends object>(
       <WrappedComponent {...props} />
     </RoleGate>
   );
+  WithRoleGate.displayName = `withRoleGate(${WrappedComponent.displayName || WrappedComponent.name || 'Component'})`;
+  return WithRoleGate;
 };

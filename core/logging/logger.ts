@@ -23,7 +23,7 @@ const shouldLog = (level: LogLevel): boolean => {
   return LOG_LEVELS[level] >= currentLevel;
 };
 
-const formatMessage = (level: string, args: unknown[]): string => {
+const formatMessage = (level: string, _args: unknown[]): string => {
   const timestamp = new Date().toISOString();
   return `[${timestamp}] [${level.toUpperCase()}]`;
 };
@@ -43,7 +43,7 @@ export const logger: Logger = {
   error: createLogMethod('error', console.error),
 };
 
-export const setLogContext = (context: Record<string, unknown>): void => {
+export const setLogContext = (_context: Record<string, unknown>): void => {
   // This can be extended to add context to all log messages
   // Useful for Sentry breadcrumbs or structured logging
 };

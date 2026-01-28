@@ -1,4 +1,4 @@
-import { ColorPalette, TextColors } from '../types';
+import { ColorPalette } from '../types';
 
 /**
  * Default color palette

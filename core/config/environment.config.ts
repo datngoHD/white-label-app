@@ -1,4 +1,4 @@
-import { Environment, EnvironmentConfig, LogLevel } from '../types';
+import { Environment, EnvironmentConfig } from '../types';
 
 const ENV = (process.env.APP_ENV as Environment) || 'development';
 
