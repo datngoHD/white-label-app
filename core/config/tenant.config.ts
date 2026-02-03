@@ -30,11 +30,11 @@ export const validateTenantConfig = (tenant: unknown): tenant is Tenant => {
   const t = tenant as Record<string, unknown>;
 
   return (
-    typeof t.id === 'string' &&
-    typeof t.name === 'string' &&
-    ['active', 'suspended', 'maintenance'].includes(t.status as string) &&
-    typeof t.api === 'object' &&
-    t.api !== null
+    typeof t['id'] === 'string' &&
+    typeof t['name'] === 'string' &&
+    ['active', 'suspended', 'maintenance'].includes(t['status'] as string) &&
+    typeof t['api'] === 'object' &&
+    t['api'] !== null
   );
 };
 

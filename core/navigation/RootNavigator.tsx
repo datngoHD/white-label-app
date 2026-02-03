@@ -1,6 +1,6 @@
 
 import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { createNativeStackNavigator, NativeStackScreenProps } from '@react-navigation/native-stack';
 import React from 'react';
 
 import { TenantStatusScreen } from '@modules/tenant/screens/TenantStatusScreen';
@@ -95,8 +95,10 @@ export const RootNavigator: React.FC = () => {
 };
 
 // Wrapper to handle route params
-const TenantStatusScreenWrapper: React.FC<{
-  route: { params: { status: 'suspended' | 'maintenance'; message?: string } };
-}> = ({ route }) => {
-  return <TenantStatusScreen status={route.params.status} message={route.params.message} />;
+type TenantStatusWrapperProps = NativeStackScreenProps<RootStackParamList, 'TenantStatus'>;
+
+const TenantStatusScreenWrapper = ({ route }: TenantStatusWrapperProps) => {
+  const { status, message } = route.params;
+  // Use spread to conditionally include message only when defined (exactOptionalPropertyTypes)
+  return <TenantStatusScreen status={status} {...(message !== undefined ? { message } : {})} />;
 };

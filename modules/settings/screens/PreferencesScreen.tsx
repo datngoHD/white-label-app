@@ -26,20 +26,21 @@ export function PreferencesScreen({ navigation }: Props) {
   );
 
   const handleToggle = async (key: 'email' | 'push' | 'sms' | 'marketing', value: boolean) => {
-    const setters: Record<string, (v: boolean) => void> = {
+    const setters = {
       email: setEmailNotifications,
       push: setPushNotifications,
       sms: setSmsNotifications,
       marketing: setMarketingEmails,
-    };
+    } as const;
 
-    setters[key](value);
+    // Key is guaranteed to exist in setters
+    setters[key]!(value);
 
     try {
       await updateNotifications({ [key]: value });
     } catch {
       // Revert on error
-      setters[key](!value);
+      setters[key]!(!value);
     }
   };
 

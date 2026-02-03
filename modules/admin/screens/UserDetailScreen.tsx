@@ -225,7 +225,7 @@ export function UserDetailScreen({ route, navigation }: Props) {
             onPress={handleDeleteUser}
             variant="text"
             disabled={isUpdating}
-            style={[styles.actionButton, styles.deleteButton]}
+            style={StyleSheet.flatten([styles.actionButton, styles.deleteButton])}
           />
         </View>
 

@@ -13,7 +13,7 @@ interface SentryConfig {
 }
 
 const getSentryConfig = (): SentryConfig => {
-  const dsn = process.env.SENTRY_DSN || '';
+  const dsn = process.env['SENTRY_DSN'] || '';
 
   return {
     dsn,
@@ -40,7 +40,7 @@ export const initializeSentry = (): void => {
       debug: config.debug,
 
       // Set tags for filtering
-      beforeSend: (event: Sentry.Event) => {
+      beforeSend: (event) => {
         event.tags = {
           ...event.tags,
           brand: getCurrentBrandId(),
@@ -64,7 +64,7 @@ export const initializeSentry = (): void => {
 export const setUserContext = (user: { id: string; email?: string; tenantId?: string }): void => {
   Sentry.setUser({
     id: user.id,
-    email: user.email,
+    ...(user.email !== undefined && { email: user.email }),
   });
 
   if (user.tenantId) {
@@ -77,9 +77,7 @@ export const clearUserContext = (): void => {
 };
 
 export const captureException = (error: Error, context?: Record<string, unknown>): void => {
-  Sentry.captureException(error, {
-    extra: context,
-  });
+  Sentry.captureException(error, context ? { extra: context } : undefined);
 };
 
 export const captureMessage = (
@@ -89,7 +87,7 @@ export const captureMessage = (
 ): void => {
   Sentry.captureMessage(message, {
     level,
-    extra: context,
+    ...(context !== undefined && { extra: context }),
   });
 };
 
@@ -101,8 +99,8 @@ export const addBreadcrumb = (
   Sentry.addBreadcrumb({
     category,
     message,
-    data,
     level: 'info',
+    ...(data !== undefined && { data }),
   });
 };
 

@@ -1,6 +1,6 @@
 import { Environment, EnvironmentConfig } from '../types';
 
-const ENV = (process.env.APP_ENV as Environment) || 'development';
+const ENV = (process.env['APP_ENV'] as Environment) || 'development';
 
 const configs: Record<Environment, EnvironmentConfig> = {
   development: {
@@ -13,7 +13,7 @@ const configs: Record<Environment, EnvironmentConfig> = {
   staging: {
     name: 'staging',
     apiBaseUrl: 'https://staging-api.example.com/api/v1',
-    sentryDsn: process.env.SENTRY_DSN,
+    sentryDsn: process.env['SENTRY_DSN'],
     debug: true,
     useMocks: false,
     logLevel: 'info',
@@ -21,7 +21,7 @@ const configs: Record<Environment, EnvironmentConfig> = {
   production: {
     name: 'production',
     apiBaseUrl: 'https://api.example.com/api/v1',
-    sentryDsn: process.env.SENTRY_DSN,
+    sentryDsn: process.env['SENTRY_DSN'],
     debug: false,
     useMocks: false,
     logLevel: 'error',

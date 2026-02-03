@@ -7,6 +7,7 @@ Auto-generated from all feature plans. Last updated: 2026-01-23
 - File system (native project files, .current-brand state file) (004-switch-brand)
 - JavaScript (Node.js 18+) + Node.js built-in modules (fs, path) + sharp (for image processing) (004-switch-brand)
 - N/A (file-based configuration) (004-switch-brand)
+- TypeScript 5.3.3 (strict mode) + Expo SDK 54, React Native 0.81.5, Metro bundler (007-typescript-strict-setup)
 
 - TypeScript 5.3.3 (strict mode) + Prettier 3.8.1, @ianvs/prettier-plugin-sort-imports 4.7.0 (existing), eslint-plugin-import (to add) (003-prettier-import-sort)
 
@@ -32,13 +33,11 @@ npm test && npm run lint
 TypeScript (strict mode): Follow standard conventions
 
 ## Recent Changes
+- 007-typescript-strict-setup: Added TypeScript 5.3.3 (strict mode) + Expo SDK 54, React Native 0.81.5, Metro bundler
 - 004-switch-brand: Added JavaScript (Node.js 18+) + Node.js built-in modules (fs, path) + sharp (for image processing)
 - 004-switch-brand: Added TypeScript 5.3.3 (strict mode) + Node.js built-in modules only (fs, path)
 
-- 003-prettier-import-sort: Added TypeScript 5.3.3 (strict mode) + Prettier 3.8.1, @ianvs/prettier-plugin-sort-imports 4.7.0 (existing), eslint-plugin-import (to add)
 
-- 003-prettier-import-sort: Added TypeScript 5.3.3 (strict mode) + Prettier 3.8.1 (existing), Prettier import sorting plugin (to be added)
-- 002-setup-aliases: Added TypeScript 5.3.3 (strict mode) + Expo SDK 54, React Native 0.81.5, babel-preset-expo, babel-plugin-module-resolver
 
 <!-- MANUAL ADDITIONS START -->
 <!-- MANUAL ADDITIONS END -->

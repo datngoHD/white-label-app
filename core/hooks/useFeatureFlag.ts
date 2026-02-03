@@ -10,7 +10,7 @@ export const useFeatureFlag = (flagKey: FeatureFlagKey | string): boolean => {
 
   // Check tenant-specific feature flags first
   if (tenant?.features && flagKey in tenant.features) {
-    return tenant.features[flagKey];
+    return tenant.features[flagKey] ?? false;
   }
 
   // Fall back to default flags

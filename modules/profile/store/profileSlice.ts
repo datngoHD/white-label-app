@@ -49,6 +49,7 @@ export const deleteAvatar = createAsyncThunk(
   async (_, { rejectWithValue }) => {
     try {
       await profileService.deleteAvatar();
+      return;
     } catch (error: unknown) {
       const message = error instanceof Error ? error.message : 'Failed to delete avatar';
       return rejectWithValue(message);

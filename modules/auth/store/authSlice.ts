@@ -63,6 +63,7 @@ export const logout = createAsyncThunk('auth/logout', async (_, { rejectWithValu
   try {
     await authService.logout();
     await authPersistence.clearTokens();
+    return;
   } catch (error: unknown) {
     await authPersistence.clearTokens();
     const message = error instanceof Error ? error.message : 'Logout failed';
