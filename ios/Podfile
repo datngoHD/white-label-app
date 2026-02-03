@@ -20,7 +20,7 @@ platform :ios, podfile_properties['ios.deploymentTarget'] || '15.1'
 
 prepare_react_native_project!
 
-target 'WhiteLabelApp' do
+abstract_target 'WhiteLabelAppCommonPods' do
   use_expo_modules!
 
   if ENV['EXPO_USE_COMMUNITY_AUTOLINKING'] == '1'
@@ -51,6 +51,18 @@ target 'WhiteLabelApp' do
     :app_path => "#{Pod::Config.instance.installation_root}/..",
     :privacy_file_aggregation_enabled => podfile_properties['apple.privacyManifestAggregationEnabled'] != 'false',
   )
+
+  target 'WhiteLabelApp' do
+    inherit! :complete
+  end
+
+  target 'WhiteLabelApp-Dev' do
+    inherit! :complete
+  end
+
+  target 'WhiteLabelApp-Staging' do
+    inherit! :complete
+  end
 
   post_install do |installer|
     react_native_post_install(

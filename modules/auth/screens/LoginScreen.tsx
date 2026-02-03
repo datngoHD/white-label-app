@@ -1,7 +1,7 @@
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import React, { useState } from 'react';
 import { KeyboardAvoidingView, Platform, ScrollView, StyleSheet, View } from 'react-native';
-
+import Config from 'react-native-config';
 
 import { AuthStackParamList } from '@core/navigation/types';
 import { useTheme } from '@core/theme';
@@ -49,6 +49,7 @@ export function LoginScreen({ navigation }: Props) {
         <Header title="Welcome Back" showLogo />
 
         <View style={styles.formContainer}>
+          <Text>{Config.APP_ENV}</Text>
           <LoginForm
             email={email}
             password={password}
