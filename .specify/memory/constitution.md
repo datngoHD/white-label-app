@@ -16,7 +16,43 @@ Sync Impact Report:
 
 Build a production-grade React Native application using Expo (latest) that fully supports White-label (multi-brand) and Multi-tenant use cases. The system must be scalable, maintainable for 5+ years, and suitable for multi-developer teams and CI/CD pipelines.
 
+## External Skills (Agent Guidelines)
+
+This project uses the following Vercel agent-skills for AI-assisted development:
+
+### vercel-react-native-skills
+Located at: `.claude/skills/vercel-react-native-skills/`
+
+**MUST reference these guidelines when:**
+- Building React Native or Expo components
+- Optimizing list and scroll performance (use FlashList, not FlatList)
+- Implementing animations (use Reanimated, animate only transform/opacity)
+- Working with images (use expo-image, not Image from react-native)
+- Configuring navigation (use native stack/tabs)
+- Managing state (minimize subscriptions, use dispatcher pattern)
+
+**Key Rules:**
+| Priority | Category | Rule |
+|----------|----------|------|
+| CRITICAL | Lists | Use FlashList, memoize items, stabilize callbacks |
+| HIGH | Animation | Use Reanimated, animate only GPU properties |
+| HIGH | Navigation | Use native stack/native tabs over JS navigators |
+| HIGH | UI | Use expo-image, Pressable (not TouchableOpacity) |
+| MEDIUM | State | Minimize state subscriptions, use Zustand patterns |
+| MEDIUM | Rendering | Wrap text in Text components, avoid falsy && |
+
+**Full documentation:** `.claude/skills/vercel-react-native-skills/AGENTS.md`
+
+### vercel-composition-patterns
+Located at: `.claude/skills/vercel-composition-patterns/`
+
+**MUST reference when:**
+- Refactoring components with many boolean props
+- Building reusable component libraries
+- Designing flexible component APIs
+
 ## Core Principles
+
 
 ### I. Clean Architecture / Modular Architecture
 
