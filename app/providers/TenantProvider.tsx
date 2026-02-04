@@ -1,12 +1,23 @@
-import React, { createContext, ReactNode, useContext, useEffect } from 'react';
+/**
+ * Tenant Provider
+ *
+ * Provides tenant context using TanStack Query for state management.
+ * Supports offline caching and automatic refetching.
+ */
+
+import { useQueryClient } from '@tanstack/react-query';
+import React, { createContext, ReactNode, useCallback, useContext, useEffect, useMemo } from 'react';
+
 
 import { setTenantId } from '@core/api';
 import { getDefaultTenantConfig } from '@core/config/tenant.config';
 import { Tenant } from '@core/config/tenant.types';
 import { logger } from '@core/logging/logger';
+import { useTenantQuery, invalidateTenant } from '@modules/tenant/hooks/useTenantQuery';
 
 interface TenantContextValue {
   tenant: Tenant | null;
+  tenantId: string;
   isLoading: boolean;
   error: string | null;
   refreshTenant: () => Promise<void>;
@@ -16,52 +27,83 @@ const TenantContext = createContext<TenantContextValue | null>(null);
 
 interface TenantProviderProps {
   children: ReactNode;
+  /** Override the default tenant ID (useful for testing or multi-tenant apps) */
+  tenantId?: string;
 }
 
-export const TenantProvider: React.FC<TenantProviderProps> = ({ children }) => {
-  // For now, use default tenant config until tenant slice is integrated
-  const [tenant, setTenant] = React.useState<Tenant | null>(null);
-  const [isLoading, setIsLoading] = React.useState(true);
-  const [error, setError] = React.useState<string | null>(null);
+/**
+ * TenantProvider component
+ *
+ * Wraps the app with tenant context backed by TanStack Query.
+ * Automatically loads tenant configuration on mount.
+ */
+export const TenantProvider: React.FC<TenantProviderProps> = ({
+  children,
+  tenantId: propTenantId,
+}) => {
+  const queryClient = useQueryClient();
 
-  useEffect(() => {
-    const initTenant = async () => {
-      try {
-        // Load default tenant config
-        const defaultConfig = getDefaultTenantConfig();
-        setTenant(defaultConfig);
+  // Get default tenant ID from config if not provided
+  const defaultConfig = getDefaultTenantConfig();
+  const tenantId = propTenantId ?? defaultConfig.id;
 
-        // Set tenant ID for API interceptor
-        setTenantId(defaultConfig.id);
-
-        logger.info('Tenant initialized', { tenantId: defaultConfig.id });
-      } catch (err) {
-        const message = err instanceof Error ? err.message : 'Failed to load tenant';
-        setError(message);
-        logger.error('Tenant initialization failed', { error: message });
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    initTenant();
-  }, []);
-
-  const refreshTenant = async (): Promise<void> => {
-    // TODO: Fetch fresh tenant config from API
-    logger.debug('Refreshing tenant config');
-  };
-
-  const value: TenantContextValue = {
-    tenant,
+  // Use TanStack Query for tenant data
+  const {
+    tenant: queriedTenant,
     isLoading,
-    error,
-    refreshTenant,
-  };
+    error: queryError,
+    refetch,
+  } = useTenantQuery(tenantId);
+
+  // Use default config as fallback while loading or on error
+  const tenant = useMemo(() => {
+    if (queriedTenant) {
+      return queriedTenant;
+    }
+    // Return default config if query hasn't loaded yet or failed
+    if (tenantId === defaultConfig.id) {
+      return defaultConfig;
+    }
+    return null;
+  }, [queriedTenant, tenantId, defaultConfig]);
+
+  // Set tenant ID for API interceptor when tenant changes
+  useEffect(() => {
+    if (tenant?.id) {
+      setTenantId(tenant.id);
+      logger.info('Tenant initialized', { tenantId: tenant.id });
+    }
+  }, [tenant?.id]);
+
+  // Refresh tenant configuration
+  const refreshTenant = useCallback(async (): Promise<void> => {
+    logger.debug('Refreshing tenant config', { tenantId });
+    await invalidateTenant(queryClient, tenantId);
+    await refetch();
+  }, [queryClient, tenantId, refetch]);
+
+  // Convert error to string for context
+  const error = queryError?.message ?? null;
+
+  const value: TenantContextValue = useMemo(
+    () => ({
+      tenant,
+      tenantId,
+      isLoading,
+      error,
+      refreshTenant,
+    }),
+    [tenant, tenantId, isLoading, error, refreshTenant]
+  );
 
   return <TenantContext.Provider value={value}>{children}</TenantContext.Provider>;
 };
 
+/**
+ * Hook to access tenant context
+ *
+ * @throws Error if used outside of TenantProvider
+ */
 export const useTenantContext = (): TenantContextValue => {
   const context = useContext(TenantContext);
   if (!context) {

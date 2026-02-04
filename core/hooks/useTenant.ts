@@ -1,16 +1,37 @@
+/**
+ * Tenant Hooks
+ *
+ * Convenience hooks for accessing tenant information.
+ * Uses TenantProvider context which is backed by TanStack Query.
+ */
+
 import { useTenantContext } from '@app/providers/TenantProvider';
 
 import { getTenantStatusMessage, isTenantAvailable } from '../config/tenant.config';
 
 /**
  * Hook to access tenant information
+ *
+ * @returns Tenant state and utilities
+ *
+ * @example
+ * ```tsx
+ * function MyComponent() {
+ *   const { tenant, tenantId, isLoading, refreshTenant } = useTenant();
+ *
+ *   if (isLoading) return <Loading />;
+ *   if (!tenant) return <Error />;
+ *
+ *   return <Text>{tenant.name}</Text>;
+ * }
+ * ```
  */
 export const useTenant = () => {
-  const { tenant, isLoading, error, refreshTenant } = useTenantContext();
+  const { tenant, tenantId, isLoading, error, refreshTenant } = useTenantContext();
 
   return {
     tenant,
-    tenantId: tenant?.id ?? null,
+    tenantId,
     tenantName: tenant?.name ?? null,
     isLoading,
     error,
@@ -22,6 +43,8 @@ export const useTenant = () => {
 
 /**
  * Hook to get tenant API configuration
+ *
+ * @returns API configuration for current tenant
  */
 export const useTenantApi = () => {
   const { tenant } = useTenantContext();
@@ -34,6 +57,8 @@ export const useTenantApi = () => {
 
 /**
  * Hook to get tenant metadata
+ *
+ * @returns Tenant metadata (support email, terms URL, etc.)
  */
 export const useTenantMetadata = () => {
   const { tenant } = useTenantContext();

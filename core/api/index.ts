@@ -4,4 +4,5 @@ export { errorResponseInterceptor } from './interceptors/errorInterceptor';
 export {
   authRequestInterceptor,
   createAuthResponseInterceptor,
+  setupAuthInterceptors,
 } from './interceptors/authInterceptor';
