@@ -3,6 +3,8 @@
 Auto-generated from all feature plans. Last updated: 2026-01-23
 
 ## Active Technologies
+- TypeScript ~5.4.0 (strict mode enabled) (009-tanstack-migration)
+- AsyncStorage (existing) for query cache persistence, expo-secure-store (existing) for auth tokens (009-tanstack-migration)
 
 - TypeScript 5.3.3 (strict mode) + Node.js built-in modules only (fs, path) (004-switch-brand)
 - File system (native project files, .current-brand state file) (004-switch-brand)
@@ -49,10 +51,10 @@ TypeScript (strict mode): Follow standard conventions
 - **Prettier**: eslint-config-prettier integrated (must be last in config)
 
 ## Recent Changes
+- 009-tanstack-migration: Added TypeScript ~5.4.0 (strict mode enabled)
 
 - 008-eslint-strict-config: Added TypeScript 5.4.x (strict mode enabled) + ESLint 9.39.x, @typescript-eslint/eslint-plugin 8.53.x, eslint-plugin-react 7.37.x, eslint-plugin-react-hooks 7.0.x, eslint-plugin-react-native 5.0.x, eslint-plugin-import 2.32.x
 - 007-typescript-strict-setup: Added TypeScript 5.3.3 (strict mode) + Expo SDK 54, React Native 0.81.5, Metro bundler
-- 004-switch-brand: Added JavaScript (Node.js 18+) + Node.js built-in modules (fs, path) + sharp (for image processing)
 
 <!-- MANUAL ADDITIONS START -->
 <!-- MANUAL ADDITIONS END -->
