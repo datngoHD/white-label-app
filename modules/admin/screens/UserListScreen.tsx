@@ -83,7 +83,11 @@ export function UserListScreen({ navigation }: Props) {
   };
 
   const renderUser = ({ item }: { item: TenantUser }) => (
-    <TouchableOpacity onPress={() => handleUserPress(item)}>
+    <TouchableOpacity
+      onPress={() => {
+        handleUserPress(item);
+      }}
+    >
       <Card style={styles.userCard}>
         <View style={styles.userRow}>
           <View

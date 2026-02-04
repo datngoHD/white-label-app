@@ -95,7 +95,7 @@ As a new team member, I want the TypeScript configuration to be well-documented 
 - **FR-010**: Configuration MUST enable `allowUnreachableCode: false` to report errors on unreachable code
 - **FR-011**: Configuration MUST enable `isolatedModules` for Metro bundler compatibility
 - **FR-012**: Configuration MUST maintain compatibility with Expo SDK 54 and TypeScript 5.3.3
-- **FR-013**: Configuration MUST preserve existing path alias mappings (@app/*, @modules/*, @shared/*, @core/*, @assets/*)
+- **FR-013**: Configuration MUST preserve existing path alias mappings (@app/_, @modules/_, @shared/_, @core/_, @assets/\*)
 - **FR-014**: Configuration MUST include inline documentation explaining each strict option's purpose
 - **FR-015**: Any existing type errors revealed by the stricter configuration MUST be fixed to achieve a clean typecheck
 

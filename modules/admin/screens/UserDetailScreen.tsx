@@ -2,6 +2,7 @@ import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import React, { useCallback, useEffect, useState } from 'react';
 import { Alert, ScrollView, StyleSheet, View } from 'react-native';
 
+
 import { AdminStackParamList } from '@core/navigation/types';
 import { useTheme } from '@core/theme';
 import { Button, Card, Loading } from '@shared/components';
@@ -113,7 +114,13 @@ export function UserDetailScreen({ route, navigation }: Props) {
   if (error || !user) {
     return (
       <View style={[styles.container, { backgroundColor: theme.colors.background }]}>
-        <Header title="User Details" showBack onBack={() => navigation.goBack()} />
+        <Header
+          title="User Details"
+          showBack
+          onBack={() => {
+            navigation.goBack();
+          }}
+        />
         <View style={styles.errorContainer}>
           <Text style={[styles.errorText, { color: theme.colors.error }]}>
             {error || 'User not found'}
@@ -126,7 +133,13 @@ export function UserDetailScreen({ route, navigation }: Props) {
 
   return (
     <View style={[styles.container, { backgroundColor: theme.colors.background }]}>
-      <Header title="User Details" showBack onBack={() => navigation.goBack()} />
+      <Header
+        title="User Details"
+        showBack
+        onBack={() => {
+          navigation.goBack();
+        }}
+      />
       <ScrollView contentContainerStyle={styles.scrollContent}>
         <View style={styles.avatarSection}>
           <View

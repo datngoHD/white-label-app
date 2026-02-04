@@ -42,11 +42,8 @@ export const useFeatureFlagsMultiple = (
 ): Record<string, boolean> => {
   const flags = useFeatureFlags();
 
-  return flagKeys.reduce(
-    (result, key) => {
-      result[key] = flags[key] ?? false;
-      return result;
-    },
-    {} as Record<string, boolean>
-  );
+  return flagKeys.reduce<Record<string, boolean>>((result, key) => {
+    result[key] = flags[key] ?? false;
+    return result;
+  }, {});
 };

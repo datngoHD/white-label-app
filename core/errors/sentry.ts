@@ -19,7 +19,7 @@ const getSentryConfig = (): SentryConfig => {
     dsn,
     environment: environment.name,
     enabled: (isProd || isStaging) && !!dsn,
-    tracesSampleRate: isProd ? 0.1 : isStaging ? 0.5 : 1.0,
+    tracesSampleRate: isProd ? 0.1 : isStaging ? 0.5 : 1,
     debug: !isProd,
   };
 };

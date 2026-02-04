@@ -16,6 +16,7 @@ yarn brand brand-a
 ```
 
 **Output**:
+
 ```
 🔄 Switching to brand: brand-a
 
@@ -43,6 +44,7 @@ yarn brand
 ```
 
 **Output**:
+
 ```
 Current brand: brand-a
 
@@ -58,6 +60,7 @@ yarn brand invalid-brand
 ```
 
 **Output**:
+
 ```
 ❌ Brand 'invalid-brand' not found
 
@@ -150,6 +153,7 @@ yarn brand brand-a
 ```
 
 **Output**:
+
 ```
 🔄 Switching to brand: brand-a
 
@@ -179,6 +183,7 @@ yarn brand brand-b  # brand-b has no icon.png
 ```
 
 **Output**:
+
 ```
 🔄 Switching to brand: brand-b
 
@@ -204,6 +209,7 @@ yarn brand brand-a  # sharp not installed
 ```
 
 **Output**:
+
 ```
 🔄 Switching to brand: brand-a
 
@@ -234,6 +240,7 @@ yarn brand brand-a  # sharp not installed
 ### "iOS directory not found"
 
 Run prebuild first:
+
 ```bash
 yarn prebuild
 ```
@@ -241,6 +248,7 @@ yarn prebuild
 ### iOS build fails after switching bundle ID
 
 Clean the iOS build:
+
 ```bash
 cd ios && xcodebuild clean && cd ..
 yarn ios
@@ -249,6 +257,7 @@ yarn ios
 ### Android build shows old package name
 
 Clean the Android build:
+
 ```bash
 cd android && ./gradlew clean && cd ..
 yarn android
@@ -256,9 +265,9 @@ yarn android
 
 ## Related Commands
 
-| Command | Purpose |
-|---------|---------|
-| `yarn brand <id>` | Switch to a brand |
-| `yarn brand` | Show current brand and list |
-| `yarn prebuild` | Generate native projects |
+| Command               | Purpose                                 |
+| --------------------- | --------------------------------------- |
+| `yarn brand <id>`     | Switch to a brand                       |
+| `yarn brand`          | Show current brand and list             |
+| `yarn prebuild`       | Generate native projects                |
 | `yarn prebuild:clean` | Regenerate native projects from scratch |

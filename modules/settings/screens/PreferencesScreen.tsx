@@ -2,13 +2,13 @@ import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import React, { useState } from 'react';
 import { ScrollView, StyleSheet, Switch, View } from 'react-native';
 
+
 import { SettingsStackParamList } from '@core/navigation/types';
 import { useTheme } from '@core/theme';
 import { useProfile } from '@modules/profile/hooks/useProfile';
 import { Card } from '@shared/components';
 import { Header } from '@shared/components/Header/Header';
 import { Text } from '@shared/components/Text/Text';
-
 
 type Props = NativeStackScreenProps<SettingsStackParamList, 'Preferences'>;
 
@@ -34,19 +34,25 @@ export function PreferencesScreen({ navigation }: Props) {
     } as const;
 
     // Key is guaranteed to exist in setters
-    setters[key]!(value);
+    setters[key](value);
 
     try {
       await updateNotifications({ [key]: value });
     } catch {
       // Revert on error
-      setters[key]!(!value);
+      setters[key](!value);
     }
   };
 
   return (
     <View style={[styles.container, { backgroundColor: theme.colors.background }]}>
-      <Header title="Preferences" showBack onBack={() => navigation.goBack()} />
+      <Header
+        title="Preferences"
+        showBack
+        onBack={() => {
+          navigation.goBack();
+        }}
+      />
       <ScrollView contentContainerStyle={styles.scrollContent}>
         <View style={styles.section}>
           <Text style={[styles.sectionTitle, { color: theme.colors.text.secondary }]}>

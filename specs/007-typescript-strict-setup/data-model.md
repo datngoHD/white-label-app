@@ -18,8 +18,8 @@ The primary entity is the TypeScript compiler configuration:
 ```typescript
 interface TSConfigCompilerOptions {
   // Module System
-  module: "ESNext" | "ES2022" | "CommonJS";
-  moduleResolution: "bundler" | "node" | "node16";
+  module: 'ESNext' | 'ES2022' | 'CommonJS';
+  moduleResolution: 'bundler' | 'node' | 'node16';
   isolatedModules: boolean;
 
   // Strict Type Checking (enabled by strict: true)
@@ -45,7 +45,7 @@ interface TSConfigCompilerOptions {
   resolveJsonModule: boolean;
 
   // JSX
-  jsx: "react-jsx" | "react-native" | "react";
+  jsx: 'react-jsx' | 'react-native' | 'react';
 
   // Path Mapping
   baseUrl: string;
@@ -62,17 +62,17 @@ interface TSConfig {
 
 ### Files Affected
 
-| File | Type | Change |
-|------|------|--------|
-| `tsconfig.json` | Configuration | Add strict options, override module setting |
-| `core/errors/sentry.ts` | Source | Fix Sentry type mismatch |
-| `core/navigation/MainNavigator.tsx` | Source | Fix navigation prop types |
-| `core/navigation/RootNavigator.tsx` | Source | Fix navigation prop types |
-| `modules/admin/screens/UserDetailScreen.tsx` | Source | Fix style array type |
-| `scripts/build/cli.ts` | Source | Add missing types, fix imports |
-| `scripts/build/utils/asset-config.ts` | Source | Fix missing module import |
-| `scripts/build/utils/validation.ts` | Source | Fix ZodError property access |
-| `scripts/build/validate-assets.ts` | Source | Fix missing module import |
+| File                                         | Type          | Change                                      |
+| -------------------------------------------- | ------------- | ------------------------------------------- |
+| `tsconfig.json`                              | Configuration | Add strict options, override module setting |
+| `core/errors/sentry.ts`                      | Source        | Fix Sentry type mismatch                    |
+| `core/navigation/MainNavigator.tsx`          | Source        | Fix navigation prop types                   |
+| `core/navigation/RootNavigator.tsx`          | Source        | Fix navigation prop types                   |
+| `modules/admin/screens/UserDetailScreen.tsx` | Source        | Fix style array type                        |
+| `scripts/build/cli.ts`                       | Source        | Add missing types, fix imports              |
+| `scripts/build/utils/asset-config.ts`        | Source        | Fix missing module import                   |
+| `scripts/build/utils/validation.ts`          | Source        | Fix ZodError property access                |
+| `scripts/build/validate-assets.ts`           | Source        | Fix missing module import                   |
 
 ---
 

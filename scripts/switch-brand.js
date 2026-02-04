@@ -273,7 +273,15 @@ function findAndroidProjectFiles() {
   }
 
   const buildGradlePath = path.join(androidDir, 'app', 'build.gradle');
-  const stringsXmlPath = path.join(androidDir, 'app', 'src', 'main', 'res', 'values', 'strings.xml');
+  const stringsXmlPath = path.join(
+    androidDir,
+    'app',
+    'src',
+    'main',
+    'res',
+    'values',
+    'strings.xml'
+  );
 
   return {
     buildGradle: fs.existsSync(buildGradlePath) ? buildGradlePath : null,
@@ -469,7 +477,9 @@ async function validateIconSize(iconPath) {
       valid,
       width: metadata.width,
       height: metadata.height,
-      error: valid ? undefined : `Icon must be at least 1024x1024, got ${metadata.width}x${metadata.height}`,
+      error: valid
+        ? undefined
+        : `Icon must be at least 1024x1024, got ${metadata.width}x${metadata.height}`,
     };
   } catch (err) {
     return {
@@ -562,7 +572,15 @@ async function updateIosAppIcon(brandId) {
  * @returns {Promise<{success: boolean, error?: string}>}
  */
 async function generateAndroidLauncherIcon(iconPath, density, size) {
-  const outputDir = path.join(ROOT_DIR, 'android', 'app', 'src', 'main', 'res', `mipmap-${density}`);
+  const outputDir = path.join(
+    ROOT_DIR,
+    'android',
+    'app',
+    'src',
+    'main',
+    'res',
+    `mipmap-${density}`
+  );
   if (!fs.existsSync(outputDir)) {
     return { success: false, error: `Directory not found: mipmap-${density}` };
   }
@@ -588,7 +606,15 @@ async function generateAndroidLauncherIcon(iconPath, density, size) {
  * @returns {Promise<{success: boolean, error?: string}>}
  */
 async function generateAndroidRoundIcon(iconPath, density, size) {
-  const outputDir = path.join(ROOT_DIR, 'android', 'app', 'src', 'main', 'res', `mipmap-${density}`);
+  const outputDir = path.join(
+    ROOT_DIR,
+    'android',
+    'app',
+    'src',
+    'main',
+    'res',
+    `mipmap-${density}`
+  );
   if (!fs.existsSync(outputDir)) {
     return { success: false, error: `Directory not found: mipmap-${density}` };
   }
@@ -620,7 +646,15 @@ async function generateAndroidRoundIcon(iconPath, density, size) {
  * @returns {Promise<{success: boolean, error?: string}>}
  */
 async function generateAndroidForegroundIcon(iconPath, density, size) {
-  const outputDir = path.join(ROOT_DIR, 'android', 'app', 'src', 'main', 'res', `mipmap-${density}`);
+  const outputDir = path.join(
+    ROOT_DIR,
+    'android',
+    'app',
+    'src',
+    'main',
+    'res',
+    `mipmap-${density}`
+  );
   if (!fs.existsSync(outputDir)) {
     return { success: false, error: `Directory not found: mipmap-${density}` };
   }
@@ -646,7 +680,13 @@ async function generateAndroidForegroundIcon(iconPath, density, size) {
 async function updateAndroidIcons(brandId) {
   const iconPath = getBrandIconPath(brandId);
   if (!iconPath) {
-    return { success: false, launcherCount: 0, roundCount: 0, foregroundCount: 0, errors: ['Icon not found'] };
+    return {
+      success: false,
+      launcherCount: 0,
+      roundCount: 0,
+      foregroundCount: 0,
+      errors: ['Icon not found'],
+    };
   }
 
   // Use adaptive icon for foreground if available, otherwise use main icon
@@ -675,7 +715,11 @@ async function updateAndroidIcons(brandId) {
     }
 
     // Generate foreground icon
-    const foregroundResult = await generateAndroidForegroundIcon(adaptiveIconPath, density, foregroundSize);
+    const foregroundResult = await generateAndroidForegroundIcon(
+      adaptiveIconPath,
+      density,
+      foregroundSize
+    );
     if (foregroundResult.success) {
       foregroundCount++;
     } else {

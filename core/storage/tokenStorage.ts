@@ -74,7 +74,7 @@ export const tokenStorage = {
       return {
         accessToken,
         refreshToken,
-        expiresAt: expiresAtStr ? parseInt(expiresAtStr, 10) : 0,
+        expiresAt: expiresAtStr ? Number.parseInt(expiresAtStr, 10) : 0,
       };
     } catch (error) {
       logger.error('Failed to get tokens', { error });
@@ -101,7 +101,7 @@ export const tokenStorage = {
       if (!expiresAtStr) {
         return true;
       }
-      const expiresAt = parseInt(expiresAtStr, 10);
+      const expiresAt = Number.parseInt(expiresAtStr, 10);
       // Add 60 second buffer for network latency
       return Date.now() >= expiresAt - 60000;
     } catch (error) {

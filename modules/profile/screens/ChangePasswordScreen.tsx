@@ -72,7 +72,9 @@ export function ChangePasswordScreen({ navigation }: Props) {
           </Text>
           <Button
             title="Back to Profile"
-            onPress={() => navigation.goBack()}
+            onPress={() => {
+              navigation.goBack();
+            }}
             style={styles.backButton}
           />
         </View>
@@ -87,7 +89,13 @@ export function ChangePasswordScreen({ navigation }: Props) {
       style={[styles.container, { backgroundColor: theme.colors.background }]}
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
     >
-      <Header title="Change Password" showBack onBack={() => navigation.goBack()} />
+      <Header
+        title="Change Password"
+        showBack
+        onBack={() => {
+          navigation.goBack();
+        }}
+      />
       <ScrollView contentContainerStyle={styles.scrollContent} keyboardShouldPersistTaps="handled">
         {error && (
           <View style={[styles.errorContainer, { backgroundColor: theme.colors.error + '10' }]}>
@@ -150,7 +158,9 @@ export function ChangePasswordScreen({ navigation }: Props) {
           />
           <Button
             title="Cancel"
-            onPress={() => navigation.goBack()}
+            onPress={() => {
+              navigation.goBack();
+            }}
             variant="outline"
             style={styles.cancelButton}
           />

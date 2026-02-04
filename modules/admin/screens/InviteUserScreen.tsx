@@ -70,7 +70,9 @@ export function InviteUserScreen({ navigation }: Props) {
           />
           <Button
             title="Back to Users"
-            onPress={() => navigation.goBack()}
+            onPress={() => {
+              navigation.goBack();
+            }}
             variant="outline"
             style={styles.button}
           />
@@ -86,7 +88,13 @@ export function InviteUserScreen({ navigation }: Props) {
       style={[styles.container, { backgroundColor: theme.colors.background }]}
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
     >
-      <Header title="Invite User" showBack onBack={() => navigation.goBack()} />
+      <Header
+        title="Invite User"
+        showBack
+        onBack={() => {
+          navigation.goBack();
+        }}
+      />
       <ScrollView contentContainerStyle={styles.scrollContent} keyboardShouldPersistTaps="handled">
         {error && (
           <View style={[styles.errorContainer, { backgroundColor: theme.colors.error + '10' }]}>
@@ -134,13 +142,17 @@ export function InviteUserScreen({ navigation }: Props) {
               <RoleOption
                 label="User"
                 selected={role === 'user'}
-                onPress={() => setRole('user')}
+                onPress={() => {
+                  setRole('user');
+                }}
                 theme={theme}
               />
               <RoleOption
                 label="Admin"
                 selected={role === 'admin'}
-                onPress={() => setRole('admin')}
+                onPress={() => {
+                  setRole('admin');
+                }}
                 theme={theme}
               />
             </View>
@@ -156,7 +168,9 @@ export function InviteUserScreen({ navigation }: Props) {
           />
           <Button
             title="Cancel"
-            onPress={() => navigation.goBack()}
+            onPress={() => {
+              navigation.goBack();
+            }}
             variant="outline"
             style={styles.button}
           />

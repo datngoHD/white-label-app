@@ -89,6 +89,7 @@ This will reveal all existing type errors that need fixing.
 Fix errors in order of severity. Common patterns:
 
 **Navigation prop types:**
+
 ```typescript
 // Before
 const MyScreen = ({ navigation }: Props) => { ... }
@@ -100,6 +101,7 @@ const MyScreen: React.FC<Props> = ({ navigation, route }) => { ... }
 ```
 
 **Array index access (noUncheckedIndexedAccess):**
+
 ```typescript
 // Before
 const item = items[0];
@@ -115,6 +117,7 @@ const item = items[0]!;
 ```
 
 **Style arrays:**
+
 ```typescript
 // Before
 style={[styles.container, { marginTop: 10 }]}
@@ -148,15 +151,18 @@ npm start
 ## Common Issues
 
 ### "Cannot find module" errors
+
 - Check if the module path is correct
 - Verify the file exists at the specified path
 - Ensure path aliases match between tsconfig.json and babel.config.js
 
 ### "implicit any" errors
+
 - Add explicit type annotations to parameters and variables
 - Use generics where appropriate
 
 ### Navigation type errors
+
 - Use `NativeStackScreenProps<ParamList, 'ScreenName'>` for screen props
 - Ensure ParamList is correctly defined with all screen names
 
