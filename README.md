@@ -174,6 +174,65 @@ cd fastlane && bundle exec fastlane android beta brand:default
 
 See [ARCHITECTURE.md](./ARCHITECTURE.md) for detailed architecture documentation.
 
+## AI-Assisted Development
+
+This project is configured for AI-assisted development with **Claude Code** and other MCP-compatible tools.
+
+### Prerequisites for AI Tools
+
+- Node.js >= 18 (required for MCP servers)
+- [Claude Code](https://code.claude.com/) or compatible AI IDE
+
+### Automatic Setup (via Git)
+
+The following are **automatically available** when you clone the repo:
+
+| Tool | Config File | Purpose |
+|------|-------------|---------|
+| **Context7 MCP** | `.mcp.json` | Real-time library documentation |
+| **Vercel React Native Skills** | `.claude/skills/` | Best practices for RN/Expo |
+| **Speckit Constitution** | `.specify/memory/` | Project architecture rules |
+
+### Manual Skills Installation (Optional)
+
+If skills need to be reinstalled:
+
+```bash
+npx skills add vercel-labs/agent-skills
+```
+
+### Usage Tips
+
+**Context7** auto-fetches docs when mentioned:
+```
+How do I use FlashList with pull-to-refresh?
+```
+
+**Vercel Skills** are referenced in `.claude/skills/vercel-react-native-skills/AGENTS.md`:
+- Use FlashList instead of FlatList
+- Use expo-image instead of Image
+- Use Reanimated for animations
+- Prefer Zustand over Redux
+
+### Team Onboarding
+
+1. Clone the repository
+2. **(Recommended)** Get a free API key at [context7.com/dashboard](https://context7.com/dashboard)
+3. **Configure local environment**:
+   Create a `.env.local` file in the project root (ignored by Git):
+   ```bash
+   CONTEXT7_API_KEY="your-api-key-here"
+   ```
+4. Open with **Claude Code** → MCP servers will auto-load with your personal key.
+5. Skills are available immediately from `.claude/skills/`.
+
+> **Note**: While you can also use shell `export`, using `.env.local` is recommended to keep it project-specific. Context7 still works without a key using shared rate limits.
+
+
+**📖 Full Guide**: See [docs/AI_TOOLS_GUIDE.md](./docs/AI_TOOLS_GUIDE.md) for detailed usage instructions, example prompts, and troubleshooting.
+
 ## License
 
+
 Private - All rights reserved
+

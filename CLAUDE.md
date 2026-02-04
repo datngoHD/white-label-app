@@ -55,4 +55,31 @@ TypeScript (strict mode): Follow standard conventions
 - 004-switch-brand: Added JavaScript (Node.js 18+) + Node.js built-in modules (fs, path) + sharp (for image processing)
 
 <!-- MANUAL ADDITIONS START -->
+
+## Context7 Integration
+
+Always use Context7 MCP when I need:
+- Library/API documentation for React Native, Expo, or any npm packages
+- Code generation with specific libraries (FlashList, Reanimated, expo-image, etc.)
+- Setup or configuration steps for new packages
+
+This applies automatically without me explicitly asking.
+
+### Library References (use these for faster lookups)
+- React Native: `/facebook/react-native`
+- Expo: `/expo/expo`
+- FlashList: `/shopify/flash-list`
+- Reanimated: `/software-mansion/react-native-reanimated`
+- Zustand: `/pmndrs/zustand`
+
+## Vercel React Native Skills
+
+Reference `.claude/skills/vercel-react-native-skills/AGENTS.md` when:
+- Building React Native or Expo components
+- Optimizing list and scroll performance (use FlashList, not FlatList)
+- Implementing animations (use Reanimated, animate only transform/opacity)
+- Working with images (use expo-image, not Image from react-native)
+- Managing state (prefer Zustand over Redux)
+
 <!-- MANUAL ADDITIONS END -->
+

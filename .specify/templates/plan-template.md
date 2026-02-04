@@ -33,6 +33,18 @@ _GATE: Must pass before Phase 0 research. Re-check after Phase 1 design._
 
 [Gates determined based on constitution file]
 
+## Skills Check
+
+_Reference `.claude/skills/` for applicable best practices before implementation._
+
+| Skill | Applies? | Key Rules to Follow |
+|-------|----------|---------------------|
+| vercel-react-native-skills | [ ] | FlashList, expo-image, Reanimated, native navigators |
+| vercel-composition-patterns | [ ] | Compound components, state lifting, composition |
+
+**Full skill docs:** `.claude/skills/vercel-react-native-skills/AGENTS.md`
+
+
 ## Project Structure
 
 ### Documentation (this feature)
