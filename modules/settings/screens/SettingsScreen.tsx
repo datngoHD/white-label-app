@@ -30,12 +30,16 @@ export function SettingsScreen({ navigation }: Props) {
     {
       title: 'Preferences',
       subtitle: 'Notifications, language, and display options',
-      onPress: () => navigation.navigate('Preferences'),
+      onPress: () => {
+        navigation.navigate('Preferences');
+      },
     },
     {
       title: 'Brand Preview',
       subtitle: 'View current brand theme and assets',
-      onPress: () => navigation.navigate('BrandPreview'),
+      onPress: () => {
+        navigation.navigate('BrandPreview');
+      },
     },
     ...(canManageUsers
       ? [
@@ -43,7 +47,9 @@ export function SettingsScreen({ navigation }: Props) {
             title: 'User Management',
             subtitle: 'Invite and manage tenant users',
             // @ts-expect-error - Navigating to different stack
-            onPress: () => navigation.navigate('Admin', { screen: 'UserList' }),
+            onPress: () => {
+              navigation.navigate('Admin', { screen: 'UserList' });
+            },
             requiresPermission: PERMISSIONS.MANAGE_USERS,
           },
         ]

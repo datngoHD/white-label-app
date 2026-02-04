@@ -143,7 +143,9 @@ export const offlineCache = {
       // Return cached data immediately, revalidate in background
       fetchFn()
         .then((freshData) => this.set(key, freshData, options))
-        .catch((error) => logger.error('Background revalidation failed', { key, error }));
+        .catch((error: unknown) => {
+          logger.error('Background revalidation failed', { key, error });
+        });
 
       return { data: cached, isStale: true };
     }

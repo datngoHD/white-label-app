@@ -5,65 +5,65 @@ import { NativeStackScreenProps } from '@react-navigation/native-stack';
 /**
  * Root stack navigator params
  */
-export type RootStackParamList = {
+export interface RootStackParamList {
   Auth: NavigatorScreenParams<AuthStackParamList>;
   Main: NavigatorScreenParams<MainTabParamList>;
   TenantStatus: {
     status: 'suspended' | 'maintenance';
     message?: string;
   };
-};
+}
 
 /**
  * Auth stack navigator params
  */
-export type AuthStackParamList = {
+export interface AuthStackParamList {
   Login: undefined;
   Register: undefined;
   ForgotPassword: undefined;
   ResetPassword: {
     token: string;
   };
-};
+}
 
 /**
  * Main tab navigator params
  */
-export type MainTabParamList = {
+export interface MainTabParamList {
   Home: undefined;
   Profile: NavigatorScreenParams<ProfileStackParamList>;
   Settings: NavigatorScreenParams<SettingsStackParamList>;
   Admin: NavigatorScreenParams<AdminStackParamList>;
-};
+}
 
 /**
  * Profile stack navigator params
  */
-export type ProfileStackParamList = {
+export interface ProfileStackParamList {
   Profile: undefined;
   EditProfile: undefined;
   ChangePassword: undefined;
-};
+}
 
 /**
  * Settings stack navigator params
  */
-export type SettingsStackParamList = {
+export interface SettingsStackParamList {
   Settings: undefined;
   Preferences: undefined;
   BrandPreview: undefined;
-};
+}
 
 /**
  * Admin stack navigator params (admin only)
  */
-export type AdminStackParamList = {
+export interface AdminStackParamList {
   UserList: undefined;
   UserDetail: {
     userId: string;
   };
   InviteUser: undefined;
-};
+}
 
 /**
  * Screen props types

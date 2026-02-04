@@ -58,8 +58,12 @@ export const getImageSize = (uri: string): Promise<ImageSize> => {
   return new Promise((resolve, reject) => {
     Image.getSize(
       uri,
-      (width, height) => resolve({ width, height }),
-      (error) => reject(error)
+      (width, height) => {
+        resolve({ width, height });
+      },
+      (error) => {
+        reject(error);
+      }
     );
   });
 };
@@ -93,7 +97,7 @@ export const createOptimizedSource = (
 export const getPlaceholderSource = (
   width: number,
   height: number,
-  color: string = '#E0E0E0'
+  color = '#E0E0E0'
 ): OptimizedImageSource => {
   // Return a data URI for a simple colored placeholder
   const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}"><rect width="100%" height="100%" fill="${color}"/></svg>`;

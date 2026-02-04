@@ -56,6 +56,7 @@ type CurrentBrandState = string; // Brand ID, e.g., "brand-a"
 **File Format**: Single line containing the brand ID
 
 **Example**:
+
 ```
 brand-a
 ```
@@ -124,21 +125,21 @@ interface FileUpdate {
 
 ### Brand Config Validation
 
-| Rule | Error Message |
-|------|---------------|
-| Brand file must exist | `Brand '{id}' not found. Available: {list}` |
-| `appName` required | `Brand config missing required field: appName` |
-| `ios.bundleId` required | `Brand config missing required field: ios.bundleId` |
+| Rule                           | Error Message                                              |
+| ------------------------------ | ---------------------------------------------------------- |
+| Brand file must exist          | `Brand '{id}' not found. Available: {list}`                |
+| `appName` required             | `Brand config missing required field: appName`             |
+| `ios.bundleId` required        | `Brand config missing required field: ios.bundleId`        |
 | `android.packageName` required | `Brand config missing required field: android.packageName` |
-| Valid JSON format | `Failed to parse brand config: {error}` |
+| Valid JSON format              | `Failed to parse brand config: {error}`                    |
 
 ### Platform Directory Validation
 
-| Condition | Behavior |
-|-----------|----------|
-| `ios/` missing | Warning, skip iOS updates |
+| Condition          | Behavior                      |
+| ------------------ | ----------------------------- |
+| `ios/` missing     | Warning, skip iOS updates     |
 | `android/` missing | Warning, skip Android updates |
-| Both missing | Error, exit with code 1 |
+| Both missing       | Error, exit with code 1       |
 
 ### 4. IconConfig (New - US4)
 
@@ -164,7 +165,7 @@ interface IconConfig {
 ```typescript
 interface IconSizeConfig {
   density: 'mdpi' | 'hdpi' | 'xhdpi' | 'xxhdpi' | 'xxxhdpi';
-  launcherSize: number;   // 48, 72, 96, 144, 192
+  launcherSize: number; // 48, 72, 96, 144, 192
   foregroundSize: number; // 108, 162, 216, 324, 432
 }
 
@@ -254,23 +255,23 @@ interface IconUpdateResult {
 
 ### Input Files (Read)
 
-| File | Purpose |
-|------|---------|
-| `core/config/brands/*.json` | Brand configuration files |
-| `.current-brand` | Current brand state (optional) |
-| `assets/brands/{brand-id}/icon.png` | Brand app icon (1024x1024) |
+| File                                         | Purpose                                     |
+| -------------------------------------------- | ------------------------------------------- |
+| `core/config/brands/*.json`                  | Brand configuration files                   |
+| `.current-brand`                             | Current brand state (optional)              |
+| `assets/brands/{brand-id}/icon.png`          | Brand app icon (1024x1024)                  |
 | `assets/brands/{brand-id}/adaptive-icon.png` | Android adaptive icon foreground (optional) |
 
 ### Output Files (Write)
 
-| File | Purpose |
-|------|---------|
-| `android/app/build.gradle` | Android package name |
-| `android/app/src/main/res/values/strings.xml` | Android app name |
-| `android/app/src/main/res/mipmap-*/ic_launcher.webp` | Android launcher icon |
-| `android/app/src/main/res/mipmap-*/ic_launcher_round.webp` | Android round icon |
-| `android/app/src/main/res/mipmap-*/ic_launcher_foreground.webp` | Android adaptive foreground |
-| `ios/*.xcodeproj/project.pbxproj` | iOS bundle identifier |
-| `ios/*/Info.plist` | iOS display name |
-| `ios/*/Images.xcassets/AppIcon.appiconset/App-Icon-1024x1024@1x.png` | iOS app icon |
-| `.current-brand` | Current brand state |
+| File                                                                 | Purpose                     |
+| -------------------------------------------------------------------- | --------------------------- |
+| `android/app/build.gradle`                                           | Android package name        |
+| `android/app/src/main/res/values/strings.xml`                        | Android app name            |
+| `android/app/src/main/res/mipmap-*/ic_launcher.webp`                 | Android launcher icon       |
+| `android/app/src/main/res/mipmap-*/ic_launcher_round.webp`           | Android round icon          |
+| `android/app/src/main/res/mipmap-*/ic_launcher_foreground.webp`      | Android adaptive foreground |
+| `ios/*.xcodeproj/project.pbxproj`                                    | iOS bundle identifier       |
+| `ios/*/Info.plist`                                                   | iOS display name            |
+| `ios/*/Images.xcassets/AppIcon.appiconset/App-Icon-1024x1024@1x.png` | iOS app icon                |
+| `.current-brand`                                                     | Current brand state         |

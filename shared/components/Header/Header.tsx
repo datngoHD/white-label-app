@@ -31,7 +31,7 @@ export const Header: React.FC<HeaderProps> = ({
 }) => {
   const insets = useSafeAreaInsets();
   const theme = useTheme();
-  const handleBack = onBack || onBackPress;
+  const handleBack = onBack ?? onBackPress;
 
   return (
     <View

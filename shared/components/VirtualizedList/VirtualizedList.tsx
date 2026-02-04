@@ -37,7 +37,7 @@ export function VirtualizedList<T>({
   onEndReachedThreshold = 0.5,
   contentContainerStyle,
   ...props
-}: VirtualizedListProps<T>) {
+}: VirtualizedListProps<T>): React.ReactElement {
   const theme = useTheme();
 
   const renderItemWrapper = useCallback(

@@ -209,6 +209,7 @@ T053 → T054 (add CLI output)
 ### Parallel Opportunities
 
 **Phase 6 (US4)**:
+
 - T047, T048, T049, T050 can run in parallel (different icon types)
 - T055, T056, T057, T058 can run in parallel (different test scenarios)
 
@@ -219,6 +220,7 @@ T053 → T054 (add CLI output)
 ### Current Progress
 
 **Phase 1-5 COMPLETE** (36 tasks)
+
 - US1: Brand switching with identifier updates ✅
 - US2: View current brand and available brands ✅
 - US3: Error handling ✅
@@ -247,6 +249,7 @@ T053 → T054 (add CLI output)
 ### After US4 Complete
 
 Developers can:
+
 - Switch brands with `yarn brand <brand-id>`
 - Native files are correctly updated (identifiers + app name)
 - App icons are automatically updated (iOS + Android)
@@ -256,15 +259,15 @@ Developers can:
 
 ## Summary
 
-| Phase | User Story | Tasks | Status |
-|-------|------------|-------|--------|
-| Phase 1 | Setup | T001-T004 (4) | ✅ COMPLETE |
-| Phase 2 | Foundational | T005-T011 (7) | ✅ COMPLETE |
-| Phase 3 | US1 - Switch Brand | T012-T022 (11) | ✅ COMPLETE |
-| Phase 4 | US2 - View Status | T023-T025 (3) | ✅ COMPLETE |
-| Phase 5 | US3 - Error Handling | T026-T031 (6) | ✅ COMPLETE |
-| Phase 6 | US4 - Icon Updates | T037-T054 (18) | ✅ COMPLETE |
-| Phase 7 | Polish | T032-T036, T055-T059 (10) | ✅ COMPLETE |
+| Phase   | User Story           | Tasks                     | Status      |
+| ------- | -------------------- | ------------------------- | ----------- |
+| Phase 1 | Setup                | T001-T004 (4)             | ✅ COMPLETE |
+| Phase 2 | Foundational         | T005-T011 (7)             | ✅ COMPLETE |
+| Phase 3 | US1 - Switch Brand   | T012-T022 (11)            | ✅ COMPLETE |
+| Phase 4 | US2 - View Status    | T023-T025 (3)             | ✅ COMPLETE |
+| Phase 5 | US3 - Error Handling | T026-T031 (6)             | ✅ COMPLETE |
+| Phase 6 | US4 - Icon Updates   | T037-T054 (18)            | ✅ COMPLETE |
+| Phase 7 | Polish               | T032-T036, T055-T059 (10) | ✅ COMPLETE |
 
 **Total tasks**: 59
 **Completed**: 59

@@ -3,7 +3,7 @@ import React, { useEffect } from 'react';
 import { Image, ScrollView, StyleSheet, View } from 'react-native';
 
 
-import { MainTabParamList } from '@core/navigation/types';
+import { ProfileStackParamList } from '@core/navigation/types';
 import { useTheme } from '@core/theme';
 import { useAuth } from '@modules/auth/hooks/useAuth';
 import { Button, Card, Loading } from '@shared/components';
@@ -12,7 +12,7 @@ import { Text } from '@shared/components/Text/Text';
 
 import { useProfile } from '../hooks/useProfile';
 
-type Props = NativeStackScreenProps<MainTabParamList, 'Profile'>;
+type Props = NativeStackScreenProps<ProfileStackParamList, 'Profile'>;
 
 export function ProfileScreen({ navigation }: Props) {
   const theme = useTheme();
@@ -24,12 +24,10 @@ export function ProfileScreen({ navigation }: Props) {
   }, [fetchProfile]);
 
   const handleEditProfile = () => {
-    // @ts-expect-error - Navigate to nested stack
     navigation.navigate('EditProfile');
   };
 
   const handleChangePassword = () => {
-    // @ts-expect-error - Navigate to nested stack
     navigation.navigate('ChangePassword');
   };
 

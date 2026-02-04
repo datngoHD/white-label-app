@@ -13,7 +13,7 @@ interface PerformanceMeasure {
 }
 
 class PerformanceMonitor {
-  private marks: Map<string, PerformanceMark> = new Map();
+  private marks = new Map<string, PerformanceMark>();
   private measures: PerformanceMeasure[] = [];
   private startupTime: number | null = null;
 
@@ -120,7 +120,9 @@ export const trackRenderTime = (
   const endMark = `render_${componentName}_end`;
 
   return {
-    start: () => performanceMonitor.mark(startMark),
+    start: () => {
+      performanceMonitor.mark(startMark);
+    },
     end: () => {
       performanceMonitor.mark(endMark);
       performanceMonitor.measure(`render_${componentName}`, startMark, endMark);

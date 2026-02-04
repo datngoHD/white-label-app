@@ -6,19 +6,19 @@ import { logger } from '@core/logging/logger';
 import { SECURE_KEYS } from '@core/storage/keys';
 
 let isRefreshing = false;
-let failedQueue: Array<{
+let failedQueue: {
   resolve: (token: string) => void;
   reject: (error: Error) => void;
-}> = [];
+}[] = [];
 
 const processQueue = (error: Error | null, token: string | null = null): void => {
-  failedQueue.forEach((prom) => {
+  for (const prom of failedQueue) {
     if (error) {
       prom.reject(error);
     } else if (token) {
       prom.resolve(token);
     }
-  });
+  }
   failedQueue = [];
 };
 
@@ -44,7 +44,7 @@ export const createAuthResponseInterceptor = (
     const originalRequest = error.config;
 
     if (error.response?.status !== 401 || !originalRequest) {
-      return Promise.reject(error);
+      throw error;
     }
 
     if (isRefreshing) {
@@ -57,7 +57,7 @@ export const createAuthResponseInterceptor = (
           }
           return originalRequest;
         })
-        .catch((err) => Promise.reject(err));
+        .catch((err) => { throw err; });
     }
 
     isRefreshing = true;

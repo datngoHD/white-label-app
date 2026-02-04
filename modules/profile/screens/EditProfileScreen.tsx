@@ -2,6 +2,7 @@ import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import React, { useState } from 'react';
 import { KeyboardAvoidingView, Platform, ScrollView, StyleSheet, View } from 'react-native';
 
+
 import { ProfileStackParamList } from '@core/navigation/types';
 import { useTheme } from '@core/theme';
 import { Button, Input, Loading } from '@shared/components';
@@ -29,7 +30,7 @@ function useFormState(
     bio: profile?.bio || '',
   }));
 
-  const updateField = <K extends keyof FormData>(field: K, value: FormData[K]) => {
+  const updateField = <K extends keyof FormData>(field: K, value: FormData[K]): void => {
     setFormData((prev) => ({ ...prev, [field]: value }));
   };
 
@@ -71,7 +72,13 @@ export function EditProfileScreen({ navigation }: Props) {
       style={[styles.container, { backgroundColor: theme.colors.background }]}
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
     >
-      <Header title="Edit Profile" showBack onBack={() => navigation.goBack()} />
+      <Header
+        title="Edit Profile"
+        showBack
+        onBack={() => {
+          navigation.goBack();
+        }}
+      />
       <ScrollView contentContainerStyle={styles.scrollContent} keyboardShouldPersistTaps="handled">
         {error && (
           <View style={[styles.errorContainer, { backgroundColor: theme.colors.error + '10' }]}>
@@ -108,7 +115,9 @@ export function EditProfileScreen({ navigation }: Props) {
             <Input
               label="Phone"
               value={phone}
-              onChangeText={(value) => updateField('phone', value)}
+              onChangeText={(value) => {
+                updateField('phone', value);
+              }}
               placeholder="Enter phone number"
               keyboardType="phone-pad"
             />
@@ -118,7 +127,9 @@ export function EditProfileScreen({ navigation }: Props) {
             <Input
               label="Bio"
               value={bio}
-              onChangeText={(value) => updateField('bio', value)}
+              onChangeText={(value) => {
+                updateField('bio', value);
+              }}
               placeholder="Tell us about yourself"
               multiline
               numberOfLines={4}
@@ -135,7 +146,9 @@ export function EditProfileScreen({ navigation }: Props) {
           />
           <Button
             title="Cancel"
-            onPress={() => navigation.goBack()}
+            onPress={() => {
+              navigation.goBack();
+            }}
             variant="outline"
             style={styles.cancelButton}
           />

@@ -10,7 +10,7 @@ export const useFeatureFlag = (flagKey: FeatureFlagKey | string): boolean => {
 
   // Check tenant-specific feature flags first
   if (tenant?.features && flagKey in tenant.features) {
-    return tenant.features[flagKey];
+    return tenant.features[flagKey] ?? false;
   }
 
   // Fall back to default flags
@@ -42,11 +42,8 @@ export const useFeatureFlagsMultiple = (
 ): Record<string, boolean> => {
   const flags = useFeatureFlags();
 
-  return flagKeys.reduce(
-    (result, key) => {
-      result[key] = flags[key] ?? false;
-      return result;
-    },
-    {} as Record<string, boolean>
-  );
+  return flagKeys.reduce<Record<string, boolean>>((result, key) => {
+    result[key] = flags[key] ?? false;
+    return result;
+  }, {});
 };

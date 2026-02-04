@@ -1,13 +1,66 @@
 {
   "extends": "expo/tsconfig.base",
   "compilerOptions": {
+    // ══════════════════════════════════════════════════════════════════════════
+    // MODULE SYSTEM
+    // Override Expo base config's "module: preserve" which requires TS 5.4+
+    // ══════════════════════════════════════════════════════════════════════════
+    "module": "ESNext",
+    // Ensures files can be transpiled individually by Metro bundler
+    "isolatedModules": true,
+
+    // ══════════════════════════════════════════════════════════════════════════
+    // STRICT TYPE CHECKING - Core
+    // Enables: strictNullChecks, strictFunctionTypes, strictBindCallApply,
+    // strictPropertyInitialization, noImplicitAny, noImplicitThis,
+    // alwaysStrict, useUnknownInCatchVariables
+    // ══════════════════════════════════════════════════════════════════════════
     "strict": true,
+
+    // ══════════════════════════════════════════════════════════════════════════
+    // STRICT TYPE CHECKING - Additional (beyond strict: true)
+    // ══════════════════════════════════════════════════════════════════════════
+    // Array/object index access returns T | undefined, catching potential undefined bugs
+    "noUncheckedIndexedAccess": true,
+    // Ensures all code paths in a function return a value
+    "noImplicitReturns": true,
+    // Disallows fallthrough in switch statements (prevents common bugs)
+    "noFallthroughCasesInSwitch": true,
+    // Requires 'override' keyword when overriding class members
+    "noImplicitOverride": true,
+    // Requires bracket notation for index signature access (e.g., obj['key'] not obj.key)
+    "noPropertyAccessFromIndexSignature": true,
+
+    // ══════════════════════════════════════════════════════════════════════════
+    // CODE QUALITY
+    // ══════════════════════════════════════════════════════════════════════════
+    // Ensures import casing matches file system (critical for CI/Linux compatibility)
+    "forceConsistentCasingInFileNames": true,
+    // Report errors on unused labels (prevents dead code)
+    "allowUnusedLabels": false,
+    // Report errors on unreachable code (prevents dead code)
+    "allowUnreachableCode": false,
+
+    // ══════════════════════════════════════════════════════════════════════════
+    // BUILD CONFIGURATION
+    // ══════════════════════════════════════════════════════════════════════════
+    // Type-check only, Metro handles actual transpilation
     "noEmit": true,
+    // Skip type checking of declaration files for faster builds
     "skipLibCheck": true,
+    // Enable interop between CommonJS and ES modules
     "esModuleInterop": true,
+    // Allow importing JSON files
     "resolveJsonModule": true,
+    // Modern resolution for bundlers like Metro
     "moduleResolution": "bundler",
+    // Use new JSX transform (React 17+, no need to import React)
     "jsx": "react-jsx",
+
+    // ══════════════════════════════════════════════════════════════════════════
+    // PATH ALIASES
+    // Must match babel.config.js module-resolver configuration
+    // ══════════════════════════════════════════════════════════════════════════
     "baseUrl": ".",
     "paths": {
       "@app/*": ["app/*"],
@@ -18,5 +71,12 @@
     }
   },
   "include": ["**/*.ts", "**/*.tsx", "app.config.js"],
-  "exclude": ["node_modules", "ios", "android"]
+  "exclude": [
+    "node_modules",
+    "ios",
+    "android",
+    ".expo",
+    // Excluded: incomplete build scripts with missing module dependencies
+    "scripts/build"
+  ]
 }

@@ -89,5 +89,5 @@ export const validateResponseTenant = (
  */
 export const sanitizeTenantId = (tenantId: string): string => {
   // Remove any characters that could be used for injection
-  return tenantId.replace(/[^a-zA-Z0-9-_]/g, '');
+  return tenantId.replaceAll(/[^a-zA-Z0-9-_]/g, '');
 };
