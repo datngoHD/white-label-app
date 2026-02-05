@@ -29,9 +29,16 @@ module.exports = function (api) {
           // React Compiler configuration
           // Requires experiments.reactCompiler: true in app.json
           'react-compiler': {
-            // Compile all files (default behavior)
-            // Use 'sources' option to limit to specific directories for gradual adoption
-            compilationMode: 'all',
+            // Incremental adoption: only compile our source directories
+            // Excludes node_modules and other potentially problematic code
+            sources: (filename) => {
+              return (
+                filename.includes('/app/') ||
+                filename.includes('/core/') ||
+                filename.includes('/modules/') ||
+                filename.includes('/shared/')
+              );
+            },
           },
         },
       ],
