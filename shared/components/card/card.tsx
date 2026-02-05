@@ -1,53 +1,72 @@
-import React, { ReactNode } from 'react';
-import { StyleSheet, TouchableOpacity, View, ViewStyle } from 'react-native';
+import { Pressable, View } from 'react-native';
 
-interface CardProps {
-  children: ReactNode;
-  style?: ViewStyle;
-  onPress?: () => void;
-  elevated?: boolean;
-  padded?: boolean;
-  testID?: string;
-}
+import { cn } from '@shared/utils';
 
-export const Card: React.FC<CardProps> = ({
+import { CardProps } from './card.types';
+import { getCardClassName } from './card.utils';
+
+/**
+ * Card component following the 010-ui-components-migration spec
+ *
+ * Features:
+ * - Uses Pressable for interactive cards (not TouchableOpacity)
+ * - Uses Uniwind className for styling
+ * - Supports compound pattern (CardHeader, CardContent, CardFooter, etc.)
+ * - Supports variants (default, outlined, elevated)
+ * - Theme-aware via CSS class tokens
+ *
+ * @example
+ * // Basic card with compound components
+ * <Card>
+ *   <CardHeader>
+ *     <CardTitle>Card Title</CardTitle>
+ *     <CardDescription>Card description text</CardDescription>
+ *   </CardHeader>
+ *   <CardContent>
+ *     <Text>Card content goes here</Text>
+ *   </CardContent>
+ *   <CardFooter>
+ *     <Button title="Action" />
+ *   </CardFooter>
+ * </Card>
+ *
+ * @example
+ * // Interactive card
+ * <Card onPress={handlePress} variant="elevated">
+ *   <CardContent>
+ *     <Text>Tap me</Text>
+ *   </CardContent>
+ * </Card>
+ */
+export function Card({
+  variant = 'default',
   children,
+  className,
   style,
   onPress,
-  elevated = true,
-  padded = true,
   testID,
-}) => {
-  const cardStyle = [styles.card, elevated && styles.elevated, padded && styles.padded, style];
+}: CardProps) {
+  const cardClassName = getCardClassName(variant);
 
+  // If onPress is provided, use Pressable for interactivity
   if (onPress) {
     return (
-      <TouchableOpacity style={cardStyle} onPress={onPress} activeOpacity={0.8} testID={testID}>
+      <Pressable
+        className={cn(cardClassName, className)}
+        style={style}
+        onPress={onPress}
+        testID={testID}
+        accessibilityRole="button"
+      >
         {children}
-      </TouchableOpacity>
+      </Pressable>
     );
   }
 
+  // Otherwise, use View for non-interactive cards
   return (
-    <View style={cardStyle} testID={testID}>
+    <View className={cn(cardClassName, className)} style={style} testID={testID}>
       {children}
     </View>
   );
-};
-
-const styles = StyleSheet.create({
-  card: {
-    backgroundColor: '#ffffff',
-    borderRadius: 12,
-  },
-  elevated: {
-    shadowColor: '#000000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 8,
-    elevation: 3,
-  },
-  padded: {
-    padding: 16,
-  },
-});
+}

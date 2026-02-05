@@ -1,156 +1,127 @@
-import React from 'react';
+import React, { useMemo } from 'react';
+import { ActivityIndicator, Pressable, Text } from 'react-native';
+
+import { cn } from '@shared/utils';
+
+import { ButtonContext } from './button-context';
+import { ButtonProps } from './button.types';
 import {
-  ActivityIndicator,
-  StyleSheet,
-  Text,
-  TextStyle,
-  TouchableOpacity,
-  ViewStyle,
-} from 'react-native';
+  getButtonClassName,
+  getButtonTextClassName,
+  getLoadingColor,
+} from './button.utils';
 
-export type ButtonVariant = 'primary' | 'secondary' | 'outline' | 'ghost' | 'text';
-export type ButtonSize = 'small' | 'medium' | 'large';
-
-interface ButtonProps {
-  title: string;
-  onPress: () => void;
-  variant?: ButtonVariant;
-  size?: ButtonSize;
-  disabled?: boolean;
-  loading?: boolean;
-  fullWidth?: boolean;
-  style?: ViewStyle;
-  textStyle?: TextStyle;
-  testID?: string;
-}
-
-export const Button: React.FC<ButtonProps> = ({
-  title,
-  onPress,
-  variant = 'primary',
-  size = 'medium',
-  disabled = false,
+/**
+ * Button component following the 010-ui-components-migration spec
+ *
+ * Features:
+ * - Uses Pressable (not TouchableOpacity) per Vercel RN Skills 9.9
+ * - Uses Uniwind className for styling
+ * - Supports compound pattern (ButtonText, ButtonIcon)
+ * - Backward compatible with legacy `title` prop
+ * - Theme-aware via CSS class tokens
+ *
+ * @example
+ * // Compound pattern (recommended)
+ * <Button onPress={handlePress}>
+ *   <ButtonIcon><SaveIcon /></ButtonIcon>
+ *   <ButtonText>Save</ButtonText>
+ * </Button>
+ *
+ * @example
+ * // Legacy pattern (backward compatible)
+ * <Button title="Save" onPress={handlePress} />
+ *
+ * @example
+ * // With variants and loading
+ * <Button variant="destructive" loading={isDeleting}>
+ *   <ButtonText>Delete</ButtonText>
+ * </Button>
+ */
+export function Button({
+  variant = 'default',
+  size = 'default',
   loading = false,
+  loadingText,
   fullWidth = false,
+  disabled = false,
+  className,
+  children,
+  title,
   style,
-  textStyle,
   testID,
-}) => {
-  const isDisabled = disabled || loading;
+  accessibilityLabel,
+  accessibilityHint,
+  onPress,
+  ...pressableProps
+}: ButtonProps) {
+  // Using explicit check to satisfy both nullish-coalescing and boolean-literal rules
+  const isDisabled = disabled ? true : loading;
+
+  const buttonClassName = getButtonClassName(
+    variant,
+    size,
+    fullWidth,
+    isDisabled
+  );
+  const textClassName = getButtonTextClassName(variant, size);
+  const loadingColor = getLoadingColor(variant);
+
+  const contextValue = useMemo(
+    () => ({
+      variant,
+      size,
+      disabled: isDisabled,
+      loading,
+    }),
+    [variant, size, isDisabled, loading]
+  );
+
+  const renderContent = () => {
+    if (loading) {
+      return (
+        <>
+          <ActivityIndicator
+            size="small"
+            color={loadingColor}
+            testID={testID ? `${testID}-loading` : undefined}
+          />
+          {loadingText ? (
+            <Text className={textClassName}>{loadingText}</Text>
+          ) : null}
+        </>
+      );
+    }
+
+    if (children) {
+      return children;
+    }
+
+    if (title) {
+      return <Text className={textClassName}>{title}</Text>;
+    }
+
+    return null;
+  };
+
+  const label = accessibilityLabel ?? title;
 
   return (
-    <TouchableOpacity
-      style={[
-        styles.base,
-        styles[variant],
-        styles[size],
-        fullWidth && styles.fullWidth,
-        isDisabled && styles.disabled,
-        style,
-      ]}
-      onPress={onPress}
-      disabled={isDisabled}
-      activeOpacity={0.7}
-      testID={testID}
-    >
-      {loading ? (
-        <ActivityIndicator size="small" color={variant === 'primary' ? '#ffffff' : '#007AFF'} />
-      ) : (
-        <Text
-          style={[
-            styles.text,
-            styles[`${variant}Text`],
-            styles[`${size}Text`],
-            isDisabled && styles.disabledText,
-            textStyle,
-          ]}
-        >
-          {title}
-        </Text>
-      )}
-    </TouchableOpacity>
+    <ButtonContext.Provider value={contextValue}>
+      <Pressable
+        className={cn(buttonClassName, className)}
+        style={style}
+        disabled={isDisabled}
+        onPress={onPress}
+        testID={testID}
+        accessibilityRole="button"
+        accessibilityLabel={label}
+        accessibilityHint={accessibilityHint}
+        accessibilityState={{ disabled: isDisabled }}
+        {...pressableProps}
+      >
+        {renderContent()}
+      </Pressable>
+    </ButtonContext.Provider>
   );
-};
-
-const styles = StyleSheet.create({
-  base: {
-    borderRadius: 8,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  fullWidth: {
-    width: '100%',
-  },
-  disabled: {
-    opacity: 0.5,
-  },
-
-  // Variants
-  primary: {
-    backgroundColor: '#007AFF',
-  },
-  secondary: {
-    backgroundColor: '#5856D6',
-  },
-  outline: {
-    backgroundColor: 'transparent',
-    borderWidth: 1,
-    borderColor: '#007AFF',
-  },
-  ghost: {
-    backgroundColor: 'transparent',
-  },
-  text: {
-    backgroundColor: 'transparent',
-    paddingHorizontal: 0,
-    fontWeight: '600',
-  },
-
-  // Sizes
-  small: {
-    paddingVertical: 8,
-    paddingHorizontal: 16,
-    minHeight: 36,
-  },
-  medium: {
-    paddingVertical: 12,
-    paddingHorizontal: 24,
-    minHeight: 44,
-  },
-  large: {
-    paddingVertical: 16,
-    paddingHorizontal: 32,
-    minHeight: 52,
-  },
-
-  // Text
-  primaryText: {
-    color: '#ffffff',
-  },
-  secondaryText: {
-    color: '#ffffff',
-  },
-  outlineText: {
-    color: '#007AFF',
-  },
-  ghostText: {
-    color: '#007AFF',
-  },
-  textText: {
-    color: '#007AFF',
-  },
-  disabledText: {
-    color: '#999999',
-  },
-
-  // Text sizes
-  smallText: {
-    fontSize: 14,
-  },
-  mediumText: {
-    fontSize: 16,
-  },
-  largeText: {
-    fontSize: 18,
-  },
-});
+}

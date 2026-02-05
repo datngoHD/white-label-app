@@ -58,9 +58,9 @@ export class ErrorBoundary extends Component<Props, State> {
           <Text style={styles.message}>
             We&apos;re sorry, but an error occurred. Please try again.
           </Text>
-          {__DEV__ && this.state.error && (
+          {__DEV__ && this.state.error ? (
             <Text style={styles.errorDetails}>{this.state.error.message}</Text>
-          )}
+          ) : null}
           <TouchableOpacity style={styles.button} onPress={this.handleRetry}>
             <Text style={styles.buttonText}>Try Again</Text>
           </TouchableOpacity>
