@@ -1,8 +1,10 @@
+import { apiClient, setupAuthInterceptors, authRequestInterceptor } from '@core/api';
 import { currentBrand } from '@core/config/brand.config';
-import { environment } from '@core/config/environment.config';
 import { initializeSentry } from '@core/errors/sentry';
 import { logger } from '@core/logging/logger';
 import { performanceMonitor } from '@core/utils/performance';
+import { logoutAndClearCache } from '@modules/auth/hooks/use-auth-mutation';
+import { authService } from '@modules/auth/services/auth-service';
 
 import '@core/i18n/i18n';
 
@@ -15,13 +17,19 @@ export const bootstrap = async (): Promise<void> => {
   performanceMonitor.mark('bootstrap_start');
 
   try {
-    logger.info('App bootstrap starting', {
-      brand: currentBrand.id,
-      environment: environment.name,
-    });
-
     // Initialize error tracking (Sentry)
     initializeSentry();
+
+    // Setup API interceptors
+    // Add request interceptor
+    apiClient.interceptors.request.use(authRequestInterceptor, (error) => Promise.reject(error));
+    
+    // Add response interceptor with dependencies to break cycles
+    setupAuthInterceptors(
+      apiClient,
+      (refreshToken) => authService.refreshToken(refreshToken),
+      () => logoutAndClearCache()
+    );
 
     // Initialize i18n (already imported)
     logger.debug('i18n initialized');

@@ -1,4 +1,4 @@
-export { ThemeProvider, useThemeContext } from './ThemeProvider';
+export { ThemeProvider, useThemeContext } from './theme-provider';
 export {
   useTheme,
   useIsDarkMode,
@@ -6,7 +6,7 @@ export {
   useColors,
   useTypography,
   useSpacing,
-} from './useTheme';
+} from './use-theme';
 export { lightTheme, darkTheme, createTheme, mergeBrandTheme } from './theme';
 export { defaultColors, darkColors, createColorPalette } from './colors';
 export { defaultTypography, fontWeights, lineHeights, createTypography } from './typography';

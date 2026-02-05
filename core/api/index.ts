@@ -1,8 +1,8 @@
 export { apiClient, api, setBaseUrl } from './client';
-export { setTenantId, getTenantId } from './interceptors/tenantInterceptor';
-export { errorResponseInterceptor } from './interceptors/errorInterceptor';
+export { setTenantId, getTenantId } from './interceptors/tenant-interceptor';
+export { errorResponseInterceptor } from './interceptors/error-interceptor';
 export {
   authRequestInterceptor,
   createAuthResponseInterceptor,
   setupAuthInterceptors,
-} from './interceptors/authInterceptor';
+} from './interceptors/auth-interceptor';

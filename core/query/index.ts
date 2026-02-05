@@ -12,13 +12,13 @@ export type { TenantId, BaseQueryKey, NetworkStatus, NetworkStatusHookReturn, Of
 export { MUTATION_SCOPES } from './types';
 
 // Query Client
-export { queryClient, createQueryClient } from './queryClient';
+export { queryClient, createQueryClient } from './query-client';
 
 // Persister
 export { asyncStoragePersister, clearPersistedCache, getPersistedCacheSize } from './persister';
 
 // Online Manager
-export { setupOnlineManager, isOnline, setOnline } from './onlineManager';
+export { setupOnlineManager, isOnline, setOnline } from './online-manager';
 
 // Mutation Defaults
-export { setupMutationDefaults, shouldQueueOffline } from './mutationDefaults';
+export { setupMutationDefaults, shouldQueueOffline } from './mutation-defaults';

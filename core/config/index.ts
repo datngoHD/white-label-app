@@ -11,14 +11,14 @@ export {
   validateBrandConfig,
   formatValidationErrors,
   assertValidBrandConfig,
-} from './brandValidator';
+} from './brand-validator';
 export {
   getDefaultTenantConfig,
   validateTenantConfig,
   isTenantAvailable,
   getTenantStatusMessage,
 } from './tenant.config';
-export { FEATURE_FLAGS, DEFAULT_FLAGS } from './featureFlags.types';
+export { FEATURE_FLAGS, DEFAULT_FLAGS } from './feature-flags.types';
 export type { Brand, BrandAssets, BrandTheme, BrandConfig } from './types';
 export type {
   Tenant,
@@ -27,4 +27,4 @@ export type {
   FeatureFlags,
   TenantConfig,
 } from './tenant.types';
-export type { FeatureFlag, FeatureFlagsConfig, FeatureFlagKey } from './featureFlags.types';
+export type { FeatureFlag, FeatureFlagsConfig, FeatureFlagKey } from './feature-flags.types';

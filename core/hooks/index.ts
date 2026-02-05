@@ -1,11 +1,11 @@
 // Core hooks exports
-export { useTenant, useTenantApi, useTenantMetadata } from './useTenant';
-export { useFeatureFlag, useFeatureFlags, useFeatureFlagsMultiple } from './useFeatureFlag';
-export { useUserRole, useIsAdmin, useHasRole } from './useUserRole';
+export { useTenant, useTenantApi, useTenantMetadata } from './use-tenant';
+export { useFeatureFlag, useFeatureFlags, useFeatureFlagsMultiple } from './use-feature-flag';
+export { useUserRole, useIsAdmin, useHasRole } from './use-user-role';
 export {
   useHasPermission,
   useHasAllPermissions,
   useHasAnyPermission,
   useUserPermissions,
-} from './useHasPermission';
-export { useNetworkStatus, useIsOnline, useIsOffline } from './useNetworkStatus';
+} from './use-has-permission';
+export { useNetworkStatus, useIsOnline, useIsOffline } from './use-network-status';

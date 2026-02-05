@@ -1,4 +1,4 @@
-export { LoginScreen } from './LoginScreen';
-export { RegisterScreen } from './RegisterScreen';
-export { ForgotPasswordScreen } from './ForgotPasswordScreen';
-export { ResetPasswordScreen } from './ResetPasswordScreen';
+export { LoginScreen } from './login-screen';
+export { RegisterScreen } from './register-screen';
+export { ForgotPasswordScreen } from './forgot-password-screen';
+export { ResetPasswordScreen } from './reset-password-screen';

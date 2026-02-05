@@ -8,7 +8,6 @@
     "module": "ESNext",
     // Ensures files can be transpiled individually by Metro bundler
     "isolatedModules": true,
-
     // ══════════════════════════════════════════════════════════════════════════
     // STRICT TYPE CHECKING - Core
     // Enables: strictNullChecks, strictFunctionTypes, strictBindCallApply,
@@ -16,7 +15,6 @@
     // alwaysStrict, useUnknownInCatchVariables
     // ══════════════════════════════════════════════════════════════════════════
     "strict": true,
-
     // ══════════════════════════════════════════════════════════════════════════
     // STRICT TYPE CHECKING - Additional (beyond strict: true)
     // ══════════════════════════════════════════════════════════════════════════
@@ -30,7 +28,6 @@
     "noImplicitOverride": true,
     // Requires bracket notation for index signature access (e.g., obj['key'] not obj.key)
     "noPropertyAccessFromIndexSignature": true,
-
     // ══════════════════════════════════════════════════════════════════════════
     // CODE QUALITY
     // ══════════════════════════════════════════════════════════════════════════
@@ -40,7 +37,6 @@
     "allowUnusedLabels": false,
     // Report errors on unreachable code (prevents dead code)
     "allowUnreachableCode": false,
-
     // ══════════════════════════════════════════════════════════════════════════
     // BUILD CONFIGURATION
     // ══════════════════════════════════════════════════════════════════════════
@@ -56,21 +52,35 @@
     "moduleResolution": "bundler",
     // Use new JSX transform (React 17+, no need to import React)
     "jsx": "react-jsx",
-
     // ══════════════════════════════════════════════════════════════════════════
     // PATH ALIASES
     // Must match babel.config.js module-resolver configuration
     // ══════════════════════════════════════════════════════════════════════════
     "baseUrl": ".",
     "paths": {
-      "@app/*": ["app/*"],
-      "@modules/*": ["modules/*"],
-      "@shared/*": ["shared/*"],
-      "@core/*": ["core/*"],
-      "@assets/*": ["assets/*"]
+      "@app/*": [
+        "app/*"
+      ],
+      "@modules/*": [
+        "modules/*"
+      ],
+      "@shared/*": [
+        "shared/*"
+      ],
+      "@core/*": [
+        "core/*"
+      ],
+      "@assets/*": [
+        "assets/*"
+      ]
     }
   },
-  "include": ["**/*.ts", "**/*.tsx", "app.config.js"],
+  "include": [
+    "**/*.ts",
+    "**/*.tsx",
+    "app.config.js",
+    "uniwind-env.d.ts"
+  ],
   "exclude": [
     "node_modules",
     "ios",

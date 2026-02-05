@@ -8,7 +8,7 @@ A React Native mobile application built with Expo that supports white-labeling (
 - **Multi-Tenant Architecture**: Runtime tenant isolation with per-tenant feature flags and configurations
 - **Clean Architecture**: Feature-based module structure with clear separation of concerns
 - **TypeScript**: Full TypeScript support with strict mode
-- **State Management**: Redux Toolkit for global state management
+- **State Management**: Zustand + TanStack React Query
 - **Navigation**: React Navigation with type-safe routes
 - **Internationalization**: i18next for multi-language support
 - **Error Tracking**: Sentry integration for error monitoring
@@ -62,7 +62,7 @@ A React Native mobile application built with Expo that supports white-labeling (
 │   ├── logging/           # Logging utilities
 │   ├── navigation/        # Navigation configuration
 │   ├── permissions/       # RBAC system
-│   ├── store/             # Redux store
+│   ├── stores/            # Zustand stores
 │   ├── storage/           # Secure storage, cache
 │   ├── theme/             # Theming system
 │   ├── types/             # Shared types
@@ -187,11 +187,11 @@ This project is configured for AI-assisted development with **Claude Code** and 
 
 The following are **automatically available** when you clone the repo:
 
-| Tool | Config File | Purpose |
-|------|-------------|---------|
-| **Context7 MCP** | `.mcp.json` | Real-time library documentation |
-| **Vercel React Native Skills** | `.claude/skills/` | Best practices for RN/Expo |
-| **Speckit Constitution** | `.specify/memory/` | Project architecture rules |
+| Tool                           | Config File        | Purpose                         |
+| ------------------------------ | ------------------ | ------------------------------- |
+| **Context7 MCP**               | `.mcp.json`        | Real-time library documentation |
+| **Vercel React Native Skills** | `.claude/skills/`  | Best practices for RN/Expo      |
+| **Speckit Constitution**       | `.specify/memory/` | Project architecture rules      |
 
 ### Manual Skills Installation (Optional)
 
@@ -204,11 +204,13 @@ npx skills add vercel-labs/agent-skills
 ### Usage Tips
 
 **Context7** auto-fetches docs when mentioned:
+
 ```
 How do I use FlashList with pull-to-refresh?
 ```
 
 **Vercel Skills** are referenced in `.claude/skills/vercel-react-native-skills/AGENTS.md`:
+
 - Use FlashList instead of FlatList
 - Use expo-image instead of Image
 - Use Reanimated for animations
@@ -228,11 +230,8 @@ How do I use FlashList with pull-to-refresh?
 
 > **Note**: While you can also use shell `export`, using `.env.local` is recommended to keep it project-specific. Context7 still works without a key using shared rate limits.
 
-
 **📖 Full Guide**: See [docs/AI_TOOLS_GUIDE.md](./docs/AI_TOOLS_GUIDE.md) for detailed usage instructions, example prompts, and troubleshooting.
 
 ## License
 
-
 Private - All rights reserved
-

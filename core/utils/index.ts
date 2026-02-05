@@ -5,7 +5,7 @@ export {
   getStatusMessage,
   validateResponseTenant,
   sanitizeTenantId,
-} from './tenantValidation';
+} from './tenant-validation';
 
 export { performanceMonitor, measureAsync, measureSync, trackRenderTime } from './performance';
 
@@ -17,4 +17,4 @@ export {
   calculateAspectRatioFit,
   createOptimizedSource,
   getPlaceholderSource,
-} from './imageOptimization';
+} from './image-optimization';
