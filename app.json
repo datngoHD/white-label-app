@@ -3,6 +3,9 @@
     "name": "White Label App",
     "slug": "rn-whitelabel-app",
     "version": "1.0.0",
+    "experiments": {
+      "reactCompiler": true
+    },
     "orientation": "portrait",
     "icon": "./assets/brands/default/icon.png",
     "userInterfaceStyle": "automatic",
