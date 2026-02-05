@@ -1,66 +1,94 @@
-import { CardVariant } from './card.types';
+import { cva, type VariantProps } from 'class-variance-authority';
 
 /**
- * Get variant-specific classes for card
+ * Card container variants using CVA
+ * Consistent with web frontend pattern per 010-spec
  */
-function getVariantClasses(variant: CardVariant): string[] {
-  switch (variant) {
-    case 'default':
-      return ['shadow-sm'];
-    case 'outlined':
-      return ['border', 'border-gray-200'];
-    case 'elevated':
-      return ['shadow-lg'];
+export const cardVariants = cva(
+  // Base classes
+  'bg-card rounded-xl overflow-hidden',
+  {
+    variants: {
+      variant: {
+        default: 'shadow-sm',
+        outlined: 'border border-border',
+        elevated: 'shadow-lg',
+      },
+    },
+    defaultVariants: {
+      variant: 'default',
+    },
   }
-}
+);
 
 /**
- * Get card container class names based on variant
+ * Card header variants
  */
-export function getCardClassName(variant: CardVariant): string {
-  const baseClasses = ['bg-white', 'rounded-xl', 'overflow-hidden'];
-
-  return [...baseClasses, ...getVariantClasses(variant)].join(' ');
-}
+export const cardHeaderVariants = cva(
+  'flex-row items-start justify-between gap-4 px-4 pt-4'
+);
 
 /**
- * Get card header class names
+ * Card title variants
  */
+export const cardTitleVariants = cva(
+  'text-lg font-semibold text-card-foreground flex-1'
+);
+
+/**
+ * Card description variants
+ */
+export const cardDescriptionVariants = cva(
+  'text-sm text-muted-foreground mt-1'
+);
+
+/**
+ * Card content variants
+ */
+export const cardContentVariants = cva('px-4 py-4');
+
+/**
+ * Card footer variants
+ */
+export const cardFooterVariants = cva(
+  'flex-row items-center px-4 pb-4 pt-2'
+);
+
+/**
+ * Card action variants
+ */
+export const cardActionVariants = cva('ml-auto');
+
+/**
+ * Export variant props type for TypeScript
+ */
+export type CardVariantProps = VariantProps<typeof cardVariants>;
+
+// Legacy function exports for backward compatibility
+export function getCardClassName(variant: CardVariantProps['variant']): string {
+  return cardVariants({ variant });
+}
+
 export function getCardHeaderClassName(): string {
-  return 'flex-row items-start justify-between gap-4 px-4 pt-4';
+  return cardHeaderVariants();
 }
 
-/**
- * Get card title class names
- */
 export function getCardTitleClassName(): string {
-  return 'text-lg font-semibold text-gray-900 flex-1';
+  return cardTitleVariants();
 }
 
-/**
- * Get card description class names
- */
 export function getCardDescriptionClassName(): string {
-  return 'text-sm text-gray-500 mt-1';
+  return cardDescriptionVariants();
 }
 
-/**
- * Get card content class names
- */
 export function getCardContentClassName(): string {
-  return 'px-4 py-4';
+  return cardContentVariants();
 }
 
-/**
- * Get card footer class names
- */
 export function getCardFooterClassName(): string {
-  return 'flex-row items-center px-4 pb-4 pt-2';
+  return cardFooterVariants();
 }
 
-/**
- * Get card action class names
- */
 export function getCardActionClassName(): string {
-  return 'ml-auto';
+  return cardActionVariants();
 }

@@ -16,6 +16,10 @@ export interface CardProps {
   onPress?: () => void;
   /** Test ID for testing */
   testID?: string;
+  /** Accessibility label for interactive cards */
+  accessibilityLabel?: string;
+  /** Accessibility hint for interactive cards */
+  accessibilityHint?: string;
 }
 
 export interface CardHeaderProps {

@@ -1,186 +1,153 @@
-import { ButtonSize, ButtonVariant } from './button.types';
+import { cva, type VariantProps } from 'class-variance-authority';
 
-const BASE_BUTTON_CLASSES = [
-  'flex-row',
-  'items-center',
-  'justify-center',
-  'rounded-lg',
-];
+import { defaultColors } from '@core/theme/colors';
 
 /**
- * Get variant-specific classes for button container
+ * Button container variants using CVA
+ * Consistent with web frontend pattern per 010-spec
  */
-function getVariantClasses(variant: ButtonVariant): string[] {
-  switch (variant) {
-    case 'default':
-      return ['bg-primary'];
-    case 'destructive':
-      return ['bg-red-500'];
-    case 'outline':
-      return ['bg-transparent', 'border', 'border-gray-300'];
-    case 'secondary':
-      return ['bg-gray-200'];
-    case 'ghost':
-      return ['bg-transparent'];
-    case 'link':
-      return ['bg-transparent'];
+export const buttonVariants = cva(
+  // Base classes
+  'flex-row items-center justify-center rounded-lg',
+  {
+    variants: {
+      variant: {
+        default: 'bg-primary',
+        destructive: 'bg-destructive',
+        outline: 'bg-transparent border border-input',
+        secondary: 'bg-secondary',
+        ghost: 'bg-transparent',
+        link: 'bg-transparent',
+      },
+      size: {
+        sm: 'min-h-[32px] px-3 py-2 gap-1.5',
+        default: 'min-h-[44px] px-4 py-3 gap-2',
+        lg: 'min-h-[52px] px-6 py-4 gap-2',
+        icon: 'min-h-[44px] w-[44px] p-2',
+      },
+      fullWidth: {
+        true: 'w-full',
+        false: '',
+      },
+      disabled: {
+        true: 'opacity-50',
+        false: '',
+      },
+    },
+    defaultVariants: {
+      variant: 'default',
+      size: 'default',
+      fullWidth: false,
+      disabled: false,
+    },
   }
-}
+);
 
 /**
- * Get size-specific classes for button container
+ * Button text variants using CVA
  */
-function getSizeClasses(size: ButtonSize): string[] {
-  switch (size) {
-    case 'sm':
-      return ['min-h-[32px]', 'px-3', 'py-2', 'gap-1.5'];
-    case 'default':
-      return ['min-h-[44px]', 'px-4', 'py-3', 'gap-2'];
-    case 'lg':
-      return ['min-h-[52px]', 'px-6', 'py-4', 'gap-2'];
-    case 'icon':
-      return ['min-h-[44px]', 'w-[44px]', 'p-2'];
+export const buttonTextVariants = cva(
+  // Base classes
+  'font-semibold',
+  {
+    variants: {
+      variant: {
+        default: 'text-primary-foreground',
+        destructive: 'text-destructive-foreground',
+        outline: 'text-foreground',
+        secondary: 'text-secondary-foreground',
+        ghost: 'text-primary',
+        link: 'text-primary underline',
+      },
+      size: {
+        sm: 'text-sm',
+        default: 'text-base',
+        lg: 'text-lg',
+        icon: 'text-base',
+      },
+    },
+    defaultVariants: {
+      variant: 'default',
+      size: 'default',
+    },
   }
-}
+);
 
 /**
- * Get container class names based on variant and size
+ * Button icon variants using CVA
  */
-export function getButtonClassName(
-  variant: ButtonVariant,
-  size: ButtonSize,
-  fullWidth: boolean,
-  disabled: boolean
-): string {
-  const classes = [
-    ...BASE_BUTTON_CLASSES,
-    ...getVariantClasses(variant),
-    ...getSizeClasses(size),
-  ];
-
-  if (fullWidth) {
-    classes.push('w-full');
+export const buttonIconVariants = cva(
+  // Base classes (empty)
+  '',
+  {
+    variants: {
+      variant: {
+        default: 'text-primary-foreground',
+        destructive: 'text-destructive-foreground',
+        outline: 'text-foreground',
+        secondary: 'text-secondary-foreground',
+        ghost: 'text-primary',
+        link: 'text-primary',
+      },
+      size: {
+        sm: 'w-4 h-4',
+        default: 'w-5 h-5',
+        lg: 'w-6 h-6',
+        icon: 'w-5 h-5',
+      },
+    },
+    defaultVariants: {
+      variant: 'default',
+      size: 'default',
+    },
   }
-
-  if (disabled) {
-    classes.push('opacity-50');
-  }
-
-  return classes.join(' ');
-}
+);
 
 /**
- * Get variant-specific text classes
+ * Export variant props type for TypeScript
  */
-function getVariantTextClasses(variant: ButtonVariant): string[] {
-  switch (variant) {
-    case 'default':
-      return ['text-white'];
-    case 'destructive':
-      return ['text-white'];
-    case 'outline':
-      return ['text-gray-900'];
-    case 'secondary':
-      return ['text-gray-900'];
-    case 'ghost':
-      return ['text-primary'];
-    case 'link':
-      return ['text-primary', 'underline'];
-  }
-}
-
-/**
- * Get size-specific text classes
- */
-function getSizeTextClasses(size: ButtonSize): string[] {
-  switch (size) {
-    case 'sm':
-      return ['text-sm'];
-    case 'default':
-      return ['text-base'];
-    case 'lg':
-      return ['text-lg'];
-    case 'icon':
-      return ['text-base'];
-  }
-}
-
-/**
- * Get text class names based on variant and size
- */
-export function getButtonTextClassName(
-  variant: ButtonVariant,
-  size: ButtonSize
-): string {
-  return [
-    'font-semibold',
-    ...getVariantTextClasses(variant),
-    ...getSizeTextClasses(size),
-  ].join(' ');
-}
-
-/**
- * Get variant-specific icon classes
- */
-function getVariantIconClasses(variant: ButtonVariant): string[] {
-  switch (variant) {
-    case 'default':
-      return ['text-white'];
-    case 'destructive':
-      return ['text-white'];
-    case 'outline':
-      return ['text-gray-900'];
-    case 'secondary':
-      return ['text-gray-900'];
-    case 'ghost':
-      return ['text-primary'];
-    case 'link':
-      return ['text-primary'];
-  }
-}
-
-/**
- * Get size-specific icon classes
- */
-function getSizeIconClasses(size: ButtonSize): string[] {
-  switch (size) {
-    case 'sm':
-      return ['w-4', 'h-4'];
-    case 'default':
-      return ['w-5', 'h-5'];
-    case 'lg':
-      return ['w-6', 'h-6'];
-    case 'icon':
-      return ['w-5', 'h-5'];
-  }
-}
-
-/**
- * Get icon class names based on variant and size
- */
-export function getButtonIconClassName(
-  variant: ButtonVariant,
-  size: ButtonSize
-): string {
-  return [
-    ...getVariantIconClasses(variant),
-    ...getSizeIconClasses(size),
-  ].join(' ');
-}
+export type ButtonVariantProps = VariantProps<typeof buttonVariants>;
 
 /**
  * Get ActivityIndicator color based on variant
+ * Note: ActivityIndicator requires direct color value, cannot use className
  */
-export function getLoadingColor(variant: ButtonVariant): string {
+export function getLoadingColor(variant: ButtonVariantProps['variant']): string {
   switch (variant) {
     case 'default':
     case 'destructive':
-      return '#ffffff';
+      return defaultColors.text.inverse;
     case 'outline':
     case 'secondary':
-      return '#1f2937';
+      return defaultColors.text.primary;
     case 'ghost':
     case 'link':
-      return '#007AFF';
+      return defaultColors.primary;
+    default:
+      return defaultColors.text.inverse;
   }
+}
+
+// Legacy function exports for backward compatibility
+export function getButtonClassName(
+  variant: ButtonVariantProps['variant'],
+  size: ButtonVariantProps['size'],
+  fullWidth: boolean,
+  disabled: boolean
+): string {
+  return buttonVariants({ variant, size, fullWidth, disabled });
+}
+
+export function getButtonTextClassName(
+  variant: ButtonVariantProps['variant'],
+  size: ButtonVariantProps['size']
+): string {
+  return buttonTextVariants({ variant, size });
+}
+
+export function getButtonIconClassName(
+  variant: ButtonVariantProps['variant'],
+  size: ButtonVariantProps['size']
+): string {
+  return buttonIconVariants({ variant, size });
 }

@@ -45,6 +45,8 @@ export function Card({
   style,
   onPress,
   testID,
+  accessibilityLabel,
+  accessibilityHint,
 }: CardProps) {
   const cardClassName = getCardClassName(variant);
 
@@ -57,6 +59,8 @@ export function Card({
         onPress={onPress}
         testID={testID}
         accessibilityRole="button"
+        accessibilityLabel={accessibilityLabel}
+        accessibilityHint={accessibilityHint}
       >
         {children}
       </Pressable>

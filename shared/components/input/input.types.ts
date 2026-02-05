@@ -1,5 +1,5 @@
-import { ReactNode } from 'react';
-import { TextInputProps, ViewStyle } from 'react-native';
+import { ReactNode, RefObject } from 'react';
+import { TextInput, TextInputProps, ViewStyle } from 'react-native';
 
 export type InputVariant = 'default' | 'filled' | 'outline';
 
@@ -28,4 +28,6 @@ export interface InputProps extends TextInputProps {
   className?: string;
   /** Container className */
   containerClassName?: string;
+  /** Ref to the TextInput (React 19 style - no forwardRef needed) */
+  ref?: RefObject<TextInput>;
 }
