@@ -3,6 +3,7 @@
     "name": "White Label App",
     "slug": "rn-whitelabel-app",
     "version": "1.0.0",
+    "newArchEnabled": true,
     "experiments": {
       "reactCompiler": true
     },

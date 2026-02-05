@@ -22,27 +22,7 @@ module.exports = function (api) {
   api.cache(true);
 
   return {
-    presets: [
-      [
-        'babel-preset-expo',
-        {
-          // React Compiler configuration
-          // Requires experiments.reactCompiler: true in app.json
-          'react-compiler': {
-            // Incremental adoption: only compile our source directories
-            // Excludes node_modules and other potentially problematic code
-            sources: (filename) => {
-              return (
-                filename.includes('/app/') ||
-                filename.includes('/core/') ||
-                filename.includes('/modules/') ||
-                filename.includes('/shared/')
-              );
-            },
-          },
-        },
-      ],
-    ],
+    presets: ['babel-preset-expo'],
     plugins: [
       [
         'module-resolver',
