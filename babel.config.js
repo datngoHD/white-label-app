@@ -1,6 +1,11 @@
 /**
  * Babel Configuration
  *
+ * React Compiler:
+ *   Enabled via experiments.reactCompiler in app.json (Expo SDK 54+)
+ *   Provides automatic memoization - no need for useMemo/useCallback/memo
+ *   See: https://react.dev/learn/react-compiler
+ *
  * Path Aliases (must match tsconfig.json):
  *   @app     -> ./app       (Application entry, bootstrap, providers)
  *   @modules -> ./modules   (Feature-based, domain-driven modules)
@@ -15,6 +20,7 @@
  */
 module.exports = function (api) {
   api.cache(true);
+
   return {
     presets: ['babel-preset-expo'],
     plugins: [

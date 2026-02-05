@@ -1,5 +1,6 @@
 /**
  * AsyncStorage keys for non-sensitive data
+ * Note: Token storage uses SECURE_KEYS (see below) for SecureStore
  */
 export const STORAGE_KEYS = {
   USER_PREFERENCES: '@app/userPreferences',
@@ -8,17 +9,16 @@ export const STORAGE_KEYS = {
   ONBOARDING_COMPLETE: '@app/onboardingComplete',
   LAST_SYNC_TIME: '@app/lastSyncTime',
   OFFLINE_QUEUE: '@app/offlineQueue',
-  AUTH_TOKEN: '@app/authToken',
-  REFRESH_TOKEN: '@app/refreshToken',
-  TOKEN_EXPIRY: '@app/tokenExpiry',
 } as const;
 
 /**
  * SecureStore keys for sensitive data
+ * Keys must contain only alphanumeric characters, ".", "-", and "_"
  */
 export const SECURE_KEYS = {
   ACCESS_TOKEN: 'accessToken',
   REFRESH_TOKEN: 'refreshToken',
+  TOKEN_EXPIRY: 'tokenExpiry',
   BIOMETRIC_CREDENTIAL: 'biometricCredential',
 } as const;
 
