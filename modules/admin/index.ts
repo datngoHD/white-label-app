@@ -1,3 +1,3 @@
 export * from './types';
-export * from './services/adminUserService';
+export * from './services/admin-user-service';
 export * from './screens';

@@ -1,9 +1,9 @@
 // Tenant module exports
-export { TenantStatusScreen } from './screens/TenantStatusScreen';
-export { tenantService } from './services/tenantService';
+export { TenantStatusScreen } from './screens/tenant-status-screen';
+export { tenantService } from './services/tenant-service';
 
 // Query keys
-export { tenantKeys } from './queries/tenantQueryKeys';
+export { tenantKeys } from './queries/tenant-query-keys';
 
 // Hooks
 export {
@@ -12,4 +12,4 @@ export {
   setTenantData,
   invalidateTenant,
   clearTenantCache,
-} from './hooks/useTenantQuery';
+} from './hooks/use-tenant-query';

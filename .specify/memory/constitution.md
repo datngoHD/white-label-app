@@ -2,7 +2,7 @@
 Sync Impact Report:
 - Version: 2.1.1 → 2.2.0 (Added detailed technical stack constraints)
 - Changes:
-  - Technology Stack: Added State Management (TanStack Query, MMKV), UI (NativeWind, Lucide),
+  - Technology Stack: Added State Management (TanStack Query, MMKV), UI (Uniwind, Lucide),
     Forms (React Hook Form, Zod), Payment (Stripe), File/Media (Image Picker)
   - Secure Storage: Added Keychain/Keystore requirement
 - Templates: ✅ plan-template.md, spec-template.md, tasks-template.md validated
@@ -20,9 +20,11 @@ Build a production-grade React Native application using Expo (latest) that fully
 This project uses the following Vercel agent-skills for AI-assisted development:
 
 ### vercel-react-native-skills
+
 Located at: `.claude/skills/vercel-react-native-skills/`
 
 **MUST reference these guidelines when:**
+
 - Building React Native or Expo components
 - Optimizing list and scroll performance (use FlashList, not FlatList)
 - Implementing animations (use Reanimated, animate only transform/opacity)
@@ -43,15 +45,16 @@ Located at: `.claude/skills/vercel-react-native-skills/`
 **Full documentation:** `.claude/skills/vercel-react-native-skills/AGENTS.md`
 
 ### vercel-composition-patterns
+
 Located at: `.claude/skills/vercel-composition-patterns/`
 
 **MUST reference when:**
+
 - Refactoring components with many boolean props
 - Building reusable component libraries
 - Designing flexible component APIs
 
 ## Core Principles
-
 
 ### I. Clean Architecture / Modular Architecture
 
@@ -76,7 +79,7 @@ Every feature MUST follow a documented folder organization. The project structur
   - `config/` - Brand, tenant, environment loader
   - `theme/` - Centralized design system
   - `api/` - Axios client and networking
-  - `store/` - Redux Toolkit setup
+  - `stores/` - Zustand store setup
   - `i18n/` - Localization
   - `logging/` - Logging abstraction
   - `errors/` - Error handling
@@ -90,13 +93,13 @@ Each directory MUST have a clear, documented purpose. No organizational-only dir
 
 MUST maintain strict separation between UI/Presentation layer and business logic:
 
-- UI components (components, screens) MUST be presentational and receive data via props or Redux selectors
+- UI components (components, screens) MUST be presentational and receive data via props or slices
 - Business logic (services, hooks, utilities) MUST be isolated from UI components
 - UI components MUST NOT contain API calls, data transformation, or business rules
 - Services handle data fetching and API communication
-- Redux store manages application state; Redux slices organize state by feature domain
-- Redux actions and thunks handle async operations and side effects
-- UI components connect to Redux store via hooks (useSelector, useDispatch) or connect HOC
+- Zustand stores manage application state; stores organize state by feature domain
+- TanStack Query handles async operations, caching, and side effects
+- UI components connect to stores/queries via hooks (useAuthStore, useQuery)
 - Features MUST remain brand-agnostic and tenant-agnostic
 
 ### IV. Strong TypeScript Typing and Contracts
@@ -195,7 +198,7 @@ MUST use Expo (latest) with prebuild workflow:
 
 - **Server State**: TanStack Query (React Query) for API data fetching, caching, and synchronization
 - **Local Persistence**: MMKV (preferred) or AsyncStorage for local data storage
-- **Global State**: Redux Toolkit (RTK) with React-Redux hooks for complex client-side state
+- **Global State**: Zustand for complex client-side state (auth, UI, tenant settings)
 
 ### Navigation
 
@@ -204,7 +207,7 @@ MUST use Expo (latest) with prebuild workflow:
 ### UI Components
 
 - **Base**: Native components + custom components
-- **Styling**: NativeWind (Tailwind for RN) OR StyleSheet (choose one per project)
+- **Styling**: Uniwind (Tailwind for RN) OR StyleSheet (choose one per project)
 - **Icons**: Lucide React Native
 
 ### API Integration
@@ -357,4 +360,4 @@ Constitution supersedes all other development practices. Amendments require:
 
 All PRs and code reviews MUST verify compliance with constitution principles. Complexity MUST be justified. Violations of core principles require explicit exception documentation.
 
-**Version**: 2.2.0 | **Ratified**: 2025-01-27 | **Last Amended**: 2026-02-04
+**Version**: 2.3.0 | **Ratified**: 2025-01-27 | **Last Amended**: 2026-02-05

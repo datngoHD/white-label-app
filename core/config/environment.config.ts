@@ -1,6 +1,11 @@
+import Constants from 'expo-constants';
+
 import { Environment, EnvironmentConfig } from '../types';
 
-const ENV = (process.env['APP_ENV'] as Environment) || 'development';
+const ENV =
+  (Constants.expoConfig?.extra?.['APP_ENV'] as Environment) ||
+  (process.env['APP_ENV'] as Environment) ||
+  'development';
 
 const configs: Record<Environment, EnvironmentConfig> = {
   development: {

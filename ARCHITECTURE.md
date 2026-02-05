@@ -23,7 +23,7 @@ This is a white-label, multi-tenant React Native application built with Expo. Th
 │   ├── logging/           # Logging abstraction
 │   ├── navigation/        # React Navigation setup
 │   ├── permissions/       # Role-based access control
-│   ├── store/             # Redux store and slices
+│   ├── stores/            # Zustand stores (auth, UI, tenant)
 │   ├── theme/             # Theming system
 │   ├── types/             # Shared TypeScript types
 │   └── utils/             # Utility functions
@@ -78,7 +78,7 @@ Tenants are configured at **runtime**. Each tenant has:
 - Theme overrides (optional)
 - User permissions
 
-Tenant configuration is fetched from the backend and stored in Redux.
+Tenant configuration is fetched from the backend and stored in Zustand.
 
 ### Clean Architecture Layers
 
@@ -99,9 +99,16 @@ Tenant configuration is fetched from the backend and stored in Redux.
 
 ### State Management
 
-- **Redux Toolkit** for global state
-- **React Context** for theme and tenant
+- **Zustand** for client state (auth, UI, tenant context)
+- **TanStack React Query** for server state (API data, caching, mutations)
+- **React Context** for theme and tenant providers
 - **Local state** for component-specific state
+
+### Styling
+
+- **Uniwind** for utility-first Tailwind CSS 4 styling
+- Brand colors applied via `global.css` using CSS variables
+- Tenant theme overrides at runtime
 
 ### Navigation
 

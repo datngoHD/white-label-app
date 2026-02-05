@@ -1,3 +1,5 @@
+import '../global.css';
+
 import { StatusBar } from 'expo-status-bar';
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
@@ -6,14 +8,14 @@ import { RootNavigator } from '@core/navigation';
 import { Loading } from '@shared/components';
 
 import { bootstrap, markBootstrapped } from './bootstrap';
-import { AppProviders } from './providers/AppProviders';
+import { AppProviders } from './providers/app-providers';
 
 const App: React.FC = () => {
   const [isReady, setIsReady] = useState(false);
   const [error, setError] = useState<Error | null>(null);
 
   useEffect(() => {
-    const init = async () => {
+    const init = async (): Promise<void> => {
       try {
         await bootstrap();
         markBootstrapped();
@@ -23,7 +25,7 @@ const App: React.FC = () => {
       }
     };
 
-    init();
+    void init();
   }, []);
 
   if (error) {

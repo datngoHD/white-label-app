@@ -1,7 +1,6 @@
 ---
 name: vercel-react-native-skills
-description:
-  React Native and Expo best practices for building performant mobile apps. Use
+description: React Native and Expo best practices for building performant mobile apps. Use
   when building React Native components, optimizing list performance,
   implementing animations, or working with native modules. Triggers on tasks
   involving React Native, Expo, mobile performance, or native platform APIs.
@@ -74,7 +73,7 @@ Reference these guidelines when:
 - `ui-menus` - Use native context menus
 - `ui-native-modals` - Use native modals when possible
 - `ui-measure-views` - Use onLayout, not measure()
-- `ui-styling` - Use StyleSheet.create or Nativewind
+- `ui-styling` - Use StyleSheet.create or Uniwind
 
 ### 5. State Management (MEDIUM)
 

@@ -7,6 +7,7 @@ const reactNative = require('eslint-plugin-react-native');
 const importPlugin = require('eslint-plugin-import');
 const security = require('eslint-plugin-security');
 const reactNativeA11y = require('eslint-plugin-react-native-a11y');
+const checkFile = require('eslint-plugin-check-file');
 const unicorn = require('eslint-plugin-unicorn').default;
 const promise = require('eslint-plugin-promise');
 const prettier = require('eslint-config-prettier');
@@ -125,6 +126,7 @@ module.exports = [
       'react-native-a11y': reactNativeA11y,
       unicorn: unicorn,
       promise: promise,
+      'check-file': checkFile,
     },
     settings: {
       react: {
@@ -275,6 +277,28 @@ module.exports = [
         { selector: 'objectLiteralMethod', format: ['camelCase', 'UPPER_CASE', 'PascalCase'] },
         // Class methods: camelCase
         { selector: 'classMethod', format: ['camelCase'] },
+      ],
+
+      // ========================================================================
+      // File/Folder Naming Conventions - kebab-case enforcement
+      // ========================================================================
+      'check-file/filename-naming-convention': [
+        'error',
+        {
+          '**/*.{ts,tsx}': 'KEBAB_CASE',
+        },
+        {
+          ignoreMiddleExtensions: true,
+        },
+      ],
+      'check-file/folder-naming-convention': [
+        'error',
+        {
+          'app/**': 'KEBAB_CASE',
+          'core/**': 'KEBAB_CASE',
+          'modules/**': 'KEBAB_CASE',
+          'shared/**': 'KEBAB_CASE',
+        },
       ],
 
       // ========================================================================

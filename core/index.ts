@@ -18,7 +18,7 @@ export * from './i18n';
 
 // Logging
 export { logger, setLogContext } from './logging/logger';
-export * from './logging/accessLogger';
+export * from './logging/access-logger';
 
 // Navigation
 export * from './navigation';

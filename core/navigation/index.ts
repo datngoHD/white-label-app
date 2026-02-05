@@ -1,6 +1,6 @@
-export { RootNavigator } from './RootNavigator';
-export { AuthNavigator } from './AuthNavigator';
-export { MainNavigator } from './MainNavigator';
+export { RootNavigator } from './root-navigator';
+export { AuthNavigator } from './auth-navigator';
+export { MainNavigator } from './main-navigator';
 export type {
   RootStackParamList,
   AuthStackParamList,

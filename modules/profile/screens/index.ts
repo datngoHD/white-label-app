@@ -1,3 +1,3 @@
-export { ProfileScreen } from './ProfileScreen';
-export { EditProfileScreen } from './EditProfileScreen';
-export { ChangePasswordScreen } from './ChangePasswordScreen';
+export { ProfileScreen } from './profile-screen';
+export { EditProfileScreen } from './edit-profile-screen';
+export { ChangePasswordScreen } from './change-password-screen';

@@ -1,5 +1,5 @@
-import React from 'react';
 import { Text as RNText, TextProps as RNTextProps, StyleSheet } from 'react-native';
+import { withUniwind } from 'uniwind';
 
 import { useTheme } from '@core/theme';
 
@@ -11,9 +11,10 @@ interface TextProps extends RNTextProps {
   color?: TextColor;
   bold?: boolean;
   center?: boolean;
+  className?: string;
 }
 
-export const Text: React.FC<TextProps> = ({
+const TextBase: React.FC<TextProps> = ({
   children,
   variant = 'body',
   color = 'primary',
@@ -79,6 +80,8 @@ export const Text: React.FC<TextProps> = ({
     </RNText>
   );
 };
+
+export const Text = withUniwind(TextBase);
 
 const styles = StyleSheet.create({
   h1: {

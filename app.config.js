@@ -87,6 +87,7 @@ module.exports = ({ config }) => {
     extra: {
       brandId: brand.id,
       tenantId: brand.defaultTenantId,
+      APP_ENV: process.env.APP_ENV || 'development',
     },
     plugins: ['expo-secure-store'],
   };

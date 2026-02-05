@@ -3,9 +3,9 @@ import axios, { AxiosInstance, AxiosRequestConfig, InternalAxiosRequestConfig } 
 import { environment } from '../config/environment.config';
 import { addBreadcrumb } from '../errors/sentry';
 import { logger } from '../logging/logger';
-import { authRequestInterceptor } from './interceptors/authInterceptor';
-import { errorResponseInterceptor } from './interceptors/errorInterceptor';
-import { tenantRequestInterceptor } from './interceptors/tenantInterceptor';
+import { authRequestInterceptor } from './interceptors/auth-interceptor';
+import { errorResponseInterceptor } from './interceptors/error-interceptor';
+import { tenantRequestInterceptor } from './interceptors/tenant-interceptor';
 
 const DEFAULT_TIMEOUT = 30000;
 
