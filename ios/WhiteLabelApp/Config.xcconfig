@@ -1,4 +1,5 @@
-APP_ENV=development
-APP_NAME=BrandDev
+APP_ENV=staging
+APP_NAME=BrandStaging
 API_BASE_URL=https:/$()/api.example.com
 API_TIMEOUT=30000
+CONTEXT7_API_KEY=
